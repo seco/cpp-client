@@ -49,7 +49,7 @@ class Delegatable :
 		/*************************************************
 		* /api/delegates/count
 		*
-		* @return: unsigned int
+		* @return: std::string
 		*
 		* @brief: Gets current number of registered Delegates from a Node via API.
 		**************************************************/

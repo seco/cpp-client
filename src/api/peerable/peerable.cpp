@@ -23,7 +23,7 @@
 **************************************************/
 std::string ARK::API::Peerable::peer(
 		const char *const ip,
-		const unsigned int port
+		const int port
 ) {
 	char uri[68 + 1] = { '\0' };
 		strcpy(uri, ARK::API::Paths::Peer::get_s);

@@ -44,7 +44,7 @@ class HTTP :
 		**************************************************/
 		void printConnection(
 				const char *const peer,
-				int port,
+				const int port,
 				const char *const request
 		) {
 			Serial.print("\nOpening HTTP connection to:\n");
@@ -60,31 +60,31 @@ class HTTP :
 		int tryConnection(
 				HTTPClient &client,
 				const char *const peer,
-				int port,
+				const int port,
 				const char *const request
 		) {
 			printConnection(peer, port, request);
-			if (!client.begin(peer, port, request)) {
-				// error
-				Serial.println("\nbad HTTP begin..");
+			if (!client.begin(peer, port, request))
+			{	// error
+				Serial.println("\nBad HTTP begin..");
 			}
 			auto code = client.GET();			
 			int count = 0;
-			while (code != HTTP_CODE_OK) {
-				//error
+			while (code != HTTP_CODE_OK)
+			{	//error
 				if (count >=2)
 				{
-					Serial.println("\nbad connection. trying another peer..\n");
+					Serial.println("\nBad connection. Try another peer..\n");
+					client.end();
 					return code;
 				};
-				Serial.println("\nbad HTTP GET");
+				Serial.println("\nBad HTTP GET");
 				client.end();
 				delay(1000);
-				Serial.println("\nretrying connection..");
+				Serial.println("\nRetrying connection..");
 				client.begin(peer, port, request);
 				code = client.GET();
 				count++;
-	
 			};
 			return code;
 		};
@@ -95,7 +95,7 @@ class HTTP :
 		**************************************************/
 		std::string get(
 				const char *const peer,
-				int port,
+				const int port,
 				const char *const request
 		) {
 			HTTPClient http;
@@ -103,11 +103,10 @@ class HTTP :
 			http.setTimeout(2000);
 			
 			if ( int code = tryConnection(http, peer, port, request) != 200)
-			{
-				// error
-				return std::string(http.errorToString(code).c_str());
+			{	// error
+				return http.errorToString(code).c_str();
 			}
-			return std::string(http.getString().c_str());
+			return http.getString().c_str();
 
 		}
 		/*************************************************/

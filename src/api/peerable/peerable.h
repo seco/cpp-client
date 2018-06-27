@@ -28,12 +28,12 @@ class Peerable :
 		*	/api/peers/get?ip=167.114.29.55&port=4002
 		*
     *	@param:	const char *const ip
-		*	@param:	const unsigned int port
+		*	@param:	const int port
 		*	@return: std::string
 		*
 		*	@brief:	Gets Ark Network Peer from a Node via API.
 		**************************************************/
-    std::string peer(const char *const ip, const unsigned int port);
+    std::string peer(const char *const ip, const int port);
     /*************************************************/
 
 		/**************************************************************************************************/

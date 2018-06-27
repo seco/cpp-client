@@ -9,8 +9,6 @@
 #ifndef API_H
 #define API_H
 
-#include "manager.h"
-
 #include "api/accountable/accountable.h"
 #include "api/blockable/blockable.h"
 #include "api/delegatable/delegatable.h"
