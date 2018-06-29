@@ -26,20 +26,24 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
   Serial.print("\nConnected, IP address: ");
   Serial.println(WiFi.localIP());
-  
 
-  ARK::API::Manager manager(ARK::Constants::Networks::Model::Devnet);
+ ARK::Client arkClient(DEVNET);
 
+  Serial.println(arkClient.blocks().c_str());
+  Serial.println();
+  
+  Serial.println(arkClient.delegates().c_str());
+  Serial.println();
+  
+  Serial.println(arkClient.delegatesCount().c_str());
+  Serial.println();
+  
+  Serial.println(arkClient.peers().c_str());
+  Serial.println();
+  
+  Serial.println(arkClient.transactions().c_str());
+  Serial.println();
 
-  Serial.println(manager.blocks().c_str()); Serial.println();
-  
-  Serial.println(manager.delegates().c_str()); Serial.println();
-  
-  Serial.println(manager.delegatesCount().c_str()); Serial.println();
-  
-  Serial.println(manager.peers().c_str()); Serial.println();
-  
-  Serial.println(manager.transactions().c_str());
 }
 
 void loop() {}
