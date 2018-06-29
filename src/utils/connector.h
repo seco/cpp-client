@@ -5,8 +5,6 @@
 
 #include "platform/platform.h"
 #include "utils/http.h"
-#include "utils/network.h"
-#include "constants/networks.h"
 
 namespace ARK
 {
@@ -16,7 +14,7 @@ namespace Network
 {
 /*************************************************
 * ARK::Utilities::Network::Connectable
-* Forward Declaration. for inheritance
+* @brief: Forward Declaration.
 **************************************************/
 class Connectable; 
 /*************************************************/
@@ -30,32 +28,16 @@ class Connector :
 		virtual HTTPConnectable
 {
 	private:
-		const ARK::Network* network;
-		ARK::NetworkType netType;
-		char networkPeer[16] = { '\0' };
-		int networkPort;
+		char ip_[16];
+		unsigned int port_;
 
 	public:
 		Connector();
-		explicit Connector(const ARK::Network& network);
-		explicit Connector(ARK::NetworkType networktype);
+		Connector(const char *const newIP, const unsigned int newPort);
 
-		Connector(const Connector& other);
-		Connector& operator=(const Connector& other);
-		Connector(Connector&& other);
 		Connector& operator=(Connector&& other);
 
-		void connect(const ARK::Network& network);
-		void connectCustom(const ARK::Network& network, const char* peer, int port);
-
-		bool disconnect();
-
 		std::string callback(const char* const request);
-
-	private:  
-		const char* randomPeer() const;
-		void setNetworkPeer(const char* peer);
-
 };
 /*************************************************/
 

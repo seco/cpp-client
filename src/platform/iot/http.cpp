@@ -1,12 +1,14 @@
 
 
 #include "platform/platform.h"
+#include <string>
 #include <memory>
 #include <vector>
 
 // #if (defined ESP32 || defined ESP8266)
 // #if (defined USE_IOT)
 #include "utils/http.h"
+#include <memory>
 
 #ifdef ESP8266
 
@@ -44,7 +46,7 @@ class HTTP :
 		**************************************************/
 		void printConnection(
 				const char *const peer,
-				int port,
+				const int port,
 				const char *const request
 		) {
 			Serial.print("\nOpening HTTP connection to:\n");
@@ -64,27 +66,24 @@ class HTTP :
 				const char *const request
 		) {
 			printConnection(peer, port, request);
-			if (!client.begin(peer, port, request)) {
-				// error
-				Serial.println("\nbad HTTP begin..");
+			if (!client.begin(peer, port, request))
+			{	// error
+				Serial.println("\nBad HTTP begin..");
 			}
-			auto code = client.GET();			
+			int code = client.GET();	
 			int count = 0;
-			while (code != HTTP_CODE_OK) {
-				//error
+			while (code != HTTP_CODE_OK)
+			{	//error
+				client.end();
 				if (count >=2)
-				{
-					Serial.println("\nbad connection. trying another peer..\n");
+				{	Serial.println("\nBad connection. Try another peer..\n");
 					return code;
 				};
-				Serial.println("\nbad HTTP GET");
-				client.end();
+				Serial.println("\nBad HTTP GET.\nRetrying connection..");
 				delay(1000);
-				Serial.println("\nretrying connection..");
 				client.begin(peer, port, request);
 				code = client.GET();
 				count++;
-	
 			};
 			return code;
 		};
@@ -95,20 +94,17 @@ class HTTP :
 		**************************************************/
 		std::string get(
 				const char *const peer,
-				int port,
+				const int port,
 				const char *const request
 		) {
 			HTTPClient http;
 			http.setReuse(true);
-			http.setTimeout(2000);
-			
-			if ( int code = tryConnection(http, peer, port, request) != 200)
-			{
-				// error
-				return std::string(http.errorToString(code).c_str());
-			}
-			return std::string(http.getString().c_str());
-
+			http.setTimeout(3000);
+			if (int code = tryConnection(http, peer, port, request) != 200)
+			{	// error
+				return http.errorToString(-code).c_str(); // <- note `-` symbol.
+			}			
+			return http.getString().c_str();
 		}
 		/*************************************************/
 };

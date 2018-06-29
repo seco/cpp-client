@@ -14,7 +14,7 @@ namespace Network
 {
 /**************************************************
 * ARK::Utilities::Network::Connectable 
-*    Inheritable HTTPConnectable object
+* @brief: Forward Delcaration
 **************************************************/
 class HTTPConnectable;
 /*************************************************/
