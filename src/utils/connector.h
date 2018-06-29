@@ -28,12 +28,14 @@ class Connector :
 		virtual HTTPConnectable
 {
 	private:
-		char ip_[20+1] = { '\0' };
-		int port_;
+		char ip_[16];
+		unsigned int port_;
 
 	public:
 		Connector();
-		Connector(const char *const newIP, const int newPort);
+		Connector(const char *const newIP, const unsigned int newPort);
+
+		Connector& operator=(Connector&& other);
 
 		std::string callback(const char* const request);
 };

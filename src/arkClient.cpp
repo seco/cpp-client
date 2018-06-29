@@ -20,7 +20,7 @@ Client::Client() {}
 **************************************************/
 Client::Client(
     const char *const customBaseURL,
-    const int customBasePort
+    const unsigned int customBasePort
 ) {
     this->netConnector = ARK::Utilities::Network::Connector(customBaseURL, customBasePort);
 };
@@ -39,13 +39,13 @@ Client::Client(const NetworkType netType)
     {
         case DEVNET:
             this->netConnector = {
-                DEVNET_EXPLORER_URL,
-                DEFAULT_EXPLORER_API_PORT
+                DEVNET_SEED_URL,
+                DEVNET_SEED_PORT
             }; break;
         case MAINNET:
             this->netConnector = {
-                MAINNET_EXPLORER_URL,
-                DEFAULT_EXPLORER_API_PORT
+                MAINNET_SEED_URL,
+                MAINNET_SEED_PORT
             }; break;
     }
 };

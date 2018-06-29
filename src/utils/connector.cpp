@@ -14,7 +14,7 @@ namespace Network
 * ARK::Utilities::Network::Connector
 * Default: Empty Constructor
 **************************************************/
-Connector::Connector() : ip_(), port_(-1) {}
+Connector::Connector() : ip_(), port_() {}
 /*************************************************/
 
 /**************************************************************************************************/
@@ -27,10 +27,28 @@ Connector::Connector() : ip_(), port_(-1) {}
 **************************************************/
 Connector::Connector(
 		const char *const newIP,
-		const int newPort
+		const unsigned int newPort
 )	:	port_(newPort)
 {
 	strncpy(this->ip_, newIP, sizeof(this->ip_) / sizeof(this->ip_[0]));
+}
+/*************************************************/
+
+/**************************************************************************************************/
+
+/**************************************************
+* Move Assignment Operator
+*
+* @param: Connector&& other
+**************************************************/
+Connector& Connector::operator=(Connector&& other)
+{
+	if (this != &other)
+	{
+		strncpy(this->ip_, other.ip_, 16);
+		this->port_ = other.port_;
+	}
+	return *this;
 }
 /*************************************************/
 

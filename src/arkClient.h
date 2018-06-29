@@ -1,5 +1,5 @@
 /***************************************
-* Ark-Cpp - for the Ark Ecosystem (ark.io)
+* Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
 * https://github.com/Ark-IoT/Ark-Cpp
 *
 * sleepdeficit(simon@ark.io)
@@ -11,11 +11,21 @@
 
 #define HAS_CLIENT
 
-#include "api/api.h"
 
-#define DEVNET_EXPLORER_URL "dexplorer.ark.io" // char[24+1]
-#define MAINNET_EXPLORER_URL "explorer.ark.io" // char[23+1]
-#define DEFAULT_EXPLORER_API_PORT 8443u
+#include "api/one_api.h"
+#include "api/two_api.h"
+
+
+#define DEVNET_EXPLORER_URL "https://dexplorer.ark.io" // char[24+1]
+#define MAINNET_EXPLORER_URL "https://explorer.ark.io" // char[23+1]
+#define DEFAULT_EXPLORER_API_PORT 8443
+
+#define DEVNET_SEED_URL "167.114.29.42" // char[13+1]
+#define DEVNET_SEED_PORT 4002
+
+#define MAINNET_SEED_URL "5.39.9.242" // char[13+1]
+#define MAINNET_SEED_PORT 4001
+
 
 enum  NetworkType : int { DEVNET , MAINNET };
 
@@ -25,21 +35,14 @@ namespace ARK
 * ARK::Client
 **************************************************/
 class Client :
-		public ARK::API::Accountable,
-		public ARK::API::Blockable,
-		public ARK::API::Delegatable,
-		public ARK::API::Loadable,
-		public ARK::API::MultiSignaturable,
-		public ARK::API::Peerable,
-		public ARK::API::Signaturable,
-		public ARK::API::Transactionable,
+		public ONE_API, TWO_API,
         virtual ARK::Utilities::Network::Connectable
 {
 	public:
 		Client();
         explicit Client(
             const char *const customBaseURL,
-            const int customBasePort
+            const unsigned int customBasePort
         );
         explicit Client(const NetworkType netType);
 };
