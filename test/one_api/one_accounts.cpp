@@ -1,9 +1,7 @@
 
 
 #include "gtest/gtest.h"
-
 #include "src/arkClient.h"
-
 #include "nlohmann/json.hpp"
 
 namespace
@@ -11,7 +9,7 @@ namespace
 	const auto darkAddress = "DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA";
 }
 
-TEST(api, test_account)
+TEST(api, test_accounts_account)
 {
 	ARK::Client arkClient(DEVNET);
 	const auto accountResponse = arkClient.account(darkAddress);
@@ -35,7 +33,7 @@ TEST(api, test_account)
 	ASSERT_STREQ("03ad2a481719c80571061f0c941d57e91c928700d8dd132726edfc0bf9c4cb2869", secondPublicKey.get<std::string>().c_str());
 }
 
-TEST(api, test_account_balance)
+TEST(api, test_accounts_balance)
 {
 	ARK::Client arkClient(DEVNET);
 	const auto accountBalanceResponse = arkClient.accountBalance(darkAddress);
@@ -48,7 +46,7 @@ TEST(api, test_account_balance)
 	ASSERT_STREQ("7808415341862", balance.get<std::string>().c_str());
 }
 
-TEST(api, test_account_delegates)
+TEST(api, test_accounts_delegates)
 {
 	ARK::Client arkClient(DEVNET);
 	const auto delegateResponse = arkClient.accountDelegates(darkAddress);
@@ -66,7 +64,7 @@ TEST(api, test_account_delegates)
 	ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.get<std::string>().c_str());
 }
 
-TEST(api, test_account_delegates_fee)
+TEST(api, test_accounts_delegates_fee)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -77,7 +75,7 @@ TEST(api, test_account_delegates_fee)
 	ASSERT_EQ(2500000000, delegatesFee);
 }
 
-TEST(api, test_account_public_key)
+TEST(api, test_accounts_public_key)
 {
 	ARK::Client arkClient(DEVNET);
 
