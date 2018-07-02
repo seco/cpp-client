@@ -1,0 +1,49 @@
+
+
+#ifndef JSON_H
+#define JSON_H
+
+#include "platform/platform.h"
+
+#include <cstring>
+#include <memory>
+
+namespace ARK
+{
+namespace Test
+{
+namespace Utils
+{
+/**************************************************
+* ARK::Utilities::JSONInterface 
+*
+* The purpose of this class is to serve as an
+* entry point for integrating and simplifying
+* integration of a JSON library
+**************************************************/
+class JSONInterface
+{
+	protected:
+		JSONInterface() { }
+	public:
+		virtual ~JSONInterface() { }
+		virtual std::string valueFor(const char *const key) = 0;
+		virtual std::string valueIn(const char *const key, const char *const subkey) = 0;
+		virtual std::string subvalueFor(const char *const key, int pos) = 0;
+		virtual std::string subarrayValueIn(const char *const key, int pos, const char *const subkey) = 0;
+};
+/*************************************************/
+
+/**************************************************************************************************/
+
+/**************************************************
+*	JSON object factory
+**************************************************/
+std::unique_ptr<JSONInterface> makeJSONString(std::string str);
+/*************************************************/
+
+};
+};
+};
+
+#endif

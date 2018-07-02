@@ -22,9 +22,13 @@ set (TEST_SRC
 	${PROJECT_SOURCE_DIR}/one_api/one_accounts.cpp
 )
 
+set(PLATFORM_SRC 
+	${PROJECT_SOURCE_DIR}/utils/json/platform/os/json.cpp
+)
+
 find_library(Ark-Cpp-tests NAMES Ark-Cpp-lib PATHS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
-add_executable(Ark-Cpp-tests ${TEST_SRC})
+add_executable(Ark-Cpp-tests ${TEST_SRC} ${PLATFORM_SRC})
 
 target_link_libraries(Ark-Cpp-tests Ark-Cpp-lib)
 
