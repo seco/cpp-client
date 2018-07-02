@@ -1,0 +1,38 @@
+
+cmake_minimum_required(VERSION 3.2.2)
+
+project(Ark-Cpp-lib)
+
+hunter_add_package(PocoCpp)
+
+set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+ 
+include_directories(
+	${PROJECT_SOURCE_DIR}
+)
+
+find_package(Poco CONFIG REQUIRED Foundation Net)
+
+set(COMMON_SRC 
+	${PROJECT_SOURCE_DIR}/arkClient.cpp
+	${PROJECT_SOURCE_DIR}/utils/connector.cpp
+	${PROJECT_SOURCE_DIR}/api/one_accounts/one_accounts.cpp
+	${PROJECT_SOURCE_DIR}/api/one_blocks/one_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/one_delegates/one_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/one_loader/one_loader.cpp
+	${PROJECT_SOURCE_DIR}/api/one_peers/one_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/one_signatures/one_signatures.cpp
+	${PROJECT_SOURCE_DIR}/api/one_transactions/one_transactions.cpp
+)
+
+set(PLATFORM_SRC 
+	${PROJECT_SOURCE_DIR}/platform/os/http.cpp
+)
+
+add_library(Ark-Cpp-lib STATIC ${COMMON_SRC} ${PLATFORM_SRC})
+
+target_link_libraries(Ark-Cpp-lib PUBLIC Poco::Net)
+
+if (MSVC)
+	target_link_libraries(Ark-Cpp-lib PUBLIC crypt32)
+endif()
