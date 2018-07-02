@@ -4,7 +4,7 @@
 #define CONNECTOR_H
 
 #include "platform/platform.h"
-#include "utils/http.h"
+#include "connection/http.h"
 
 namespace ARK
 {

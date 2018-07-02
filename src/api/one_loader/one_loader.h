@@ -3,7 +3,7 @@
 #ifndef ONE_LOADER_H
 #define ONE_LOADER_H
 
-#include "utils/connector.h"
+#include "connection/connector.h"
 #include "api/one_paths.h"
 
 namespace ARK

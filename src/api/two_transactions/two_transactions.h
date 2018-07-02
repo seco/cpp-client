@@ -6,7 +6,7 @@
 #define TWO_TRANSACTIONS_H
 
 #include "platform/platform.h"
-#include "utils/connector.h"
+#include "connection/connector.h"
 #include "api/two_paths.h"
 
 namespace ARK

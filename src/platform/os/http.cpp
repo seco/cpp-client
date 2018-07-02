@@ -4,7 +4,7 @@
 
 #ifndef USE_IOT
 
-#include "utils/http.h"
+#include "connection/http.h"
 #include "Poco/Net/HTTPClientSession.h"
 #include "Poco/Net/HTTPRequest.h"
 #include "Poco/Net/HTTPResponse.h"

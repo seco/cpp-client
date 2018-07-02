@@ -15,7 +15,7 @@ find_package(Poco CONFIG REQUIRED Foundation Net)
 
 set(COMMON_SRC 
 	${PROJECT_SOURCE_DIR}/arkClient.cpp
-	${PROJECT_SOURCE_DIR}/utils/connector.cpp
+	${PROJECT_SOURCE_DIR}/connection/connector.cpp
 	${PROJECT_SOURCE_DIR}/api/one_accounts/one_accounts.cpp
 	${PROJECT_SOURCE_DIR}/api/one_blocks/one_blocks.cpp
 	${PROJECT_SOURCE_DIR}/api/one_delegates/one_delegates.cpp
