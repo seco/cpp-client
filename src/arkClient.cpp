@@ -2,12 +2,14 @@
 
 #include "arkClient.h"
 
-namespace ARK
-{
+// namespace ARK
+// {
 /*************************************************
 * Default: Empty Constructor - ARK::Client
 **************************************************/
-Client::Client() {}
+ARK::Client::Client() {
+
+}
 /*************************************************/
 
 /*************************************************
@@ -18,7 +20,7 @@ Client::Client() {}
 *
 * @brief: Creates API Client instance using a base url and port.
 **************************************************/
-Client::Client(
+ARK::Client::Client(
     const char *const customBaseURL,
     const unsigned int customBasePort
 ) {
@@ -33,16 +35,16 @@ Client::Client(
 *
 * @brief: Creates API Client instance using a Network Type (Devnet, Mainnet).
 **************************************************/
-Client::Client(const NetworkType netType)
+ARK::Client::Client(const NetworkType netType)
 {
     switch (netType)
     {
-        case DEVNET:
+        case NetworkType::DEVNET:
             this->netConnector = {
                 DEVNET_SEED_URL,
                 DEVNET_SEED_PORT
             }; break;
-        case MAINNET:
+        case NetworkType::MAINNET:
             this->netConnector = {
                 MAINNET_SEED_URL,
                 MAINNET_SEED_PORT
@@ -51,4 +53,4 @@ Client::Client(const NetworkType netType)
 };
 /*************************************************/
 
-};
+// };

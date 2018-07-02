@@ -13,8 +13,7 @@
 
 
 #include "api/one_api.h"
-#include "api/two_api.h"
-
+// #include "api/two_api.h"
 
 #define DEVNET_EXPLORER_URL "https://dexplorer.ark.io" // char[24+1]
 #define MAINNET_EXPLORER_URL "https://explorer.ark.io" // char[23+1]
@@ -26,8 +25,7 @@
 #define MAINNET_SEED_URL "5.39.9.242" // char[13+1]
 #define MAINNET_SEED_PORT 4001
 
-
-enum  NetworkType : int { DEVNET , MAINNET };
+enum NetworkType { DEVNET, MAINNET };
 
 namespace ARK
 {
@@ -35,7 +33,8 @@ namespace ARK
 * ARK::Client
 **************************************************/
 class Client :
-		public ONE_API, TWO_API,
+		public ONE_API,
+        // public TWO_API,
         virtual ARK::Utilities::Network::Connectable
 {
 	public:

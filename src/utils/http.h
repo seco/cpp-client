@@ -32,16 +32,16 @@ class HTTPConnectable;
 class HTTPInterface
 {
 	protected: 
-    HTTPInterface() = default;
+    	HTTPInterface() = default;
 
 	public:
-    virtual ~HTTPInterface() { }
+    	virtual ~HTTPInterface() { }
 
-    virtual std::string get(
-			const char *const peer,
-			int port,
-			const char *const request
-	) = 0;
+		virtual std::string get(
+				const char *const peer,
+				int port,
+				const char *const request
+		) = 0;
 };
 /*************************************************/
 
