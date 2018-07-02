@@ -96,9 +96,7 @@ std::string ARK::API::ONE_Blocks::block(
 **************************************************/
 std::string ARK::API::ONE_Blocks::blocks()
 {
-	char uri[61 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE_Paths::ONE_Blocks::blocks_s);
-	return netConnector.callback(uri);
+	return netConnector.callback(ARK::API::ONE_Paths::ONE_Blocks::blocks_s);
 }
 /*************************************************/
 

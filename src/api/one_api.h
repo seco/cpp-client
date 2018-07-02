@@ -24,6 +24,7 @@ class ONE_API :
 		public ARK::API::ONE_Loader,
 		public ARK::API::ONE_Peers,
 		public ARK::API::ONE_Signatures,
-		public ARK::API::ONE_Transactions {};
+		public ARK::API::ONE_Transactions,
+		virtual ARK::Utilities::Network::Connectable {};
 
 #endif
