@@ -23,6 +23,7 @@ class ONE_Delegates :
 	public:
 		/*************************************************
 		* /api/delegates/get?username="username"
+		* /api/delegates/get?publicKey=publicKey
 		*
 		* @param: const char *const parameter
 		* @return: std::string

@@ -21,6 +21,7 @@ include_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 set (TEST_SRC
 	${PROJECT_SOURCE_DIR}/one_api/one_accounts.cpp
 	${PROJECT_SOURCE_DIR}/one_api/one_blocks.cpp
+	${PROJECT_SOURCE_DIR}/one_api/one_delegates.cpp
 )
 
 set(PLATFORM_SRC 
