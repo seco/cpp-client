@@ -24,6 +24,8 @@ set (TEST_SRC
 	${PROJECT_SOURCE_DIR}/one_api/one_delegates.cpp
 	${PROJECT_SOURCE_DIR}/one_api/one_loader.cpp
 	${PROJECT_SOURCE_DIR}/one_api/one_peers.cpp
+	${PROJECT_SOURCE_DIR}/one_api/one_signatures.cpp
+	${PROJECT_SOURCE_DIR}/one_api/one_transactions.cpp
 )
 
 set(PLATFORM_SRC 
