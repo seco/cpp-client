@@ -24,6 +24,7 @@ class TWO_API :
 		public ARK::API::TWO_Peers,
 		public ARK::API::TWO_Transactions,
 		public ARK::API::TWO_Votes,
-        public ARK::API::TWO_Wallets {};
+        public ARK::API::TWO_Wallets,
+		virtual ARK::Utilities::Network::Connectable {};
 
 #endif
