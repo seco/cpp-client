@@ -14,7 +14,7 @@ namespace
 	const auto darkAddress = "DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA";
 }
 
-TEST(api, test_accounts_account)
+TEST(api, test_one_accounts_account)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -40,7 +40,7 @@ TEST(api, test_accounts_account)
 	ASSERT_STREQ("03ad2a481719c80571061f0c941d57e91c928700d8dd132726edfc0bf9c4cb2869", secondPublicKey.c_str());
 }
 
-TEST(api, test_accounts_balance)
+TEST(api, test_one_accounts_balance)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -54,7 +54,7 @@ TEST(api, test_accounts_balance)
 	ASSERT_STREQ("7808415341862", unconfirmedBalance.c_str());
 }
 
-TEST(api, test_accounts_delegates)
+TEST(api, test_one_accounts_delegates)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -78,7 +78,7 @@ TEST(api, test_accounts_delegates)
 	// convert_to_float(parser->subarrayValueIn("delegates", 0, "productivity").c_str())
 }
 
-TEST(api, test_accounts_delegates_fee)
+TEST(api, test_one_accounts_delegates_fee)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -89,7 +89,7 @@ TEST(api, test_accounts_delegates_fee)
 	ASSERT_STREQ("2500000000", delegatesFee.c_str()); // actual value is 2500000000 (int).
 }
 
-TEST(api, test_accounts_public_key)
+TEST(api, test_one_accounts_public_key)
 {
 	ARK::Client arkClient(DEVNET);
 

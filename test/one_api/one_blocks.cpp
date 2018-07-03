@@ -9,7 +9,7 @@
 	#include "test/utils/json/json.h"
 #endif
 
-TEST(api, test_blocks_block)
+TEST(api, test_one_blocks_block)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -66,7 +66,7 @@ TEST(api, test_blocks_block)
 	ASSERT_STREQ("200000000", totalForged.c_str());
 }
 
-TEST(api, test_blocks_blocks)
+TEST(api, test_one_blocks_blocks)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -80,7 +80,7 @@ TEST(api, test_blocks_blocks)
 	}
 }
 
-TEST(api, test_blocks_epoch)
+TEST(api, test_one_blocks_epoch)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -91,7 +91,7 @@ TEST(api, test_blocks_epoch)
 	ASSERT_STREQ("2017-03-21T13:00:00.000Z", epoch.c_str());
 }
 
-TEST(api, test_blocks_fee)
+TEST(api, test_one_blocks_fee)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -102,7 +102,7 @@ TEST(api, test_blocks_fee)
 	ASSERT_STREQ("10000000", blockFee.c_str());
 }
 
-TEST(api, test_blocks_fees)
+TEST(api, test_one_blocks_fees)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -125,7 +125,7 @@ TEST(api, test_blocks_fees)
 	ASSERT_STREQ("500000000", multisignature.c_str());
 }
 
-TEST(api, test_blocks_height)
+TEST(api, test_one_blocks_height)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -141,7 +141,7 @@ TEST(api, test_blocks_height)
 	ASSERT_STRNE("", id.c_str());
 }
 
-TEST(api, test_blocks_milestone)
+TEST(api, test_one_blocks_milestone)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -153,7 +153,7 @@ TEST(api, test_blocks_milestone)
 	ASSERT_STRNE("", milestone.c_str());
 }
 
-TEST(api, test_blocks_nethash)
+TEST(api, test_one_blocks_nethash)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -165,7 +165,7 @@ TEST(api, test_blocks_nethash)
 }
 
 
-TEST(api, test_blocks_reward)
+TEST(api, test_one_blocks_reward)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -176,7 +176,7 @@ TEST(api, test_blocks_reward)
 	ASSERT_STREQ("200000000", reward.c_str());
 }
 
-TEST(api, test_blocks_status)
+TEST(api, test_one_blocks_status)
 {
 	ARK::Client arkClient(DEVNET);	
 
@@ -210,7 +210,7 @@ TEST(api, test_blocks_status)
 	ASSERT_STRNE("", supply.c_str());
 }
 
-TEST(api, test_blocks_supply)
+TEST(api, test_one_blocks_supply)
 {
 	ARK::Client arkClient(DEVNET);
 

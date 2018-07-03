@@ -14,7 +14,7 @@ namespace
 	const auto darkPubkey = "0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456";
 }
 
-TEST(api, test_delegates_delegates)
+TEST(api, test_one_delegates_delegates)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -58,7 +58,7 @@ TEST(api, test_delegates_delegates)
 	}
 }
 
-TEST(api, test_delegates_fee)
+TEST(api, test_one_delegates_fee)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -69,7 +69,7 @@ TEST(api, test_delegates_fee)
 	ASSERT_STREQ("2500000000", delegateFee.c_str()); // actual value 2500000000 (int).
 }
 
-TEST(api, test_delegates_forged_by_account)
+TEST(api, test_one_delegates_forged_by_account)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -89,7 +89,7 @@ TEST(api, test_delegates_forged_by_account)
 	ASSERT_STRNE("", forged.c_str());
 }
 
-TEST(api, test_delegates_next_forgers)
+TEST(api, test_one_delegates_next_forgers)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -111,7 +111,7 @@ TEST(api, test_delegates_next_forgers)
 	};
 }
 
-TEST(api, test_delegates_delegate_by_public_key)
+TEST(api, test_one_delegates_delegate_by_public_key)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -152,7 +152,7 @@ TEST(api, test_delegates_delegate_by_public_key)
 	ASSERT_STRNE("", productivity.c_str());
 }
 
-TEST(api, test_delegates_delegate_by_username)
+TEST(api, test_one_delegates_delegate_by_username)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -193,7 +193,7 @@ TEST(api, test_delegates_delegate_by_username)
 	ASSERT_STRNE("", productivity.c_str());
 }
 
-TEST(api, test_delegates_voters)
+TEST(api, test_one_delegates_voters)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -228,7 +228,7 @@ TEST(api, test_delegates_voters)
 	ASSERT_STRNE("", balance0.c_str());
 }
 
-TEST(api, test_delegates_search)
+TEST(api, test_one_delegates_search)
 {
 	ARK::Client arkClient(DEVNET);
 
@@ -269,7 +269,7 @@ TEST(api, test_delegates_search)
 	ASSERT_STRNE("", productivity.c_str());
 }
 
-TEST(api, test_delegates_count)
+TEST(api, test_one_delegates_count)
 {
 	ARK::Client arkClient(DEVNET);
 
