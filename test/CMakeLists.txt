@@ -22,6 +22,7 @@ set (TEST_SRC
 	${PROJECT_SOURCE_DIR}/one_api/one_accounts.cpp
 	${PROJECT_SOURCE_DIR}/one_api/one_blocks.cpp
 	${PROJECT_SOURCE_DIR}/one_api/one_delegates.cpp
+	${PROJECT_SOURCE_DIR}/one_api/one_loader.cpp
 )
 
 set(PLATFORM_SRC 
