@@ -21,6 +21,9 @@ TEST(api, test_one_accounts_account)
 	const auto accountResponse = arkClient.account(darkAddress);
 	auto parser = ARK::Test::Utils::makeJSONString(accountResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto address = parser->valueIn("account", "address");
 	ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
 	
@@ -47,6 +50,9 @@ TEST(api, test_one_accounts_balance)
 	const auto accountBalanceResponse = arkClient.accountBalance(darkAddress);
 	auto parser = ARK::Test::Utils::makeJSONString(accountBalanceResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto balance = parser->valueFor("balance");
 	ASSERT_STREQ("7808415341862", balance.c_str());
 
@@ -60,6 +66,9 @@ TEST(api, test_one_accounts_delegates)
 
 	const auto delegateResponse = arkClient.accountDelegates(darkAddress);
 	auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto username = parser->subarrayValueIn("delegates", 0, "username");
 	ASSERT_STREQ("sleepdeficit", username.c_str());
@@ -85,6 +94,9 @@ TEST(api, test_one_accounts_delegates_fee)
 	const auto delegatesFeeResponse = arkClient.accountDelegatesFee(darkAddress);
 	auto parser = ARK::Test::Utils::makeJSONString(delegatesFeeResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto delegatesFee = parser->valueFor("fee");
 	ASSERT_STREQ("2500000000", delegatesFee.c_str()); // actual value is 2500000000 (int).
 }
@@ -95,6 +107,9 @@ TEST(api, test_one_accounts_public_key)
 
 	const auto pubkeyResponse = arkClient.accountPublickey(darkAddress);
 	auto parser = ARK::Test::Utils::makeJSONString(pubkeyResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto publicKey = parser->valueFor("publicKey");
 	ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());

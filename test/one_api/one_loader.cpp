@@ -16,6 +16,9 @@ TEST(api, test_one_loader_autoconfigure)
 	const auto autoconfigureResponse = arkClient.loaderAutoconfigure();
 	auto parser = ARK::Test::Utils::makeJSONString(autoconfigureResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto nethash = parser->valueIn("network", "nethash");
 	ASSERT_STREQ("578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23", nethash.c_str());
 
@@ -39,6 +42,9 @@ TEST(api, test_one_loader_status)
 	const auto statusResponse = arkClient.loaderStatus();
 	auto parser = ARK::Test::Utils::makeJSONString(statusResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto loaded = parser->valueFor("loaded");
 	ASSERT_STREQ("false", loaded.c_str());
 
@@ -57,6 +63,9 @@ TEST(api, test_one_loader_sync)
     
 	const auto syncResponse = arkClient.loaderSync();
 	auto parser = ARK::Test::Utils::makeJSONString(syncResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto syncing = parser->valueFor("syncing");
     ASSERT_STREQ("false", syncing.c_str());

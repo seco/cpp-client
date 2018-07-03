@@ -16,6 +16,9 @@ TEST(api, test_one_blocks_block)
 	const auto blockResponse = arkClient.block("4367122150875693402");
     auto parser = ARK::Test::Utils::makeJSONString(blockResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto id = parser->valueIn("block", "id");
 	ASSERT_STREQ("4367122150875693402", id.c_str());
 
@@ -73,6 +76,9 @@ TEST(api, test_one_blocks_blocks)
 	const auto blocksResponse = arkClient.blocks();
     auto parser = ARK::Test::Utils::makeJSONString(blocksResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
 	for (int i = 0; i < 20; i++) // Full-list too large for MCU; limit to last 20 blocks.
 	{
         const auto version = parser->subarrayValueIn("blocks", i, "version");
@@ -87,6 +93,9 @@ TEST(api, test_one_blocks_epoch)
     const auto epochResponse = 	arkClient.blockEpoch();
     auto parser = ARK::Test::Utils::makeJSONString(epochResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto epoch = parser->valueFor("epoch");
 	ASSERT_STREQ("2017-03-21T13:00:00.000Z", epoch.c_str());
 }
@@ -98,6 +107,9 @@ TEST(api, test_one_blocks_fee)
 	const auto blockFeeResponse = arkClient.blockFee();
     auto parser = ARK::Test::Utils::makeJSONString(blockFeeResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto blockFee = parser->valueFor("fee");
 	ASSERT_STREQ("10000000", blockFee.c_str());
 }
@@ -108,6 +120,9 @@ TEST(api, test_one_blocks_fees)
 
 	const auto blockFeesResponse = arkClient.blockFees();
     auto parser = ARK::Test::Utils::makeJSONString(blockFeesResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto send = parser->valueIn("fees", "send");
 	ASSERT_STREQ("10000000", send.c_str());
@@ -132,6 +147,9 @@ TEST(api, test_one_blocks_height)
 	const auto blockHeightResponse = arkClient.blockHeight();
     auto parser = ARK::Test::Utils::makeJSONString(blockHeightResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto height = parser->valueFor("height");
 	ASSERT_STRNE("0", height.c_str());
 	ASSERT_STRNE("", height.c_str());
@@ -148,6 +166,9 @@ TEST(api, test_one_blocks_milestone)
 	const auto blockMilestoneResponse = arkClient.blockMilestone();
     auto parser = ARK::Test::Utils::makeJSONString(blockMilestoneResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto milestone = parser->valueFor("milestone");
 	ASSERT_STREQ("0", milestone.c_str());
 	ASSERT_STRNE("", milestone.c_str());
@@ -159,6 +180,9 @@ TEST(api, test_one_blocks_nethash)
 
 	const auto nethashResponse = arkClient.blockNethash();
     auto parser = ARK::Test::Utils::makeJSONString(nethashResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto nethash = parser->valueFor("nethash");
 	ASSERT_STREQ("578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23", nethash.c_str());
@@ -172,6 +196,9 @@ TEST(api, test_one_blocks_reward)
 	const auto blockRewardResponse = arkClient.blockReward();
     auto parser = ARK::Test::Utils::makeJSONString(blockRewardResponse);
 
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
     const auto reward = parser->valueFor("reward");
 	ASSERT_STREQ("200000000", reward.c_str());
 }
@@ -182,6 +209,9 @@ TEST(api, test_one_blocks_status)
 
 	const auto blockStatusResponse = arkClient.blockStatus();
     auto parser = ARK::Test::Utils::makeJSONString(blockStatusResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto epoch = parser->valueFor("epoch");
 	ASSERT_STREQ("2017-03-21T13:00:00.000Z", epoch.c_str());
@@ -216,6 +246,9 @@ TEST(api, test_one_blocks_supply)
 
 	const auto blockSupplyResponse = arkClient.blockSupply();
     auto parser = ARK::Test::Utils::makeJSONString(blockSupplyResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
 
     const auto supply = parser->valueFor("supply");
 	// ASSERT_STREQ("12962158800000000", supply.c_str());
