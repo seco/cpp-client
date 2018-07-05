@@ -45,7 +45,7 @@ Connector& Connector::operator=(Connector&& other)
 {
 	if (this != &other)
 	{
-		strncpy(this->ip_, other.ip_, 16);
+		strncpy(this->ip_, other.ip_, sizeof(this->ip_) / sizeof(this->ip_[0]));
 		this->port_ = other.port_;
 	}
 	return *this;
