@@ -16,13 +16,13 @@ find_package(Poco CONFIG REQUIRED Foundation Net)
 set(COMMON_SRC 
 	${PROJECT_SOURCE_DIR}/arkClient.cpp
 	${PROJECT_SOURCE_DIR}/connection/connector.cpp
-	${PROJECT_SOURCE_DIR}/api/one_accounts/one_accounts.cpp
-	${PROJECT_SOURCE_DIR}/api/one_blocks/one_blocks.cpp
-	${PROJECT_SOURCE_DIR}/api/one_delegates/one_delegates.cpp
-	${PROJECT_SOURCE_DIR}/api/one_loader/one_loader.cpp
-	${PROJECT_SOURCE_DIR}/api/one_peers/one_peers.cpp
-	${PROJECT_SOURCE_DIR}/api/one_signatures/one_signatures.cpp
-	${PROJECT_SOURCE_DIR}/api/one_transactions/one_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/one/accounts/one_accounts.cpp
+	${PROJECT_SOURCE_DIR}/api/one/blocks/one_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/one/delegates/one_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/one/loader/one_loader.cpp
+	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
+	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
 )
 
 set(PLATFORM_SRC 

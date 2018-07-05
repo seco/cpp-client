@@ -16,16 +16,17 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../lib")
 set(COVERAGE OFF CACHE BOOL "Coverage")
 
 include_directories(${PROJECT_SOURCE_DIR}/../src)
+include_directories(${PROJECT_SOURCE_DIR}/../test)
 include_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 set (TEST_SRC
-	${PROJECT_SOURCE_DIR}/one_api/one_accounts.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_blocks.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_delegates.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_loader.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_peers.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_signatures.cpp
-	${PROJECT_SOURCE_DIR}/one_api/one_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_accounts.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_loader.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_signatures.cpp
+	${PROJECT_SOURCE_DIR}/api/one/one_transactions.cpp
 )
 
 set(PLATFORM_SRC 

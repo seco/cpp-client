@@ -11,9 +11,12 @@
 
 #define HAS_CLIENT
 
-
-#include "api/one_api.h"
-// #include "api/two_api.h"
+/***************************************
+* Uncomment to use desired API Version
+***************************************/
+#define USE_ONE_API
+// #define USE_TWO_API
+/**************************************/
 
 #define DEVNET_EXPLORER_URL "https://dexplorer.ark.io" // char[24+1]
 #define MAINNET_EXPLORER_URL "https://explorer.ark.io" // char[23+1]
@@ -27,14 +30,21 @@
 
 enum NetworkType { DEVNET, MAINNET };
 
+#ifdef USE_ONE_API
+    #include "api/one/one_api.h"
+    class VersionedAPI : public ONE_API {};
+#elif defined(USE_TWO_API)
+    #include "api/two/two_api.h"
+    class VersionedAPI : public TWO_API {};
+#endif
+
 namespace ARK
 {
 /*************************************************
 * ARK::Client
 **************************************************/
 class Client :
-		public ONE_API,
-        // public TWO_API,
+		public virtual VersionedAPI,
         virtual ARK::Utilities::Network::Connectable
 {
 	public:
