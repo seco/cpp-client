@@ -4,48 +4,37 @@
   <img src="https://github.com/sleepdefic1t/cpp-client/blob/master/ark_cpp_client.png"/>
 </p>
 
-> A simple Cpp/C++ API client for the ARK Blockchain.
+> A simple Cpp/C++ API client for the ARK Blockchain.  
 
-v0.5
+> note: this is currently NOT an official repo
 
-#### Arduino Example using the Adafruit Feather ESP8266
+[![Build Status](https://img.shields.io/travis/ArkEcosystem/cpp-client/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/core-plugin-skeleton)
+[![Latest Version](https://img.shields.io/github/release/cpp-client/cpp-client.svg?style=flat-square)](https://github.com/ArkEcosystem/cpp-client/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-```cpp
 
-#include <arkClient.h>
-#include <ESP8266WiFi.h>
+## Installation  
+- [Arduino IDE](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_ARDUINO.md)  
+- [OS(Desktop/Server)](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_OS.md)
+- [PlatformIO](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_PLATFORMIO.md)
 
-const char* ssid = "your_network";
-const char* password = "your_password";
+#
 
-void setup() {
-  Serial.begin(115200);
+## Security
 
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
-  Serial.print("\nConnected, IP address: ");
-  Serial.println(WiFi.localIP());
+If you discover a security vulnerability within this package, please send an e-mail to simon@ark.io.  
+All security vulnerabilities will be promptly addressed.
 
- ARK::Client arkClient(DEVNET);
+#
 
-  Serial.println(arkClient.blocks().c_str());
-  Serial.println();
-  
-  Serial.println(arkClient.delegates().c_str());
-  Serial.println();
-  
-  Serial.println(arkClient.delegatesCount().c_str());
-  Serial.println();
-  
-  Serial.println(arkClient.peers().c_str());
-  Serial.println();
-  
-  Serial.println(arkClient.transactions().c_str());
-  Serial.println();
+## Credits
 
-}
+- [Simon Downey](https://github.com/sleepdeficit)
+- [Chris Johnson](https://github.com/ciband)
+- [All Contributors](../../../../contributors)
 
-void loop() {}
+#
 
-```
+## License
+
+[MIT](LICENSE) © [ArkEcosystem](https://ark.io)
