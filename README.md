@@ -14,9 +14,9 @@
 
 
 ## Installation  
-- [Arduino IDE](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_ARDUINO.md)  
-- [OS(Desktop/Server)](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_OS.md)
-- [PlatformIO](https://github.com/sleepdeficit/cpp-client/docs/INSTALL_PLATFORMIO.md)
+- [Arduino IDE](https://github.com/sleepdefic1t/cpp-client/blob/master/docs/INSTALL_ARDUINO.md)  
+- [OS(Desktop/Server)](https://github.com/sleepdefic1t/cpp-client/blob/master/docs/INSTALL_OS.md)
+- [PlatformIO](https://github.com/sleepdefic1t/cpp-client/blob/master/docs/INSTALL_PLATFORMIO.md)
 
 #
 
