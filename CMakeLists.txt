@@ -9,7 +9,7 @@ HunterGate(
 	SHA1 "efd84db1349e38974f53d4c4fc0b368a3b49f022"
 )
 
-project(Ark-Cpp)
+project(Ark-Cpp-Client)
 
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
  

@@ -22,4 +22,4 @@ then run the following command combo:
 `cmake . && cmake --build .`
 
 ### run tests
-`./bin/Ark-Cpp-tests`
+`./bin/Ark-Cpp-Client-tests`

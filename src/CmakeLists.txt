@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.2.2)
 
-project(Ark-Cpp-lib)
+project(Ark-Cpp-Client-lib)
 
 hunter_add_package(PocoCpp)
 
@@ -29,10 +29,10 @@ set(PLATFORM_SRC
 	${PROJECT_SOURCE_DIR}/platform/os/http.cpp
 )
 
-add_library(Ark-Cpp-lib STATIC ${COMMON_SRC} ${PLATFORM_SRC})
+add_library(Ark-Cpp-Client-lib STATIC ${COMMON_SRC} ${PLATFORM_SRC})
 
-target_link_libraries(Ark-Cpp-lib PUBLIC Poco::Net)
+target_link_libraries(Ark-Cpp-Client-lib PUBLIC Poco::Net)
 
 if (MSVC)
-	target_link_libraries(Ark-Cpp-lib PUBLIC crypt32)
+	target_link_libraries(Ark-Cpp-Client-lib PUBLIC crypt32)
 endif()

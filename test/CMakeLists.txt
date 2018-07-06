@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2.2)
 
-project(Ark-Cpp-tests)
+project(Ark-Cpp-Client-tests)
 
 hunter_add_package(GTest)
 hunter_add_package(nlohmann_json)
@@ -33,19 +33,19 @@ set(PLATFORM_SRC
 	${PROJECT_SOURCE_DIR}/utils/json/platform/os/json.cpp
 )
 
-find_library(Ark-Cpp-tests NAMES Ark-Cpp-lib PATHS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+find_library(Ark-Cpp-Client-tests NAMES Ark-Cpp-Client-lib PATHS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
-add_executable(Ark-Cpp-tests ${TEST_SRC} ${PLATFORM_SRC})
+add_executable(Ark-Cpp-Client-tests ${TEST_SRC} ${PLATFORM_SRC})
 
-target_link_libraries(Ark-Cpp-tests Ark-Cpp-lib)
+target_link_libraries(Ark-Cpp-Client-tests Ark-Cpp-Client-lib)
 
-target_link_libraries(Ark-Cpp-tests nlohmann_json)
-target_link_libraries(Ark-Cpp-tests GTest::main) # GTest::gtest will be linked automatically
-target_link_libraries(Ark-Cpp-tests GTest::gtest)
+target_link_libraries(Ark-Cpp-Client-tests nlohmann_json)
+target_link_libraries(Ark-Cpp-Client-tests GTest::main) # GTest::gtest will be linked automatically
+target_link_libraries(Ark-Cpp-Client-tests GTest::gtest)
 
 if (COVERAGE)
 	target_compile_options(tests PRIVATE --coverage)
 	target_link_libraries(tests PRIVATE --coverage)
 endif()
 
-add_test(NAME test COMMAND Ark-Cpp-tests)
+add_test(NAME test COMMAND Ark-Cpp-Client-tests)
