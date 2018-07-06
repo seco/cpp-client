@@ -32,10 +32,14 @@ enum NetworkType { DEVNET, MAINNET };
 
 #ifdef USE_ONE_API
     #include "api/one/one_api.h"
-    class VersionedAPI : public ONE_API {};
+    class VersionedAPI :
+            public ONE_API,
+            virtual ARK::Utilities::Network::Connectable {};
 #elif defined(USE_TWO_API)
     #include "api/two/two_api.h"
-    class VersionedAPI : public TWO_API {};
+    class VersionedAPI :
+            public TWO_API,
+            virtual ARK::Utilities::Network::Connectable {};
 #endif
 
 namespace ARK
