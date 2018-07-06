@@ -8,7 +8,7 @@
 
 > note: this is currently NOT an official repo
 
-[![Build Status](https://img.shields.io/travis/ArkEcosystem/cpp-client/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/core-plugin-skeleton)
+[![Build Status](https://travis-ci.org/sleepdefic1t/cpp-client.svg?branch=master)](https://travis-ci.org/sleepdefic1t/cpp-client)
 [![Latest Version](https://img.shields.io/github/release/cpp-client/cpp-client.svg?style=flat-square)](https://github.com/ArkEcosystem/cpp-client/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
