@@ -22,7 +22,7 @@
 #define MAINNET_EXPLORER_URL "https://explorer.ark.io" // char[23+1]
 #define DEFAULT_EXPLORER_API_PORT 8443
 
-#define DEVNET_SEED_URL "167.114.29.55" // char[13+1]
+#define DEVNET_SEED_URL "167.114.29.54" // char[13+1]
 #define DEVNET_SEED_PORT 4002
 
 #define MAINNET_SEED_URL "5.39.9.242" // char[13+1]
