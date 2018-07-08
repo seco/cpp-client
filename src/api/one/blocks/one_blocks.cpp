@@ -44,9 +44,9 @@ std::string ARK::API::V1::Blocks::block(
 /**************************************************************************************************/
 
 /*************************************************
-* /api/blocks?orderBy=height:desc&limit=20
+* /api/blocks?orderBy=height:desc&limit=10
 *
-* @brief: `/api/blocks` is too large for MCU's, so lets limit to the last 20 recent blocks
+* @brief: `/api/blocks` is too large for MCU's, so lets limit to the last 10 recent blocks
 *
 * EXAMPLE:
 * {
@@ -96,7 +96,8 @@ std::string ARK::API::V1::Blocks::block(
 **************************************************/
 std::string ARK::API::V1::Blocks::blocks()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::blocks_s);
+	auto blocks = netConnector.callback(ARK::API::V1::Paths::Blocks::blocks_s);
+	return blocks;
 }
 /*************************************************/
 

@@ -38,7 +38,7 @@ std::string ARK::API::V1::Transactions::transaction(const char *const id)
 /**************************************************************************************************/
 
 /*************************************************
-* /api/transactions/get?id=
+* /api/transactions/?orderBy=timestamp:desc&limit=10"
 *
 * EXAMPLE:
 * {
@@ -82,9 +82,7 @@ std::string ARK::API::V1::Transactions::transaction(const char *const id)
 **************************************************/
 std::string ARK::API::V1::Transactions::transactions()
 {
-	char uri[69] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Transactions::transactions_s);
-	return netConnector.callback(uri);
+	return netConnector.callback(ARK::API::V1::Paths::Transactions::transactions_s);
 }
 /*************************************************/
 

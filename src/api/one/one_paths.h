@@ -30,7 +30,7 @@ namespace Accounts
 namespace Blocks
 {
 	const auto get_s = "/api/blocks/get"; //using ID
-	const auto blocks_s = "/api/blocks?orderBy=height:desc&limit=20";
+	const auto blocks_s = "/api/blocks?orderBy=height:desc&limit=10";
 	const auto getEpoch_s = "/api/blocks/getEpoch";
 	const auto getHeight_s = "/api/blocks/getHeight";
 	const auto getNethash_s = "/api/blocks/getNethash";
@@ -96,7 +96,7 @@ namespace Signatures
 namespace Transactions
 {
 	const auto getSingle_s = "/api/transactions/get";
-	const auto transactions_s = "/api/transactions?orderBy=timestamp:desc&limit=20";
+	const auto transactions_s = "/api/transactions?orderBy=timestamp:desc&limit=10";
 	const auto getSingleUnconfirmed_s = "/api/transactions/unconfirmed/get";
 	const auto unconfirmed_s = "/api/transactions/unconfirmed";
 };

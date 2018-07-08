@@ -40,11 +40,11 @@ class Blocks :
 		/**************************************************************************************************/
 
 		/*************************************************
-		* /api/blocks?orderBy=height:desc&limit=20
+		* /api/blocks?orderBy=height:desc&limit=10
 		*
 		* @return: std::string
 		*
-		* @brief: `/api/blocks` is too large for MCU's, so lets limit to the last 20
+		* @brief: `/api/blocks` is too large for MCU's, so lets limit to the last 10
 		**************************************************/
 		std::string blocks();
 		/*************************************************/

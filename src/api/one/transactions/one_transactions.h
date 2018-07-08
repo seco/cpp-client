@@ -40,9 +40,9 @@ public:
 	/**************************************************************************************************/
 
 	/*************************************************
-	* /api/transactions?limit=20
+	* /api/transactions?orderBy=timestamp:desc&limit=10"
 	*
-	* @brief: Gets Transactions list, limited to last 20.
+	* @brief: Gets Transactions list, limited to last 10.
 	**************************************************/
 	std::string transactions();
 	/*************************************************/
