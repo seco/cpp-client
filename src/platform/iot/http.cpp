@@ -1,23 +1,15 @@
 
 
 #include "platform/platform.h"
-#include <string>
+#include "connection/http.h"
 #include <memory>
 #include <vector>
 
-// #if (defined ESP32 || defined ESP8266)
-// #if (defined USE_IOT)
-#include "connection/http.h"
-#include <memory>
-
-#ifdef ESP8266
-
-#include <ESP8266HTTPClient.h>
-
+#if (defined ESP32 || defined ESP8266)
+	#include <ESP8266HTTPClient.h>
+	#include <WiFiClientSecure.h>
 #else
-
-#include <HTTPClient.h>
-
+	#include <HTTPClient.h>
 #endif
 
 namespace ARK
@@ -49,7 +41,7 @@ class HTTP :
 				const int port,
 				const char *const request
 		) {
-			Serial.print("\nOpening HTTP connection to:\n");
+			Serial.print("\nOpening HTTP(S) connection to:\n");
 			Serial.print(peer); Serial.print(":");
 			Serial.print(port);
 			Serial.println(request);
@@ -70,7 +62,7 @@ class HTTP :
 			{	// error
 				Serial.println("\nBad HTTP begin..");
 			}
-			int code = client.GET();	
+			int code = client.GET();
 			int count = 0;
 			while (code != HTTP_CODE_OK)
 			{	//error
@@ -103,8 +95,79 @@ class HTTP :
 			if (int code = tryConnection(http, peer, port, request) != 200)
 			{	// error
 				return http.errorToString(-code).c_str(); // <- note `-` symbol.
-			}			
+			}
 			return http.getString().c_str();
+		}
+		/*************************************************/
+
+		/**************************************************************************************************/
+
+		/*************************************************
+		*
+		**************************************************/
+		int tryHTTPSConnection(
+				WiFiClientSecure &client,
+				const char *const peer,
+				int port,
+				const char *const fingerprint,
+				const char *const request
+		) {
+			printConnection(peer, port, request);
+
+			auto connected = client.connect(peer, port);
+			size_t count = 0;
+			while (!connected)
+			{ Serial.println("\nconnection failed...");
+			  if (count >=3) { return -1; };
+        		delay(500);
+				Serial.println("\ntrying host again.");
+				connected = client.connect(peer, port);
+				count++;
+			}
+
+			if (!client.verify(fingerprint, peer)) { return -1; }
+
+			client.print(
+				String("GET ")
+				+ request
+				+ " HTTP/1.1\r\n"
+				+ "Host: " + peer + "\r\n"
+				+ "User-Agent: cpp-client-v0.5\r\n"
+				+ "Connection: close\r\n\r\n"
+			);
+
+    		while (client.connected())
+			{
+				if (client.readStringUntil('\n') == "\r") { break; }
+			}
+      		if (client.peek() != '{') { client.readStringUntil('\n'); };
+			return 200;
+		};
+
+		/*************************************************
+		*
+		**************************************************/
+		std::string getHTTPS(
+				const char *const peer,
+				const int port,
+				const char *const fingerprint,
+				const char *const request
+		) {
+			WiFiClientSecure client;
+			std::make_shared<WiFiClientSecure>(client);
+			if (tryHTTPSConnection(client, peer, port, fingerprint, request) != 200)
+			{	// error
+				return "-1";
+			}
+			std::string response;
+			std::make_shared<std::string>(response);
+			while (client.available())
+			{
+				char c = client.read();
+				if (c != '\n') { response += c; };
+			};
+			client.stop();
+			return response;
 		}
 		/*************************************************/
 };

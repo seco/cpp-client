@@ -18,15 +18,12 @@
 // #define USE_TWO_API
 /**************************************/
 
-#define DEVNET_EXPLORER_URL "https://dexplorer.ark.io" // char[24+1]
-#define MAINNET_EXPLORER_URL "https://explorer.ark.io" // char[23+1]
+#define DEVNET_EXPLORER_URL "dexplorer.ark.io" // char[24+1]
+#define MAINNET_EXPLORER_URL "explorer.ark.io" // char[23+1]
+
 #define DEFAULT_EXPLORER_API_PORT 8443
 
-#define DEVNET_SEED_URL "167.114.29.55" // char[13+1]
-#define DEVNET_SEED_PORT 4002
-
-#define MAINNET_SEED_URL "5.39.9.242" // char[13+1]
-#define MAINNET_SEED_PORT 4001
+#define DEFAULT_EXPLORER_SSL_FINGERPRINT "94 44 0B 97 29 13 21 1A CF A5 D1 15 BE C3 10 F1 AB 12 B5 F5"
 
 enum NetworkType { DEVNET, MAINNET };
 

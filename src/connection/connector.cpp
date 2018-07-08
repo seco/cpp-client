@@ -14,7 +14,7 @@ namespace Network
 * ARK::Utilities::Network::Connector
 * Default: Empty Constructor
 **************************************************/
-Connector::Connector() : ip_(), port_() {}
+Connector::Connector() : host_(), port_(), fingerprint_() {};
 /*************************************************/
 
 /**************************************************************************************************/
@@ -28,11 +28,25 @@ Connector::Connector() : ip_(), port_() {}
 Connector::Connector(
 		const char *const newIP,
 		const unsigned int newPort
-)	:	port_(newPort)
+)	:	port_(newPort), fingerprint_()
 {
-	strncpy(this->ip_, newIP, sizeof(this->ip_) / sizeof(this->ip_[0]));
+	strncpy(this->host_, newIP, sizeof(this->host_) / sizeof(this->host_[0]));
 }
 /*************************************************/
+
+
+/**************************************************************************************************/
+
+Connector::Connector(
+		const char *const newHost,
+		const unsigned int newPort,
+		const char *const newFingerprint
+)	:	port_(newPort)
+{
+	strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));
+	strncpy(this->fingerprint_, newFingerprint, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
+
+};
 
 /**************************************************************************************************/
 
@@ -45,8 +59,9 @@ Connector& Connector::operator=(Connector&& other)
 {
 	if (this != &other)
 	{
-		strncpy(this->ip_, other.ip_, sizeof(this->ip_) / sizeof(this->ip_[0]));
+		strncpy(this->host_, other.host_, sizeof(this->host_) / sizeof(this->host_[0]));
 		this->port_ = other.port_;
+		strncpy(this->fingerprint_, other.fingerprint_, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
 	}
 	return *this;
 }
@@ -61,7 +76,14 @@ Connector& Connector::operator=(Connector&& other)
 // TODO: add proper check for callback.
 std::string Connector::callback(const char *const request)
 {
-	return this->http->get(this->ip_, this->port_, request);
+	if (this->fingerprint_[0] != '0')
+	{
+		return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
+	}
+	else
+	{
+		return this->http->get(this->host_, this->port_, request);
+	}
 }
 /*************************************************/
 

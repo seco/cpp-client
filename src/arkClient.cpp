@@ -39,13 +39,15 @@ ARK::Client::Client(const NetworkType netType)
     {
         case NetworkType::DEVNET:
             this->netConnector = {
-                DEVNET_SEED_URL,
-                DEVNET_SEED_PORT
+                DEVNET_EXPLORER_URL,
+                DEFAULT_EXPLORER_API_PORT,
+                DEFAULT_EXPLORER_SSL_FINGERPRINT
             }; break;
         case NetworkType::MAINNET:
             this->netConnector = {
-                MAINNET_SEED_URL,
-                MAINNET_SEED_PORT
+                MAINNET_EXPLORER_URL,
+                DEFAULT_EXPLORER_API_PORT,
+                DEFAULT_EXPLORER_SSL_FINGERPRINT
             }; break;
     }
 };

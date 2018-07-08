@@ -28,12 +28,14 @@ class Connector :
 		virtual HTTPConnectable
 {
 	private:
-		char ip_[16];
+		char host_[17];
 		unsigned int port_;
+		char fingerprint_[60] = { '\0' };
 
 	public:
 		Connector();
 		Connector(const char *const newIP, const unsigned int newPort);
+		Connector(const char *const newHost, const unsigned int newPort, const char *const newFingerprint);
 
 		Connector& operator=(Connector&& other);
 

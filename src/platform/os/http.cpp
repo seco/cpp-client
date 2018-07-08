@@ -54,6 +54,13 @@ class HTTP :
 			throw std::runtime_error("Error: Connection to Peer could not be established");
 		}
 
+		std::string getHTTPS(
+				const char *const peer,
+				const int port,
+				const char *const fingerprint,
+				const char *const request
+		) override { return "not yet implemented"; }
+
 };
 
 }

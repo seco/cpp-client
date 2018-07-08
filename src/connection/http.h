@@ -30,7 +30,7 @@ class HTTPConnectable;
 * library for different boards/chipsets
 **************************************************/
 class HTTPInterface
-{
+{		
 	protected: 
     	HTTPInterface() = default;
 
@@ -40,6 +40,13 @@ class HTTPInterface
 		virtual std::string get(
 				const char *const peer,
 				int port,
+				const char *const request
+		) = 0;
+
+		virtual std::string getHTTPS(
+				const char *const peer,
+				int port,
+				const char *const fingerprint,
 				const char *const request
 		) = 0;
 };
