@@ -5,11 +5,14 @@
 #include <memory>
 #include <vector>
 
-#if (defined ESP32 || defined ESP8266)
+#ifdef ESP8266
 	#include <ESP8266HTTPClient.h>
-	#include <WiFiClientSecure.h>
 #else
 	#include <HTTPClient.h>
+#endif
+
+#if (defined ESP32 || defined ESP8266)
+	#include <WiFiClientSecure.h>
 #endif
 
 namespace ARK
