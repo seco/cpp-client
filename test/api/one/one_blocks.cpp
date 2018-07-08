@@ -74,7 +74,7 @@ TEST(api, test_one_blocks_blocks)
     const auto success = parser->valueFor("success");
 	ASSERT_STREQ("true", success.c_str());
 
-	for (int i = 0; i < 20; i++) // Full-list too large for MCU; limit to last 20 blocks.
+	for (int i = 0; i < 10; i++) // Full-list too large for MCU; limit to last 20 blocks.
 	{
         const auto version = parser->subarrayValueIn("blocks", i, "version");
 		ASSERT_STREQ("0", version.c_str());

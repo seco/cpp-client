@@ -54,10 +54,12 @@ TEST(api, test_one_accounts_balance)
 	ASSERT_STREQ("true", success.c_str());
 
     const auto balance = parser->valueFor("balance");
-	ASSERT_STREQ("7808415341862", balance.c_str());
+	ASSERT_STRNE("0", balance.c_str());
+	ASSERT_STRNE("", balance.c_str());
 
     const auto unconfirmedBalance = parser->valueFor("unconfirmedBalance");
-	ASSERT_STREQ("7808415341862", unconfirmedBalance.c_str());
+	ASSERT_STRNE("0", unconfirmedBalance.c_str());
+	ASSERT_STRNE("", unconfirmedBalance.c_str());
 }
 
 TEST(api, test_one_accounts_delegates)

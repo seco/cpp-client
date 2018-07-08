@@ -9,53 +9,6 @@ namespace
 	const auto darkPubkey = "0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456";
 }
 
-TEST(api, test_one_delegates_delegates)
-{
-	ARK::Client arkClient(DEVNET);
-
-    const auto delegateResponse = arkClient.delegate("sleepdeficit");
-	auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
-
-    const auto success = parser->valueFor("success");
-	ASSERT_STREQ("true", success.c_str());
-
-	for (int i = 0; i < 20; i++) // Full-list too large for MCU; limit to top 20 delegates.
-	{
-        const auto username = parser->subarrayValueIn("delegates", i, "username");
-        ASSERT_STRNE("", username.c_str());
-
-        const auto address = parser->subarrayValueIn("delegates", i, "address");
-        ASSERT_STRNE("", address.c_str());
-
-        const auto publicKey = parser->subarrayValueIn("delegates", i, "publicKey");
-        ASSERT_STRNE("", publicKey.c_str());
-        
-        const auto vote = parser->subarrayValueIn("delegates", i, "vote");
-        ASSERT_STRNE("0", vote.c_str());
-        ASSERT_STRNE("", vote.c_str());
-
-        const auto producedblocks = parser->subarrayValueIn("delegates", i, "producedblocks");
-        ASSERT_STRNE("0", producedblocks.c_str());
-        ASSERT_STRNE("", producedblocks.c_str());
-
-        const auto missedblocks = parser->subarrayValueIn("delegates", i, "missedblocks");
-        ASSERT_STRNE("0", missedblocks.c_str());
-        ASSERT_STRNE("", missedblocks.c_str());
-
-        const auto rate = parser->subarrayValueIn("delegates", i, "rate");
-        ASSERT_STRNE("0", rate.c_str());
-        ASSERT_STRNE("", rate.c_str());
-
-        const auto approval = parser->subarrayValueIn("delegates", i, "approval");
-        ASSERT_STRNE("0.0", approval.c_str());
-        ASSERT_STRNE("", approval.c_str());
-
-        const auto productivity = parser->subarrayValueIn("delegates", i, "productivity");
-        ASSERT_STRNE("0.0", productivity.c_str());
-        ASSERT_STRNE("", productivity.c_str());
-	}
-}
-
 TEST(api, test_one_delegates_fee)
 {
 	ARK::Client arkClient(DEVNET);
@@ -204,6 +157,53 @@ TEST(api, test_one_delegates_delegate_by_username)
     const auto productivity = parser->valueIn("delegate", "productivity");
 	ASSERT_STRNE("0.0", productivity.c_str());
 	ASSERT_STRNE("", productivity.c_str());
+}
+
+TEST(api, test_one_delegates_delegates)
+{
+	ARK::Client arkClient(DEVNET);
+
+    const auto delegatesResponse = arkClient.delegates();
+	auto parser = ARK::Test::Utils::makeJSONString(delegatesResponse);
+
+    const auto success = parser->valueFor("success");
+	ASSERT_STREQ("true", success.c_str());
+
+	for (int i = 0; i < 20; i++) // Full-list too large for MCU; limit to top 20 delegates.
+	{
+        const auto username = parser->subarrayValueIn("delegates", i, "username");
+        ASSERT_STRNE("", username.c_str());
+
+        const auto address = parser->subarrayValueIn("delegates", i, "address");
+        ASSERT_STRNE("", address.c_str());
+
+        const auto publicKey = parser->subarrayValueIn("delegates", i, "publicKey");
+        ASSERT_STRNE("", publicKey.c_str());
+        
+        const auto vote = parser->subarrayValueIn("delegates", i, "vote");
+        ASSERT_STRNE("0", vote.c_str());
+        ASSERT_STRNE("", vote.c_str());
+
+        const auto producedblocks = parser->subarrayValueIn("delegates", i, "producedblocks");
+        ASSERT_STRNE("0", producedblocks.c_str());
+        ASSERT_STRNE("", producedblocks.c_str());
+
+        const auto missedblocks = parser->subarrayValueIn("delegates", i, "missedblocks");
+        // ASSERT_STRNE("0", missedblocks.c_str());
+        ASSERT_STRNE("", missedblocks.c_str());
+
+        const auto rate = parser->subarrayValueIn("delegates", i, "rate");
+        ASSERT_STRNE("0", rate.c_str());
+        ASSERT_STRNE("", rate.c_str());
+
+        const auto approval = parser->subarrayValueIn("delegates", i, "approval");
+        ASSERT_STRNE("0.0", approval.c_str());
+        ASSERT_STRNE("", approval.c_str());
+
+        const auto productivity = parser->subarrayValueIn("delegates", i, "productivity");
+        ASSERT_STRNE("0.0", productivity.c_str());
+        ASSERT_STRNE("", productivity.c_str());
+	}
 }
 
 TEST(api, test_one_delegates_voters)

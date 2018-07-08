@@ -8,14 +8,14 @@ TEST(api, test_peers_peer)
 {
 	ARK::Client arkClient(DEVNET);
 
-    const auto peerResponse = arkClient.peer("167.114.29.55", 4002);
+    const auto peerResponse = arkClient.peer("167.114.29.54", 4002);
 	auto parser = ARK::Test::Utils::makeJSONString(peerResponse);
 
     const auto success = parser->valueFor("success");
 	ASSERT_STREQ("true", success.c_str());
 
     const auto ip = parser->valueIn("peer", "ip");
-	ASSERT_STREQ("167.114.29.55", ip.c_str());
+	ASSERT_STREQ("167.114.29.54", ip.c_str());
 
     const auto peer = parser->valueIn("peer", "port");
 	ASSERT_STREQ("4002", peer.c_str()); // actual value 4002 (int).
