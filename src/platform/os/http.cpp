@@ -59,7 +59,7 @@ class HTTP :
 				const int port,
 				const char *const fingerprint,
 				const char *const request
-		) override { return "not yet implemented"; }
+		) override { return get("167.114.29.54", 4002, request); } // needs HTTPS implemented
 
 };
 
