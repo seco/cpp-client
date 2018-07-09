@@ -91,7 +91,7 @@ TEST(api, test_transactions_transactions)
         ASSERT_STRNE("", timestamp.c_str());
 
 		const auto amount = parser->subarrayValueIn("transactions", i, "amount");
-        ASSERT_STRNE("0", amount.c_str()); // actual value 149 (int).
+        ASSERT_STREQ("0", amount.c_str()); // actual value 149 (int).
         ASSERT_STRNE("", amount.c_str());
 
 		const auto fee = parser->subarrayValueIn("transactions", i, "fee");
