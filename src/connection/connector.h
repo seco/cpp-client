@@ -5,6 +5,8 @@
 
 #include "platform/platform.h"
 #include "connection/http.h"
+#include <string>
+#include <cstring>
 
 namespace ARK
 {
@@ -31,13 +33,19 @@ class Connector :
 		char host_[17];
 		unsigned int port_;
 		char fingerprint_[60] = { '\0' };
+		bool hasSSL = false;
 
 	public:
 		Connector();
-		Connector(const char *const newIP, const unsigned int newPort);
-		Connector(const char *const newHost, const unsigned int newPort, const char *const newFingerprint);
+		Connector(const char *const newHost, const unsigned int newPort, const char *const newFingerprint = "");
 
 		Connector& operator=(Connector&& other);
+
+		void connect(const char *const newHost, const unsigned int newPort, const char *const newFingerprint); // Connect to the given connection.
+		void disconnect(); // Disconnect from the given connection.
+		
+		std::string getConnection(); // Get a connection string (host:port).
+		std::string getFingerprint();  // Get an SSL connections' fingerprint.
 
 		std::string callback(const char* const request);
 };

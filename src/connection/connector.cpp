@@ -26,27 +26,13 @@ Connector::Connector() : host_(), port_(), fingerprint_() {};
 * @param: const int newPort
 **************************************************/
 Connector::Connector(
-		const char *const newIP,
-		const unsigned int newPort
-)	:	port_(newPort), fingerprint_()
-{
-	strncpy(this->host_, newIP, sizeof(this->host_) / sizeof(this->host_[0]));
-}
-/*************************************************/
-
-
-/**************************************************************************************************/
-
-Connector::Connector(
 		const char *const newHost,
 		const unsigned int newPort,
 		const char *const newFingerprint
-)	:	port_(newPort)
-{
-	strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));
-	strncpy(this->fingerprint_, newFingerprint, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
-
-};
+) {
+	this->connect(newHost, newPort, newFingerprint);
+}
+/*************************************************/
 
 /**************************************************************************************************/
 
@@ -59,10 +45,8 @@ Connector& Connector::operator=(Connector&& other)
 {
 	if (this != &other)
 	{
-		strncpy(this->host_, other.host_, sizeof(this->host_) / sizeof(this->host_[0]));
-		this->port_ = other.port_;
-		strncpy(this->fingerprint_, other.fingerprint_, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
-	}
+		this->connect(other.host_, other.port_, other.fingerprint_);
+	};
 	return *this;
 }
 /*************************************************/
@@ -76,7 +60,7 @@ Connector& Connector::operator=(Connector&& other)
 // TODO: add proper check for callback.
 std::string Connector::callback(const char *const request)
 {
-	if (this->fingerprint_[0] != '0')
+	if (this->hasSSL)
 	{
 		return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
 	}
@@ -86,6 +70,62 @@ std::string Connector::callback(const char *const request)
 	}
 }
 /*************************************************/
+
+/**************************************************************************************************/
+
+void Connector::connect(
+		const char *const newHost,
+		const unsigned int newPort,
+		const char *const newFingerprint = ""
+) {
+	strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));
+	this->port_ = newPort;
+	if (strcmp(newFingerprint, ""))
+	{
+		this->hasSSL = true;
+		strncpy(this->fingerprint_, newFingerprint, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
+	};
+
+	// std::cout << newHost << std::endl;
+	// std::cout << newPort << std::endl;
+	// std::cout << newFingerprint << std::endl;
+
+	// std::cout <<  << std::endl;
+	// std::cout <<  << std::endl;
+	// std::cout <<  << std::endl;
+}
+
+/**************************************************************************************************/
+
+void Connector::disconnect()
+{
+	strncpy(this->host_, "\0", sizeof(this->host_) / sizeof(this->host_[0]));
+	this->port_ = 0;
+	if (this->hasSSL)
+	{
+		this->hasSSL = false;
+		strncpy(this->fingerprint_, "\0", sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
+	};
+}
+
+/**************************************************************************************************/
+
+std::string Connector::getConnection()
+{
+	char connectionStr[32] = { "\0" };
+		std::strcpy(connectionStr, this->host_);
+		std::strcat(connectionStr, ":");
+	char portBuffer[5];
+		sprintf(portBuffer, "%d", this->port_); 
+		std::strcat(connectionStr, portBuffer);
+	return connectionStr;
+}
+
+/**************************************************************************************************/
+
+std::string Connector::getFingerprint() { return this->fingerprint_; }
+
+/**************************************************************************************************/
 
 };
 };
