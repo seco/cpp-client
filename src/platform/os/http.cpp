@@ -5,10 +5,7 @@
 #ifndef USE_IOT
 
 #include "connection/http.h"
-#include "Poco/Net/HTTPClientSession.h"
-#include "Poco/Net/HTTPRequest.h"
-#include "Poco/Net/HTTPResponse.h"
-#include "Poco/StreamCopier.h"
+#include <curl/curl.h>
 #include <cstring>
 #include <sstream>
 #include <iostream>
@@ -31,27 +28,37 @@ class HTTP :
 		std::string get(
 				const char *const	peer,
 				int port,
-				const char *const	request_str
+				const char *const	request
 		) override {
 			std::ostringstream ss;
-			ss << peer << ":" << port;
-			Poco::Net::HTTPClientSession session(Poco::Net::SocketAddress(ss.str()));
-			Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_GET, request_str, Poco::Net::HTTPMessage::HTTP_1_1);
-			Poco::Net::HTTPResponse response;
-			try {
-			session.sendRequest(request);
-			auto& rs = session.receiveResponse(response);
-			if (response.getStatus() == Poco::Net::HTTPResponse::HTTP_OK)
-			{
-				std::ostringstream ofs;
-				Poco::StreamCopier::copyStream(rs, ofs);
-				return ofs.str();
+			ss << peer << ":" << port << request;
+
+			CURL *curl;
+			CURLcode res;
+			std::string readBuffer;
+
+			curl = curl_easy_init();
+			if(curl) {
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+
+				curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
+				
+				curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
+				res = curl_easy_perform(curl);
+				curl_easy_cleanup(curl);
 			}
-			} catch (const Poco::Exception& ex) {
-				std::cout << "Exception in http::get: " << ex.displayText() << std::endl;
-				throw;
-			}
-			throw std::runtime_error("Error: Connection to Peer could not be established");
+
+			return readBuffer;
+		}
+
+		//https://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html
+		static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+		{
+			((std::string*)userp)->append((char*)contents, size * nmemb);
+			return size * nmemb;
 		}
 
 		std::string getHTTPS(
@@ -59,8 +66,30 @@ class HTTP :
 				const int port,
 				const char *const fingerprint,
 				const char *const request
-		) override { return get("167.114.29.54", 4002, request); } // needs HTTPS implemented
+		) override {	
+			std::ostringstream ss;
+			ss << "https://" << peer << ":" << port << request;
 
+			CURL *curl;
+			CURLcode res;
+			std::string readBuffer;
+
+			curl = curl_easy_init();
+			if(curl) {
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+
+				curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
+				// curl_easy_setopt(curl, CURLOPT_SSLKEY, fingerprint);
+				
+				curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
+				res = curl_easy_perform(curl);
+				curl_easy_cleanup(curl);
+			}
+			return readBuffer;
+		} // needs real HTTPS (fingerprint/cert-checking) implemented
 };
 
 }
