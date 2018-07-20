@@ -5,6 +5,12 @@
 /*************************************************
 * /api/peers/get?ip=167.114.29.55&port=4002
 *
+* @param:	const char *const ip
+* @param:	const int port
+* @return: std::string
+*
+* @brief:	Gets Ark Network Peer from a Node via API.
+*
 * EXAMPLE:
 * { 
 *	"success":true,
@@ -21,12 +27,12 @@
 *	}
 * }
 **************************************************/
-std::string ARK::API::V1::Peers::peer(
+std::string ARK::API::ONE::Peers::peer(
 		const char *const ip,
 		const int port
 ) {
 	char uri[68 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Peers::get_s);
+		strcpy(uri, ARK::API::ONE::Paths::Peers::get_s);
 		strcat(uri, "?ip=");
 		strcat(uri, ip);
 		strcat(uri, "&port=");
@@ -40,6 +46,8 @@ std::string ARK::API::V1::Peers::peer(
 
 /*************************************************
 * /api/peers?limit=20
+*
+* @return: std::string
 *
 * @brief: return list of Peers, limited to 20 to fit MCU's.
 *
@@ -72,10 +80,10 @@ std::string ARK::API::V1::Peers::peer(
 *	]
 * }
 **************************************************/
-std::string ARK::API::V1::Peers::peers()
+std::string ARK::API::ONE::Peers::peers()
 {
 	char uri[39 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Peers::peers_s);
+		strcpy(uri, ARK::API::ONE::Paths::Peers::peers_s);
 	return netConnector.callback(uri);
 };
 /*************************************************/
@@ -85,6 +93,10 @@ std::string ARK::API::V1::Peers::peers()
 /*************************************************
 * /api/peers/version
 *
+* @return: std::string
+*
+* @brief: Gets Ark Network Peer Version from a Node via API.	
+*
 * EXAMPLE:
 * {
 *	"success":true,
@@ -92,8 +104,8 @@ std::string ARK::API::V1::Peers::peers()
 *	"build": "String"
 * }
 **************************************************/
-std::string ARK::API::V1::Peers::peerVersion()
+std::string ARK::API::ONE::Peers::peerVersion()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Peers::version_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Peers::version_s);
 };
 /*************************************************/

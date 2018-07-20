@@ -7,13 +7,11 @@ namespace ARK
 {
 namespace API
 {
-namespace V1
+namespace ONE
 {
 namespace Paths
 {
-/*************************************************
-* Account
-**************************************************/
+
 namespace Accounts
 {
 	const auto getBalance_s = "/api/accounts/getBalance";
@@ -22,11 +20,9 @@ namespace Accounts
 	const auto delegates_s = "/api/accounts/delegates";
 	const auto accounts_s = "/api/accounts";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Blocks
-**************************************************/
+
 namespace Blocks
 {
 	const auto get_s = "/api/blocks/get"; //using ID
@@ -41,11 +37,9 @@ namespace Blocks
 	const auto getSupply_s = "/api/blocks/getSupply";
 	const auto getStatus_s = "/api/blocks/getStatus";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Delegates
-**************************************************/
+
 namespace Delegates
 {
 	const auto count_s = "/api/delegates/count";
@@ -57,42 +51,34 @@ namespace Delegates
 	const auto getForgedByAccount_s = "/api/delegates/forging/getForgedByAccount";
 	const auto getNextForgers_s = "/api/delegates/getNextForgers";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Loader
-**************************************************/
+
 namespace Loader
 {
 	const auto status_s = "/api/loader/status";
 	const auto sync_s = "/api/loader/status/sync";
 	const auto autoconfigure_s = "/api/loader/autoconfigure";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Peers
-**************************************************/
+
 namespace Peers
 {
 	const auto get_s = "/api/peers/get";
 	const auto peers_s = "/api/peers?limit=20";
 	const auto version_s = "/api/peers/version";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Signatures
-**************************************************/
+
 namespace Signatures
 {
 	const auto fee_s = "/api/signatures/fee";
 };
-/*************************************************/
+
 /**************************************************************************************************/
-/*************************************************
-* Transactions
-**************************************************/
+
 namespace Transactions
 {
 	const auto getSingle_s = "/api/transactions/get";
@@ -100,7 +86,7 @@ namespace Transactions
 	const auto getSingleUnconfirmed_s = "/api/transactions/unconfirmed/get";
 	const auto unconfirmed_s = "/api/transactions/unconfirmed";
 };
-/*************************************************/
+
 
 };
 };

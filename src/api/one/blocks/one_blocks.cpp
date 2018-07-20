@@ -6,6 +6,11 @@
 /*************************************************
 * /api/blocks/get?id=_blockID
 *
+* @param: const char *const blockId
+* @return: std::string
+*
+* @brief: Uses Block ID to get that Blocks information from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
@@ -30,11 +35,11 @@
 *   }
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::block(
+std::string ARK::API::ONE::Blocks::block(
 		const char *const blockId
 ) {
 	char uri[80] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Blocks::get_s);
+		strcpy(uri, ARK::API::ONE::Paths::Blocks::get_s);
 		strcat(uri, "?id=");
 		strcat(uri, blockId);
 	return netConnector.callback(uri);
@@ -45,6 +50,8 @@ std::string ARK::API::V1::Blocks::block(
 
 /*************************************************
 * /api/blocks?orderBy=height:desc&limit=10
+*
+* @return: std::string
 *
 * @brief: `/api/blocks` is too large for MCU's, so lets limit to the last 10 recent blocks
 *
@@ -94,9 +101,9 @@ std::string ARK::API::V1::Blocks::block(
 *	"count": 3639000
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blocks()
+std::string ARK::API::ONE::Blocks::blocks()
 {
-	auto blocks = netConnector.callback(ARK::API::V1::Paths::Blocks::blocks_s);
+	auto blocks = netConnector.callback(ARK::API::ONE::Paths::Blocks::blocks_s);
 	return blocks;
 }
 /*************************************************/
@@ -106,15 +113,19 @@ std::string ARK::API::V1::Blocks::blocks()
 /*************************************************
 * /api/blocks/getEpoch
 *
+* @return: std::string
+*
+* @brief: Gets the Block Epoch from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
 *   "epoch":  "String"
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockEpoch()
+std::string ARK::API::ONE::Blocks::blockEpoch()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getEpoch_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getEpoch_s);
 }
 /*************************************************/
 
@@ -123,15 +134,19 @@ std::string ARK::API::V1::Blocks::blockEpoch()
 /*************************************************
 * /api/blocks/getFee
 *
+* @return: std::string
+*
+* @brief: Gets the current Block Fee from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
 *   "fee":  Balance
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockFee()
+std::string ARK::API::ONE::Blocks::blockFee()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getFee_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFee_s);
 }
 /*************************************************/
 
@@ -139,6 +154,10 @@ std::string ARK::API::V1::Blocks::blockFee()
 
 /*************************************************
 * /api/blocks/getFees
+*
+* @return: std::string
+*
+* @brief: Gets the current Block Fees from a Node via API.
 *
 * EXAMPLE:
 *
@@ -154,9 +173,9 @@ std::string ARK::API::V1::Blocks::blockFee()
 *   }
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockFees()
+std::string ARK::API::ONE::Blocks::blockFees()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getFees_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFees_s);
 }
 /*************************************************/
 
@@ -165,6 +184,10 @@ std::string ARK::API::V1::Blocks::blockFees()
 /*************************************************
 * /api/blocks/getHeight
 *
+* @return: std::string
+*
+* @brief: Gets the Block-Height from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
@@ -172,9 +195,9 @@ std::string ARK::API::V1::Blocks::blockFees()
 *   "id": "String"
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockHeight()
+std::string ARK::API::ONE::Blocks::blockHeight()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getHeight_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getHeight_s);
 }
 /*************************************************/
 
@@ -183,15 +206,19 @@ std::string ARK::API::V1::Blocks::blockHeight()
 /*************************************************
 * /api/blocks/getMilestone
 *
+* @return: std::string
+*
+* @brief: Gets the Block Milestone from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
 *   "milestone": String
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockMilestone()
+std::string ARK::API::ONE::Blocks::blockMilestone()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getMilestone_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getMilestone_s);
 }
 /*************************************************/
 
@@ -200,15 +227,19 @@ std::string ARK::API::V1::Blocks::blockMilestone()
 /*************************************************
 * /api/blocks/getNethash
 *
+* @return: std::string
+*
+* @brief: Gets the Networks Hash from a Node via API.
+
 * EXAMPLE:
 * {
 *   "success":true,
 *   "nethash":  "Hash"
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockNethash()
+std::string ARK::API::ONE::Blocks::blockNethash()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getNethash_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getNethash_s);
 }
 /*************************************************/
 
@@ -217,15 +248,19 @@ std::string ARK::API::V1::Blocks::blockNethash()
 /*************************************************
 * /api/blocks/getReward
 *
+* @return: std::string
+*
+* @brief: Gets the current Block Reward from a Node via API.
+*
 * EXAMPLE:
 * { 
 *   "success":true,
 *   "reward": Balance
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockReward()
+std::string ARK::API::ONE::Blocks::blockReward()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getReward_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getReward_s);
 }
 /*************************************************/
 
@@ -234,15 +269,19 @@ std::string ARK::API::V1::Blocks::blockReward()
 /*************************************************
 * /api/blocks/getSupply
 *
+* @return: std::string
+*
+* @brief: Gets the current Ark Supply from a Node via API.
+*
 * EXAMPLE:
 * {
 *   "success":true,
 *   "supply": Balance
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockSupply()
+std::string ARK::API::ONE::Blocks::blockSupply()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getSupply_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getSupply_s);
 }
 /*************************************************/
 
@@ -250,6 +289,10 @@ std::string ARK::API::V1::Blocks::blockSupply()
 
 /*************************************************
 * /api/blocks/getStatus
+*
+* @return: std::string
+*
+* @brief: Gets the Ark Networks Status from a Node via API.
 *
 * EXAMPLE:
 * {
@@ -263,8 +306,8 @@ std::string ARK::API::V1::Blocks::blockSupply()
 *   "supply":_supply
 * }
 **************************************************/
-std::string ARK::API::V1::Blocks::blockStatus()
+std::string ARK::API::ONE::Blocks::blockStatus()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Blocks::getStatus_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getStatus_s);
 }
 /*************************************************/

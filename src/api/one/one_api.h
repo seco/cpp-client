@@ -20,13 +20,13 @@
 #include "api/one/transactions/one_transactions.h"
 
 class ONE_API :
-		public ARK::API::V1::Accounts,
-		public ARK::API::V1::Blocks,
-		public ARK::API::V1::Delegates,
-		public ARK::API::V1::Loader,
-		public ARK::API::V1::Peers,
-		public ARK::API::V1::Signatures,
-		public ARK::API::V1::Transactions,
+		public ARK::API::ONE::Accounts,
+		public ARK::API::ONE::Blocks,
+		public ARK::API::ONE::Delegates,
+		public ARK::API::ONE::Loader,
+		public ARK::API::ONE::Peers,
+		public ARK::API::ONE::Signatures,
+		public ARK::API::ONE::Transactions,
 		virtual ARK::Utilities::Network::Connectable {};
 
 #endif

@@ -3,7 +3,11 @@
 #include "api/one/loader/one_loader.h"
 
 /*************************************************
-* /api/loader/autoconfigure 
+* /api/loader/autoconfigure
+*
+* @return: std::string
+*
+* @brief: Returns an auto-configured network from a Networks NetHash from a Node via API. 
 *
 * EXAMPLE:
 * {
@@ -18,9 +22,9 @@
 *	}
 * }
 **************************************************/
-std::string ARK::API::V1::Loader::loaderAutoconfigure()
+std::string ARK::API::ONE::Loader::loaderAutoconfigure()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Loader::autoconfigure_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Loader::autoconfigure_s);
 }
 /*************************************************/
 
@@ -28,6 +32,10 @@ std::string ARK::API::V1::Loader::loaderAutoconfigure()
 
 /*************************************************
 * /api/loader/status
+*
+* @return: std::string
+*
+* @brief: Gets Ark Network Status from a Node via API.
 *
 * EXAMPLE:
 * { 
@@ -37,9 +45,9 @@ std::string ARK::API::V1::Loader::loaderAutoconfigure()
 *	"blocksCount":  const char*
 * }
 **************************************************/
-std::string ARK::API::V1::Loader::loaderStatus()
+std::string ARK::API::ONE::Loader::loaderStatus()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Loader::status_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Loader::status_s);
 }
 /*************************************************/
 
@@ -48,17 +56,21 @@ std::string ARK::API::V1::Loader::loaderStatus()
 /*************************************************
 * /api/loader/status/sync
 *
+* @return: std::string
+*
+* @brief: Gets Ark Network Sync Status from a Node via API. 
+*
 * EXAMPLE:
 * { 
-*	"success":true,
+*	"success": bool,
 *	"syncing":  bool,
 *	"blocks": int,
 *	"height": const char*,
 *	"id": "const char*"
 * }
 **************************************************/
-std::string ARK::API::V1::Loader::loaderSync()
+std::string ARK::API::ONE::Loader::loaderSync()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Loader::sync_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Loader::sync_s);
 }
 /*************************************************/

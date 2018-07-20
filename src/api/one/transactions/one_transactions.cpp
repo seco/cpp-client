@@ -5,6 +5,11 @@
 /*************************************************
 * /api/transactions/get?id=
 *
+* @return: std::string
+* @param: const char *const id
+*
+* @brief: Gets Transaction by Hash ID from a Node via API.
+*
 * EXAMPLE:
 * {
 *  "success": true,
@@ -25,10 +30,10 @@
 *  }
 * }
 **************************************************/
-std::string ARK::API::V1::Transactions::transaction(const char *const id)
+std::string ARK::API::ONE::Transactions::transaction(const char *const id)
 {
 	char uri[114 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Transactions::getSingle_s);
+		strcpy(uri, ARK::API::ONE::Paths::Transactions::getSingle_s);
 		strcat(uri, "?id=");
 		strcat(uri, id);
 	return netConnector.callback(uri);
@@ -39,6 +44,10 @@ std::string ARK::API::V1::Transactions::transaction(const char *const id)
 
 /*************************************************
 * /api/transactions/?orderBy=timestamp:desc&limit=10"
+*
+* @return: std::string
+*
+* @brief: Gets Transactions list, limited to last 10.
 *
 * EXAMPLE:
 * {
@@ -80,9 +89,9 @@ std::string ARK::API::V1::Transactions::transaction(const char *const id)
 *	"count": "int"
 * }
 **************************************************/
-std::string ARK::API::V1::Transactions::transactions()
+std::string ARK::API::ONE::Transactions::transactions()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Transactions::transactions_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Transactions::transactions_s);
 }
 /*************************************************/
 
@@ -90,6 +99,10 @@ std::string ARK::API::V1::Transactions::transactions()
 
 /*************************************************
 * /api/transactions/unconfirmed/get?id=
+*
+* @param: const char *const id
+*
+* @brief: Gets Unconfirmed Transaction by Hash ID from a Node via API.
 *
 * EXAMPLE:
 * { 
@@ -117,10 +130,10 @@ std::string ARK::API::V1::Transactions::transactions()
 *	"error":"Transaction not found"
 * }
 **************************************************/
-std::string ARK::API::V1::Transactions::transactionUnconfirmed(const char *const id)
+std::string ARK::API::ONE::Transactions::transactionUnconfirmed(const char *const id)
 {
 	char uri[126 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Transactions::getSingleUnconfirmed_s);
+		strcpy(uri, ARK::API::ONE::Paths::Transactions::getSingleUnconfirmed_s);
 		strcat(uri, "?id=");
 		strcat(uri, id);
 	return netConnector.callback(uri);
@@ -132,15 +145,19 @@ std::string ARK::API::V1::Transactions::transactionUnconfirmed(const char *const
 /*************************************************
 * /api/transactions/unconfirmed
 *
+* @return: std::string
+*
+* @brief: Gets Unconfirmed Transactions from a Node via API.
+*
 * EXAMPLE:
 * {
 *	"success":true,
 *	"transactions":[]
 * }
 **************************************************/
-std::string ARK::API::V1::Transactions::transactionsUnconfirmed()
+std::string ARK::API::ONE::Transactions::transactionsUnconfirmed()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Transactions::unconfirmed_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Transactions::unconfirmed_s);
 }
 /*************************************************/
 
@@ -149,12 +166,17 @@ std::string ARK::API::V1::Transactions::transactionsUnconfirmed()
 /*************************************************
 * /api/transactions/get?id=
 *
+* @param: const char *const txID
+* @return: std::string
+*
+* @brief: Gets vendorField for a given Transaction by  txID from a Node via API.
+*
 * @brief: Gets vendorField for a given Transaction by  txID from a Node via API.
 **************************************************/
-std::string ARK::API::V1::Transactions::getVendorField(const char *const txID)
+std::string ARK::API::ONE::Transactions::getVendorField(const char *const txID)
 {
 	char uri[114 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Transactions::getSingle_s);
+		strcpy(uri, ARK::API::ONE::Paths::Transactions::getSingle_s);
 		strcat(uri, "?id=");
 		strcat(uri, txID);
 	return netConnector.callback(uri);

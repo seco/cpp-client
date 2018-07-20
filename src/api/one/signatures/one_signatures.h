@@ -10,30 +10,14 @@ namespace ARK
 {
 namespace API
 {
-namespace V1
+namespace ONE
 {
-/*************************************************
-* PUBLIC: ARK::API::V1::Signatures
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Signature Loader Model
-**************************************************/
-class Signatures :
-		virtual ARK::Utilities::Network::Connectable
+
+class Signatures : virtual ARK::Utilities::Network::Connectable
 {
 	public:
-		/*************************************************
-		* /api/signatures/fee
-		*
-		* @method: signaturesFee()
-		* @return: Balance
-		*
-		* @brief: Gets cost of Signature from a Node via API.
-		**************************************************/
 		std::string signaturesFee();
-		/*************************************************/
 };
-/*************************************************/
 
 };
 };

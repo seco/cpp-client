@@ -3,7 +3,13 @@
 #include "api/one/delegates/one_delegates.h"
 
 /*************************************************
-* /api/delegates/get?username=sleepdeficit
+* /api/delegates/get?username="username"
+* /api/delegates/get?publicKey=publicKey
+*
+* @param: const char *const parameter
+* @return: std::string
+*
+* @brief: Returns Delegate by username or publickey from a Node via API.
 *
 * EXAMPLE:
 * { 
@@ -22,11 +28,11 @@
 *	}
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegate(
+std::string ARK::API::ONE::Delegates::delegate(
 		const char *const parameter
 ) {
 	char uri[120 + 1] = { '\0' };	//max size (pubkey param)
-		strcpy(uri, ARK::API::V1::Paths::Delegates::get_s);
+		strcpy(uri, ARK::API::ONE::Paths::Delegates::get_s);
 	bool isUsername = (strlen(parameter) <= 20);
 	auto key = (isUsername) ? ("?username=") : ("?publicKey=");
 		strcat(uri, key);
@@ -43,7 +49,6 @@ std::string ARK::API::V1::Delegates::delegate(
 * @return: std::string
 *
 * @brief: Returns Delegates list, limited to top 20 to fit MCU.
-*
 *
 * EXAMPLE:
 * { 
@@ -77,10 +82,10 @@ std::string ARK::API::V1::Delegates::delegate(
 *	totalCount: 227
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegates()
+std::string ARK::API::ONE::Delegates::delegates()
 {
 	char uri[43] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Delegates::delegates_s);
+		strcpy(uri, ARK::API::ONE::Paths::Delegates::delegates_s);
 	return netConnector.callback(uri);
 };
 /*************************************************/
@@ -90,15 +95,19 @@ std::string ARK::API::V1::Delegates::delegates()
 /*************************************************
 * /api/delegates/count
 *
+* @return: std::string
+*
+* @brief: Gets current number of registered Delegates from a Node via API.
+*
 * EXAMPLE:
 * { 
 *	"success":true,
 *	"count":166
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegatesCount()
+std::string ARK::API::ONE::Delegates::delegatesCount()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Delegates::count_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Delegates::count_s);
 };
 /*************************************************/
 
@@ -106,6 +115,11 @@ std::string ARK::API::V1::Delegates::delegatesCount()
 
 /*************************************************
 * /api/delegates/search?q=sleepdeficit 
+*
+* @param: const char* const username
+* @return: std::string
+*
+* @brief: Searches for Delegate by username from a Node via API.
 *
 * EXAMPLE:
 * { 
@@ -123,49 +137,13 @@ std::string ARK::API::V1::Delegates::delegatesCount()
 *	]
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegateSearch(
+std::string ARK::API::ONE::Delegates::delegateSearch(
 		const char *const username
 ) {
 	char uri[69 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Delegates::search_s);
+		strcpy(uri, ARK::API::ONE::Paths::Delegates::search_s);
 		strcat(uri, "?q=");
 		strcat(uri, username);
-	return netConnector.callback(uri);
-};
-/*************************************************/
-
-/**************************************************************************************************/
-
-/*************************************************
-* /api/delegates/voters?publicKey=_pubKey
-*
-* EXAMPLE:
-* {
-*	"success":true,
-*	"accounts":
-*	[
-*		{ 
-*			"username": "const char*",
-*			"address":  "Balance",
-*			"publicKey":  "Publickey",
-*			"balance":  "Balance"
-*		},
-*		{
-*			"username": "const char*",
-*			"address":  "Address",
-*			"publicKey":  "Publickey",
-*			"balance":  "Balance"
-*		}
-*	]
-* }
-**************************************************/
-std::string ARK::API::V1::Delegates::delegateVoters(
-		const char *const publicKey
-) {
-	char uri[123 + 1] = { '\0' };
-		strcpy(uri, ARK::API::V1::Paths::Delegates::voters_s);
-		strcat(uri, "?publicKey=");
-		strcat(uri, publicKey);
 	return netConnector.callback(uri);
 };
 /*************************************************/
@@ -181,9 +159,9 @@ std::string ARK::API::V1::Delegates::delegateVoters(
 *	"fee":  Balance
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegateFee()
+std::string ARK::API::ONE::Delegates::delegateFee()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Delegates::fee_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Delegates::fee_s);
 };
 /*************************************************/
 
@@ -191,6 +169,11 @@ std::string ARK::API::V1::Delegates::delegateFee()
 
 /*************************************************
 * /api/delegates/forging/getForgedByAccount?generatorPublicKey=_genPubkey
+*
+* @param: const char *const generatorPublicKey
+* @return: std::string
+*
+* @brief: Returns Totals of Amounts Forged by Delegate by Publickey from a Node via API.
 *
 * EXAMPLE:
 * {
@@ -200,11 +183,11 @@ std::string ARK::API::V1::Delegates::delegateFee()
 *	"forged": "Balance"
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegateForgedByAccount(
+std::string ARK::API::ONE::Delegates::delegateForgedByAccount(
 		const char *const generatorPublicKey
 ) {
 	char uri[152 + 1];
-		strcpy(uri, ARK::API::V1::Paths::Delegates::getForgedByAccount_s);
+		strcpy(uri, ARK::API::ONE::Paths::Delegates::getForgedByAccount_s);
 		strcat(uri, "?generatorPublicKey=");
 		strcat(uri, generatorPublicKey);
 	return netConnector.callback(uri);
@@ -215,6 +198,11 @@ std::string ARK::API::V1::Delegates::delegateForgedByAccount(
 
 /*************************************************
 * /api/delegates/getNextForgers
+*
+* @return: std::string
+*
+* @brief: Returns next 10 Forging-Delegates from a Node via API.
+
 *
 * EXAMPLE:
 * { 
@@ -236,8 +224,49 @@ std::string ARK::API::V1::Delegates::delegateForgedByAccount(
 *	]
 * }
 **************************************************/
-std::string ARK::API::V1::Delegates::delegateNextForgers()
+std::string ARK::API::ONE::Delegates::delegateNextForgers()
 {
-	return netConnector.callback(ARK::API::V1::Paths::Delegates::getNextForgers_s);
+	return netConnector.callback(ARK::API::ONE::Paths::Delegates::getNextForgers_s);
+};
+/*************************************************/
+
+/**************************************************************************************************/
+
+/*************************************************
+* /api/delegates/voters?publicKey=_pubKey
+*
+* @param: const char *const publicKey
+* @return: std::string
+*
+* @brief: Returns Voters list for Delegate by Publickey from a Node via API.
+*
+* EXAMPLE:
+* {
+*	"success":true,
+*	"accounts":
+*	[
+*		{ 
+*			"username": "const char*",
+*			"address":  "Balance",
+*			"publicKey":  "Publickey",
+*			"balance":  "Balance"
+*		},
+*		{
+*			"username": "const char*",
+*			"address":  "Address",
+*			"publicKey":  "Publickey",
+*			"balance":  "Balance"
+*		}
+*	]
+* }
+**************************************************/
+std::string ARK::API::ONE::Delegates::delegateVoters(
+		const char *const publicKey
+) {
+	char uri[123 + 1] = { '\0' };
+		strcpy(uri, ARK::API::ONE::Paths::Delegates::voters_s);
+		strcat(uri, "?publicKey=");
+		strcat(uri, publicKey);
+	return netConnector.callback(uri);
 };
 /*************************************************/
