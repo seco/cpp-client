@@ -13,17 +13,17 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Node
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Node Model
-**************************************************/
-class Node :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Node : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string nodeConfiguration();
+		std::string nodeStatus();
+		std::string nodeSycing();
+};
+
 };
 };
 };

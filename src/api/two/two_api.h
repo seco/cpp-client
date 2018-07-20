@@ -20,13 +20,13 @@
 #include "api/two/wallets/two_wallets.h"
 
 class TWO_API :
-		public ARK::API::V2::Blocks,
-		public ARK::API::V2::Delegates,
-		public ARK::API::V2::Node,
-		public ARK::API::V2::Peers,
-		public ARK::API::V2::Transactions,
-		public ARK::API::V2::Votes,
-        public ARK::API::V2::Wallets,
+		public ARK::API::TWO::Blocks,
+		public ARK::API::TWO::Delegates,
+		public ARK::API::TWO::Node,
+		public ARK::API::TWO::Peers,
+		public ARK::API::TWO::Transactions,
+		public ARK::API::TWO::Votes,
+        public ARK::API::TWO::Wallets,
 		virtual ARK::Utilities::Network::Connectable {};
 
 #endif

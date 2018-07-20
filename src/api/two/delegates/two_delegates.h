@@ -13,17 +13,18 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Delegates
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Delegates Model
-**************************************************/
-class Delegates :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Delegates : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string delegate(const char *const identifier);
+		std::string delegates(unsigned int limit, unsigned int page);
+		std::string delegateBlocks(const char *const identifier, unsigned int limit, unsigned int page);
+		std::string delegateVoters(const char *const identifier, const unsigned int limit, const unsigned int page);
+};
+
 };
 };
 };

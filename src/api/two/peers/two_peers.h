@@ -13,17 +13,16 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Peers
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Peers Model
-**************************************************/
-class Peers :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Peers : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string peer(const char *const ip);
+		std::string peers(unsigned int limit, unsigned int page);
+};
+
 };
 };
 };

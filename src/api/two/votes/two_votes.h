@@ -13,17 +13,16 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Votes
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Votes Model
-**************************************************/
-class Votes :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Votes : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string vote(const char *const identifier);
+		std::string votes(const unsigned int limit, const unsigned int page);
+};
+
 };
 };
 };

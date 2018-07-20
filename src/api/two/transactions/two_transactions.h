@@ -13,17 +13,20 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Transactions
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Delegates Model
-**************************************************/
-class Transactions :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Transactions : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string transaction(const char *const identifier);
+		std::string transactionUnconfirmed(const char *const identifier);
+		std::string transactions(unsigned int limit, unsigned int page);
+		std::string transactions(const char *const identifier, unsigned int limit, unsigned int page);
+		std::string transactionsUnconfirmed(unsigned int limit, unsigned int page);
+		std::string transactionTypes(unsigned int limit, unsigned int page);
+};
+
 };
 };
 };

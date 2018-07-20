@@ -13,17 +13,22 @@ namespace ARK
 {
 namespace API
 {
-namespace V2
+namespace TWO
 {
-/*************************************************
-* PUBLIC: ARK::API::V2::Wallets
-* virtual ARK::Utilities::Network::Connectable
-*    
-* API's Wallets Model
-**************************************************/
-class Wallets :
-		virtual ARK::Utilities::Network::Connectable {};
-/*************************************************/
+
+class Wallets : virtual ARK::Utilities::Network::Connectable
+{
+	public:
+		std::string wallet(const char *const identifier);
+		std::string wallets(const char *const identifier, const unsigned int limit, const unsigned int page);
+		std::string walletsTop(const unsigned int limit, const unsigned int page);
+		std::string walletsTransactions(const char *const identifier, const unsigned int limit, const unsigned int page);
+		std::string walletsTransactionsSent(const char *const identifier, const unsigned int limit, const unsigned int page);
+		std::string walletsTransactionsReceived(const char *const identifier, const unsigned int limit, const unsigned int page);
+		std::string walletsVotes(const char *const identifier, const unsigned int limit, const unsigned int page);
+		std::string walletsSearch(const unsigned int limit, const unsigned int page);
+};
+
 };
 };
 };
