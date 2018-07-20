@@ -4,6 +4,8 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
+#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+
 TEST(api, test_one_loader_autoconfigure)
 {
 	ARK::Client arkClient(DEVNET);
@@ -76,3 +78,5 @@ TEST(api, test_one_loader_sync)
 	ASSERT_STRNE("0", id.c_str());
 	ASSERT_STRNE("", id.c_str());
 }
+
+#endif

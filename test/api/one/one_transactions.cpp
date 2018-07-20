@@ -4,6 +4,8 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
+#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+
 namespace
 {
 	const auto transactionID = "4e68a917d06382ce335656eef5560a537fc806ecadf3972c5221b86babecc63e";
@@ -117,3 +119,5 @@ TEST(api, test_transactions_transactions)
         ASSERT_STRNE("", confirmations.c_str());
 	};
 }
+
+#endif

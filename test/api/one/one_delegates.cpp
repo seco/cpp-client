@@ -4,6 +4,8 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
+#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+
 namespace
 {
 	const auto darkPubkey = "0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456";
@@ -302,3 +304,5 @@ TEST(api, test_one_delegates_count)
 	ASSERT_STRNE("0", count.c_str());
 	ASSERT_STRNE("", count.c_str());
 }
+
+#endif

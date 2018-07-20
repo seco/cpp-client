@@ -4,6 +4,8 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
+#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+
 TEST(api, test_signature_fees)
 {
     ARK::Client arkClient(DEVNET);
@@ -18,3 +20,5 @@ TEST(api, test_signature_fees)
 	ASSERT_STREQ("500000000", signaturesFee.c_str());
 	ASSERT_STRNE("", signaturesFee.c_str());
 }
+
+#endif

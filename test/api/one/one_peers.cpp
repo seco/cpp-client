@@ -4,6 +4,8 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
+#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+
 TEST(api, test_peers_peer)
 {
 	ARK::Client arkClient(DEVNET);
@@ -21,7 +23,7 @@ TEST(api, test_peers_peer)
 	ASSERT_STREQ("4002", peer.c_str()); // actual value 4002 (int).
 
     const auto version = parser->valueIn("peer", "version");
-	ASSERT_STREQ("1.3.0", version.c_str());
+	ASSERT_STREQ("1.1.1", version.c_str());
 
     const auto errors = parser->valueIn("peer", "errors");
 	ASSERT_STREQ("0", errors.c_str()); // actual value 0 (int).
@@ -99,3 +101,5 @@ TEST(api, test_peers_version)
     const auto build = parser->valueFor("build");
 	ASSERT_STREQ("", build.c_str());
 }
+
+#endif
