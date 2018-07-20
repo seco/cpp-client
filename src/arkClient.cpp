@@ -22,7 +22,7 @@ ARK::Client::Client(
     const char *const customBaseURL,
     const unsigned int customBasePort
 ) {
-    this->netConnector = ARK::Utilities::Network::Connector(customBaseURL, customBasePort);
+    this->netConnector = ARK::Utilities::Network::Connector(customBaseURL, customBasePort, "");
 };
 /*************************************************/
 
