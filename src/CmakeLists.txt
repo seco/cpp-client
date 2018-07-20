@@ -3,15 +3,12 @@ cmake_minimum_required(VERSION 3.2.2)
 
 project(Ark-Cpp-Client-lib)
 
-hunter_add_package(PocoCpp)
-
 set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
  
-include_directories(
-	${PROJECT_SOURCE_DIR}
-)
+include_directories(${PROJECT_SOURCE_DIR})
 
-find_package(Poco CONFIG REQUIRED Foundation Net)
+hunter_add_package(CURL)
+find_package(CURL CONFIG REQUIRED)
 
 set(COMMON_SRC 
 	${PROJECT_SOURCE_DIR}/arkClient.cpp
@@ -31,7 +28,7 @@ set(PLATFORM_SRC
 
 add_library(Ark-Cpp-Client-lib STATIC ${COMMON_SRC} ${PLATFORM_SRC})
 
-target_link_libraries(Ark-Cpp-Client-lib PUBLIC Poco::Net)
+target_link_libraries(Ark-Cpp-Client-lib PUBLIC CURL::libcurl)
 
 if (MSVC)
 	target_link_libraries(Ark-Cpp-Client-lib PUBLIC crypt32)

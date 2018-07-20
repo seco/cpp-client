@@ -1,1 +1,2 @@
-hunter_config(PocoCpp VERSION 1.7.9-p1 CMAKE_ARGS ENABLE_CRYPTO=ON)
+hunter_config(OPENSSL VERSION 1.1.0h)
+hunter_config(CURL VERSION 7.61.0)
