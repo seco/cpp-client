@@ -41,6 +41,11 @@ inline float convert_to_float(const std::string& s)
 	return atof(s.c_str());
 }
 
+static std::string convert_to_string(int integer)
+{
+	return String(integer).c_str();
+}
+
 /*************************************************
 * substringCount(const char *str, const char* substr)
 *
@@ -88,6 +93,11 @@ inline int convert_to_int(const std::string& s)
 inline float convert_to_float(const std::string& s)
 {
 	return std::stof(s);
+}
+
+static std::string convert_to_string(int integer)
+{
+	return std::to_string(integer);
 }
 
 uint32_t generate_random_number(

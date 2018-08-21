@@ -28,19 +28,15 @@ std::string ARK::API::TWO::Blocks::blocks() {
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Blocks::blocks(
-        const int limit,
+        int limit,
         const int page
 ) {
     char uri[256] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Blocks::base);
         strcat(uri, "?limit=");
-        char limitBuffer[1];
-        sprintf(limitBuffer, "%d", limit); 
-        std::strcat(uri, limitBuffer);
+        std::strcat(uri, convert_to_string(limit).c_str());
         strcat(uri, "&page=");
-        char pageBuffer[1];
-        sprintf(pageBuffer, "%d", page); 
-        std::strcat(uri, pageBuffer);
+        std::strcat(uri, convert_to_string(page).c_str());
     return netConnector.callback(uri);
 }
 

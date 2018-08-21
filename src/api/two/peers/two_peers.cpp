@@ -20,12 +20,8 @@ std::string ARK::API::TWO::Peers::peers(
     char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Peers::base);
         strcat(uri, "?limit=");
-        char limitBuffer[1];
-        sprintf(limitBuffer, "%d", limit); 
-        std::strcat(uri, limitBuffer);
+        std::strcat(uri, convert_to_string(limit).c_str());
         strcat(uri, "&page=");
-        char pageBuffer[1];
-        sprintf(pageBuffer, "%d", page); 
-        std::strcat(uri, pageBuffer);
+        std::strcat(uri, convert_to_string(page).c_str());
     return netConnector.callback(uri);
 }

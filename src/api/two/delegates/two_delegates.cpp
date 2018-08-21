@@ -21,13 +21,9 @@ std::string ARK::API::TWO::Delegates::delegates(
     char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Delegates::base);
         strcat(uri, "?limit=");
-        char limitBuffer[1];
-        sprintf(limitBuffer, "%d", limit); 
-        std::strcat(uri, limitBuffer);
+        std::strcat(uri, convert_to_string(limit).c_str());
         strcat(uri, "&page=");
-        char pageBuffer[1];
-        sprintf(pageBuffer, "%d", page); 
-        std::strcat(uri, pageBuffer);
+        std::strcat(uri, convert_to_string(page).c_str());
     return netConnector.callback(uri);
 }
 
@@ -43,13 +39,9 @@ std::string ARK::API::TWO::Delegates::delegateBlocks(
         strcat(uri, identifier);
         strcat(uri, "/blocks");
         strcat(uri, "?limit=");
-        char limitBuffer[1];
-        sprintf(limitBuffer, "%d", limit); 
-        std::strcat(uri, limitBuffer);
+        std::strcat(uri, convert_to_string(limit).c_str());
         strcat(uri, "&page=");
-        char pageBuffer[1];
-        sprintf(pageBuffer, "%d", page); 
-        std::strcat(uri, pageBuffer);
+        std::strcat(uri, convert_to_string(page).c_str());
     return netConnector.callback(uri);
 }
 
@@ -66,12 +58,8 @@ std::string ARK::API::TWO::Delegates::delegateVoters(
         strcat(uri, identifier);
         strcat(uri, "/voters");
         strcat(uri, "?limit=");
-        char limitBuffer[1];
-        sprintf(limitBuffer, "%d", limit); 
-        std::strcat(uri, limitBuffer);
+        std::strcat(uri, convert_to_string(limit).c_str());
         strcat(uri, "&page=");
-        char pageBuffer[1];
-        sprintf(pageBuffer, "%d", page); 
-        std::strcat(uri, pageBuffer);
+        std::strcat(uri, convert_to_string(page).c_str());
     return netConnector.callback(uri);
 }
