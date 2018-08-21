@@ -27,6 +27,13 @@ set (TEST_SRC
 	${PROJECT_SOURCE_DIR}/api/one/one_peers.cpp
 	${PROJECT_SOURCE_DIR}/api/one/one_signatures.cpp
 	${PROJECT_SOURCE_DIR}/api/one/one_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_node.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_votes.cpp
+	${PROJECT_SOURCE_DIR}/api/two/two_wallets.cpp
 )
 
 set(PLATFORM_SRC 

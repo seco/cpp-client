@@ -2,6 +2,8 @@
 
 #include "api/two/peers/two_peers.h"
 
+#include <sstream>
+
 std::string ARK::API::TWO::Peers::peer(const char *const ip)
 {
     char uri[80] = { '\0' };
@@ -14,18 +16,18 @@ std::string ARK::API::TWO::Peers::peer(const char *const ip)
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Peers::peers(
-        unsigned int limit,
-        unsigned int page
-)
-{
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
+        int limit,
+        int page
+) {
     char uri[120 + 1] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Peers::base);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }

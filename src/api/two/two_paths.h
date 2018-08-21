@@ -15,58 +15,57 @@ namespace Paths
 
 namespace Blocks
 {
-    const auto base = "/api/blocks";
-    const auto search = "/api/blocks/search";
+    const auto base = "/api/v2/blocks";
+    const auto search = "/api/v2/blocks/search";
 };
 
 /**************************************************************************************************/
 
 namespace Delegates
 {
-	const auto base = "/api/delegates/";
+	const auto base = "/api/v2/delegates";
 };
 
 /**************************************************************************************************/
 
 namespace Node
 {
-	const auto base = "/api/node";
-	const auto configuration = "/api/node/configuration";
-	const auto status = "/api/node/status";
-	const auto syncing = "/api/node/syncing";
+	const auto base = "/api/v2/node";
+	const auto configuration = "/api/v2/node/configuration";
+	const auto status = "/api/v2/node/status";
+	const auto syncing = "/api/v2/node/syncing";
 };
 
 /**************************************************************************************************/
 
 namespace Peers
 {
-	const auto base = "/api/peers";
+	const auto base = "/api/v2/peers";
 };
 
 /**************************************************************************************************/
 
 namespace Transactions
 {	
-	const auto base = "/api/transactions";
-	const auto search = "/api/transactions/search";
-	const auto types = "/api/transactions/types";
-	const auto unconfirmed = "/api/transactions/unconfirmed";
+	const auto base = "/api/v2/transactions";
+	const auto search = "/api/v2/transactions/search";
+	const auto types = "/api/v2/transactions/types";
+	const auto unconfirmed = "/api/v2/transactions/unconfirmed";
 };
 
 /**************************************************************************************************/
 
 namespace Votes
 {
-	const auto base = "/api/votes";
+	const auto base = "/api/v2/votes";
 };
 
 /**************************************************************************************************/
 
 namespace Wallets
 {
-	const auto base = "/api/wallets";
-	const auto search = "/api/wallets/search";
-	const auto top = "/api/wallets/top";
+	const auto base = "/api/v2/wallets";
+	const auto top = "/api/v2/wallets/top";
 };
 
 };

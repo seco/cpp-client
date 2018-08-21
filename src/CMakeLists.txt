@@ -20,6 +20,13 @@ set(COMMON_SRC
 	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
 	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
 	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/two/blocks/two_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/two/delegates/two_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/two/node/two_node.cpp
+	${PROJECT_SOURCE_DIR}/api/two/peers/two_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/two/transactions/two_transactions.cpp
+	${PROJECT_SOURCE_DIR}/api/two/votes/two_votes.cpp
+	${PROJECT_SOURCE_DIR}/api/two/wallets/two_wallets.cpp
 )
 
 set(PLATFORM_SRC 

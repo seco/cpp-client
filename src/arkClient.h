@@ -14,8 +14,8 @@
 /***************************************
 * Uncomment to use desired API Version
 ***************************************/
-#define USE_ONE_API
-// #define USE_TWO_API
+// #define USE_ONE_API
+#define USE_TWO_API
 /**************************************/
 
 #define DEVNET_EXPLORER_URL "dexplorer.ark.io" // char[16+1]
@@ -38,8 +38,7 @@ enum NetworkType { DEVNET, MAINNET };
             virtual ARK::Utilities::Network::Connectable {};
 #endif
 
-namespace ARK
-{
+namespace ARK {
 /*************************************************
 * ARK::Client
 **************************************************/
@@ -51,7 +50,7 @@ class Client :
 		Client();
         explicit Client(
             const char *const customBaseURL,
-            const unsigned int customBasePort
+            const int customBasePort
         );
         explicit Client(const NetworkType netType);
 };

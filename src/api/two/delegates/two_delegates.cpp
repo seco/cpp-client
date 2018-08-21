@@ -2,6 +2,8 @@
 
 #include "api/two/delegates/two_delegates.h"
 
+#include <iostream>
+
 std::string ARK::API::TWO::Delegates::delegate(const char *const identifier)
 {
     char uri[120 + 1] = { '\0' };
@@ -14,8 +16,8 @@ std::string ARK::API::TWO::Delegates::delegate(const char *const identifier)
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Delegates::delegates(
-        unsigned int limit,
-        unsigned int page
+        int limit,
+        int page
 )
 {
     char parameters[2][1];
@@ -34,8 +36,8 @@ std::string ARK::API::TWO::Delegates::delegates(
 
 std::string ARK::API::TWO::Delegates::delegateBlocks(
         const char *const identifier,
-        unsigned int limit,
-        unsigned int page
+        int limit,
+        int page
 ) {
     char parameters[2][1];
         sprintf(parameters[0], "%d", limit);
@@ -55,8 +57,8 @@ std::string ARK::API::TWO::Delegates::delegateBlocks(
 
 std::string ARK::API::TWO::Delegates::delegateVoters(
         const char *const identifier,
-        const unsigned int limit,
-        const unsigned int page
+        int limit,
+        int page
 ) {
     char parameters[2][1];
         sprintf(parameters[0], "%d", limit);

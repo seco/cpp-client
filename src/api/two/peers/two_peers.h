@@ -9,18 +9,15 @@
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
 
-namespace ARK
-{
-namespace API
-{
-namespace TWO
-{
+namespace ARK {
+namespace API {
+namespace TWO {
 
 class Peers : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string peer(const char *const ip);
-		std::string peers(unsigned int limit, unsigned int page);
+    public:
+        std::string peer(const char *const ip);
+        std::string peers(int limit, int page);
 };
 
 };

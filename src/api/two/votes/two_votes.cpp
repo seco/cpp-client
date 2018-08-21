@@ -14,17 +14,18 @@ std::string ARK::API::TWO::Votes::vote(const char *const identifier)
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Votes::votes(
-        const unsigned int limit,
-        const unsigned int page
+        int limit,
+        int page
 ) {
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
     char uri[120] = { '\0' };
-	    strcpy(uri, ARK::API::TWO::Paths::Votes::base);
+        strcpy(uri, ARK::API::TWO::Paths::Votes::base);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }

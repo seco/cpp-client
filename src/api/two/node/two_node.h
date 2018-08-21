@@ -9,19 +9,16 @@
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
 
-namespace ARK
-{
-namespace API
-{
-namespace TWO
-{
+namespace ARK {
+namespace API {
+namespace TWO {
 
 class Node : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string nodeConfiguration();
-		std::string nodeStatus();
-		std::string nodeSycing();
+    public:
+        std::string nodeConfiguration();
+        std::string nodeStatus();
+        std::string nodeSycing();
 };
 
 };

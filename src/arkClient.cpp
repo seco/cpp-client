@@ -2,8 +2,6 @@
 
 #include "arkClient.h"
 
-// namespace ARK
-// {
 /*************************************************
 * Default: Empty Constructor - ARK::Client
 **************************************************/
@@ -20,7 +18,7 @@ ARK::Client::Client() {}
 **************************************************/
 ARK::Client::Client(
     const char *const customBaseURL,
-    const unsigned int customBasePort
+    const int customBasePort
 ) {
     this->netConnector = ARK::Utilities::Network::Connector(customBaseURL, customBasePort, "");
 };
@@ -52,5 +50,3 @@ ARK::Client::Client(const NetworkType netType)
     }
 };
 /*************************************************/
-
-// };

@@ -1,11 +1,12 @@
 
 
 #include "api/two/transactions/two_transactions.h"
+#include <sstream>
 
 std::string ARK::API::TWO::Transactions::transaction(const char *const identifier)
 {
-    char uri[80] = { '\0' };
-	strcpy(uri, ARK::API::TWO::Paths::Transactions::base);
+    char uri[96] = { '\0' };
+    strcpy(uri, ARK::API::TWO::Paths::Transactions::base);
         strcat(uri, "/");
         strcat(uri, identifier);
     return netConnector.callback(uri);
@@ -15,9 +16,9 @@ std::string ARK::API::TWO::Transactions::transaction(const char *const identifie
 
 std::string ARK::API::TWO::Transactions::transactionUnconfirmed(const char *const identifier)
 {
-    char uri[80] = { '\0' };
-	strcpy(uri, ARK::API::TWO::Paths::Transactions::unconfirmed);
-        strcat(uri, "/");
+    char uri[128] = { '\0' };
+        strcpy(uri, ARK::API::TWO::Paths::Transactions::unconfirmed);
+        strcat(uri, "?id=");
         strcat(uri, identifier);
     return netConnector.callback(uri);
 }
@@ -25,19 +26,19 @@ std::string ARK::API::TWO::Transactions::transactionUnconfirmed(const char *cons
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Transactions::transactions(
-        unsigned int limit,
-        unsigned int page
-)
-{
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
+        int limit,
+        int page
+) {
     char uri[80] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::base);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }
 
@@ -45,58 +46,58 @@ std::string ARK::API::TWO::Transactions::transactions(
 
 std::string ARK::API::TWO::Transactions::transactions(
         const char *const identifier,
-        unsigned int limit,
-        unsigned int page
-)
-{
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
-    char uri[80] = { '\0' };
+        int limit,
+        int page
+) {
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::base);
         strcat(uri, "/");
         strcat(uri, identifier);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }
 
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Transactions::transactionsUnconfirmed(
-        unsigned int limit,
-        unsigned int page
-)
-{
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
+        int limit,
+        int page
+) {
     char uri[80] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::unconfirmed);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }
 
 /**************************************************************************************************/
 
 std::string ARK::API::TWO::Transactions::transactionTypes(
-        unsigned int limit,
-        unsigned int page
-)
-{
-    char parameters[2][1];
-        sprintf(parameters[0], "%d", limit);
-        sprintf(parameters[1], "%d", page);
-    char uri[80] = { '\0' };
+        int limit,
+        int page
+) {
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::types);
         strcat(uri, "?limit=");
-        strcat(uri, parameters[0]);
+        std::stringstream limitStream;
+        limitStream << limit;
+        strcat(uri, limitStream.str().c_str());
         strcat(uri, "&page=");
-        strcat(uri, parameters[1]);
+        std::stringstream pageStream;
+        pageStream << page;
+        strcat(uri, pageStream.str().c_str());
     return netConnector.callback(uri);
 }
