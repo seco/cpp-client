@@ -2,8 +2,6 @@
 
 #include "api/two/peers/two_peers.h"
 
-#include <sstream>
-
 std::string ARK::API::TWO::Peers::peer(const char *const ip)
 {
     char uri[80] = { '\0' };
