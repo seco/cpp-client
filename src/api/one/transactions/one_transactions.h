@@ -16,18 +16,19 @@ namespace API
 {
 namespace ONE
 {
+
 class Transactions : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string transaction(const char *const id);
-		std::string transactions();
-		std::string transactionUnconfirmed(const char *const id);
-		std::string transactionsUnconfirmed();
-		std::string getVendorField(const char *const txID);
+  public:
+    std::string transaction(const char *const id);
+    std::string transactions();
+    std::string transactionUnconfirmed(const char *const id);
+    std::string transactionsUnconfirmed();
+    std::string getVendorField(const char *const txID);
 };
 
-};
-};
-};
+}; // namespace ONE
+}; // namespace API
+}; // namespace ARK
 
 #endif

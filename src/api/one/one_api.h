@@ -19,14 +19,15 @@
 #include "api/one/signatures/one_signatures.h"
 #include "api/one/transactions/one_transactions.h"
 
-class ONE_API :
-		public ARK::API::ONE::Accounts,
-		public ARK::API::ONE::Blocks,
-		public ARK::API::ONE::Delegates,
-		public ARK::API::ONE::Loader,
-		public ARK::API::ONE::Peers,
-		public ARK::API::ONE::Signatures,
-		public ARK::API::ONE::Transactions,
-		virtual ARK::Utilities::Network::Connectable {};
+class ONE_API : public ARK::API::ONE::Accounts,
+                public ARK::API::ONE::Blocks,
+                public ARK::API::ONE::Delegates,
+                public ARK::API::ONE::Loader,
+                public ARK::API::ONE::Peers,
+                public ARK::API::ONE::Signatures,
+                public ARK::API::ONE::Transactions,
+                virtual ARK::Utilities::Network::Connectable
+{
+};
 
 #endif

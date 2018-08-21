@@ -1,6 +1,5 @@
 
 
-
 #include "api/one/blocks/one_blocks.h"
 
 /*************************************************
@@ -36,13 +35,13 @@
 * }
 **************************************************/
 std::string ARK::API::ONE::Blocks::block(
-		const char *const blockId
-) {
-	char uri[80] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Blocks::get_s);
-		strcat(uri, "?id=");
-		strcat(uri, blockId);
-	return netConnector.callback(uri);
+    const char *const blockId)
+{
+    char uri[80] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Blocks::get_s);
+    strcat(uri, "?id=");
+    strcat(uri, blockId);
+    return netConnector.callback(uri);
 }
 /*************************************************/
 
@@ -103,8 +102,8 @@ std::string ARK::API::ONE::Blocks::block(
 **************************************************/
 std::string ARK::API::ONE::Blocks::blocks()
 {
-	auto blocks = netConnector.callback(ARK::API::ONE::Paths::Blocks::blocks_s);
-	return blocks;
+    auto blocks = netConnector.callback(ARK::API::ONE::Paths::Blocks::blocks_s);
+    return blocks;
 }
 /*************************************************/
 
@@ -125,7 +124,7 @@ std::string ARK::API::ONE::Blocks::blocks()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockEpoch()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getEpoch_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getEpoch_s);
 }
 /*************************************************/
 
@@ -146,7 +145,7 @@ std::string ARK::API::ONE::Blocks::blockEpoch()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockFee()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFee_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFee_s);
 }
 /*************************************************/
 
@@ -175,7 +174,7 @@ std::string ARK::API::ONE::Blocks::blockFee()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockFees()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFees_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getFees_s);
 }
 /*************************************************/
 
@@ -197,7 +196,7 @@ std::string ARK::API::ONE::Blocks::blockFees()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockHeight()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getHeight_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getHeight_s);
 }
 /*************************************************/
 
@@ -218,7 +217,7 @@ std::string ARK::API::ONE::Blocks::blockHeight()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockMilestone()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getMilestone_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getMilestone_s);
 }
 /*************************************************/
 
@@ -239,7 +238,7 @@ std::string ARK::API::ONE::Blocks::blockMilestone()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockNethash()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getNethash_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getNethash_s);
 }
 /*************************************************/
 
@@ -260,7 +259,7 @@ std::string ARK::API::ONE::Blocks::blockNethash()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockReward()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getReward_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getReward_s);
 }
 /*************************************************/
 
@@ -281,7 +280,7 @@ std::string ARK::API::ONE::Blocks::blockReward()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockSupply()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getSupply_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getSupply_s);
 }
 /*************************************************/
 
@@ -308,6 +307,6 @@ std::string ARK::API::ONE::Blocks::blockSupply()
 **************************************************/
 std::string ARK::API::ONE::Blocks::blockStatus()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Blocks::getStatus_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Blocks::getStatus_s);
 }
 /*************************************************/

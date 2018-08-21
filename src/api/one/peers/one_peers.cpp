@@ -28,17 +28,17 @@
 * }
 **************************************************/
 std::string ARK::API::ONE::Peers::peer(
-		const char *const ip,
-		const int port
-) {
-	char uri[68 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Peers::get_s);
-		strcat(uri, "?ip=");
-		strcat(uri, ip);
-		strcat(uri, "&port=");
-	const auto len = strlen(uri);
-		sprintf(uri + len, "%d", port);
-	return netConnector.callback(uri);
+    const char *const ip,
+    const int port)
+{
+    char uri[68 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Peers::get_s);
+    strcat(uri, "?ip=");
+    strcat(uri, ip);
+    strcat(uri, "&port=");
+    const auto len = strlen(uri);
+    sprintf(uri + len, "%d", port);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -82,9 +82,9 @@ std::string ARK::API::ONE::Peers::peer(
 **************************************************/
 std::string ARK::API::ONE::Peers::peers()
 {
-	char uri[39 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Peers::peers_s);
-	return netConnector.callback(uri);
+    char uri[39 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Peers::peers_s);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -106,6 +106,6 @@ std::string ARK::API::ONE::Peers::peers()
 **************************************************/
 std::string ARK::API::ONE::Peers::peerVersion()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Peers::version_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Peers::version_s);
 };
 /*************************************************/

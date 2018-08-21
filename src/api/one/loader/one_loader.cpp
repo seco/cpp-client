@@ -24,7 +24,7 @@
 **************************************************/
 std::string ARK::API::ONE::Loader::loaderAutoconfigure()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Loader::autoconfigure_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Loader::autoconfigure_s);
 }
 /*************************************************/
 
@@ -47,7 +47,7 @@ std::string ARK::API::ONE::Loader::loaderAutoconfigure()
 **************************************************/
 std::string ARK::API::ONE::Loader::loaderStatus()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Loader::status_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Loader::status_s);
 }
 /*************************************************/
 
@@ -71,6 +71,6 @@ std::string ARK::API::ONE::Loader::loaderStatus()
 **************************************************/
 std::string ARK::API::ONE::Loader::loaderSync()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Loader::sync_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Loader::sync_s);
 }
 /*************************************************/

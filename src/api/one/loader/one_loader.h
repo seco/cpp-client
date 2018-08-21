@@ -15,14 +15,14 @@ namespace ONE
 
 class Loader : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string loaderAutoconfigure();
-		std::string loaderStatus();
-		std::string loaderSync();
+  public:
+    std::string loaderAutoconfigure();
+    std::string loaderStatus();
+    std::string loaderSync();
 };
 
-};
-};
-};
+}; // namespace ONE
+}; // namespace API
+}; // namespace ARK
 
 #endif

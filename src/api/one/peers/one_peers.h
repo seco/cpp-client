@@ -19,14 +19,14 @@ namespace ONE
 
 class Peers : virtual ARK::Utilities::Network::Connectable
 {
-  public:
-    std::string peer(const char *const ip, const int port);
-    std::string peers();
-    std::string peerVersion();
+    public:
+        std::string peer(const char *const ip, const int port);
+        std::string peers();
+        std::string peerVersion();
 };
 
-};
-};
-};
+}; // namespace ONE
+}; // namespace API
+}; // namespace ARK
 
 #endif

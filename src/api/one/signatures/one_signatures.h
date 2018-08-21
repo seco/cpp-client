@@ -15,12 +15,12 @@ namespace ONE
 
 class Signatures : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string signaturesFee();
+  public:
+    std::string signaturesFee();
 };
 
-};
-};
-};
+}; // namespace ONE
+}; // namespace API
+}; // namespace ARK
 
 #endif

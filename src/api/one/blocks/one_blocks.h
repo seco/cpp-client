@@ -10,27 +10,24 @@
 #include <memory>
 #include <vector>
 
-namespace ARK
-{
-namespace API
-{
-namespace ONE
-{
+namespace ARK {
+namespace API {
+namespace ONE {
 
 class Blocks : virtual ARK::Utilities::Network::Connectable
 {
-	public:
-		std::string block(const char *const blockId);
-		std::string blocks();
-		std::string blockEpoch();
-		std::string blockFee();
-		std::string blockFees();
-		std::string blockHeight();
-		std::string blockMilestone();
-		std::string blockNethash();
-		std::string blockReward();
-		std::string blockSupply();
-		std::string blockStatus();
+    public:
+        std::string block(const char *const blockId);
+        std::string blocks();
+        std::string blockEpoch();
+        std::string blockFee();
+        std::string blockFees();
+        std::string blockHeight();
+        std::string blockMilestone();
+        std::string blockNethash();
+        std::string blockReward();
+        std::string blockSupply();
+        std::string blockStatus();
 };
 
 };

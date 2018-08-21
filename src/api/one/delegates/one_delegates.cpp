@@ -29,20 +29,20 @@
 * }
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegate(
-		const char *const parameter
-) {
-	char uri[120 + 1] = { '\0' };	//max size (pubkey param)
-		strcpy(uri, ARK::API::ONE::Paths::Delegates::get_s);
-	bool isUsername = (strlen(parameter) <= 20);
-	auto key = (isUsername) ? ("?username=") : ("?publicKey=");
-		strcat(uri, key);
-		strcat(uri, parameter);
-	return netConnector.callback(uri);
+    const char *const parameter)
+{
+    char uri[120 + 1] = {'\0'}; //max size (pubkey param)
+    strcpy(uri, ARK::API::ONE::Paths::Delegates::get_s);
+    bool isUsername = (strlen(parameter) <= 20);
+    auto key = (isUsername) ? ("?username=") : ("?publicKey=");
+    strcat(uri, key);
+    strcat(uri, parameter);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
 /**************************************************************************************************/
-		
+
 /*************************************************
 * /api/delegates?limit=20
 *
@@ -84,9 +84,9 @@ std::string ARK::API::ONE::Delegates::delegate(
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegates()
 {
-	char uri[43] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Delegates::delegates_s);
-	return netConnector.callback(uri);
+    char uri[43] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Delegates::delegates_s);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -107,7 +107,7 @@ std::string ARK::API::ONE::Delegates::delegates()
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegatesCount()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Delegates::count_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Delegates::count_s);
 };
 /*************************************************/
 
@@ -138,13 +138,13 @@ std::string ARK::API::ONE::Delegates::delegatesCount()
 * }
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegateSearch(
-		const char *const username
-) {
-	char uri[69 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Delegates::search_s);
-		strcat(uri, "?q=");
-		strcat(uri, username);
-	return netConnector.callback(uri);
+    const char *const username)
+{
+    char uri[69 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Delegates::search_s);
+    strcat(uri, "?q=");
+    strcat(uri, username);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -161,7 +161,7 @@ std::string ARK::API::ONE::Delegates::delegateSearch(
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegateFee()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Delegates::fee_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Delegates::fee_s);
 };
 /*************************************************/
 
@@ -184,13 +184,13 @@ std::string ARK::API::ONE::Delegates::delegateFee()
 * }
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegateForgedByAccount(
-		const char *const generatorPublicKey
-) {
-	char uri[152 + 1];
-		strcpy(uri, ARK::API::ONE::Paths::Delegates::getForgedByAccount_s);
-		strcat(uri, "?generatorPublicKey=");
-		strcat(uri, generatorPublicKey);
-	return netConnector.callback(uri);
+    const char *const generatorPublicKey)
+{
+    char uri[152 + 1];
+    strcpy(uri, ARK::API::ONE::Paths::Delegates::getForgedByAccount_s);
+    strcat(uri, "?generatorPublicKey=");
+    strcat(uri, generatorPublicKey);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -226,7 +226,7 @@ std::string ARK::API::ONE::Delegates::delegateForgedByAccount(
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegateNextForgers()
 {
-	return netConnector.callback(ARK::API::ONE::Paths::Delegates::getNextForgers_s);
+    return netConnector.callback(ARK::API::ONE::Paths::Delegates::getNextForgers_s);
 };
 /*************************************************/
 
@@ -261,12 +261,12 @@ std::string ARK::API::ONE::Delegates::delegateNextForgers()
 * }
 **************************************************/
 std::string ARK::API::ONE::Delegates::delegateVoters(
-		const char *const publicKey
-) {
-	char uri[123 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Delegates::voters_s);
-		strcat(uri, "?publicKey=");
-		strcat(uri, publicKey);
-	return netConnector.callback(uri);
+    const char *const publicKey)
+{
+    char uri[123 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Delegates::voters_s);
+    strcat(uri, "?publicKey=");
+    strcat(uri, publicKey);
+    return netConnector.callback(uri);
 };
 /*************************************************/

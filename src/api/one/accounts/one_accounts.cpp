@@ -18,13 +18,13 @@
 * }
 **************************************************/
 std::string ARK::API::ONE::Accounts::accountBalance(
-		const char *const arkAddress
-) {
-	char uri[68 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Accounts::getBalance_s);
-		strcat(uri, "?address=");
-		strcat(uri, arkAddress);
-	return netConnector.callback(uri);
+    const char *const arkAddress)
+{
+    char uri[68 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Accounts::getBalance_s);
+    strcat(uri, "?address=");
+    strcat(uri, arkAddress);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -45,13 +45,13 @@ std::string ARK::API::ONE::Accounts::accountBalance(
 * }
 **************************************************/
 std::string ARK::API::ONE::Accounts::accountPublickey(
-		const char *const arkAddress
-) {
-	char uri[94 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Accounts::getPublickey_s);
-		strcat(uri, "?address=");
-		strcat(uri, arkAddress);
-	return netConnector.callback(uri);
+    const char *const arkAddress)
+{
+    char uri[94 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Accounts::getPublickey_s);
+    strcat(uri, "?address=");
+    strcat(uri, arkAddress);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -67,18 +67,18 @@ std::string ARK::API::ONE::Accounts::accountPublickey(
 *
 * EXAMPLE:
 * {
-* 	"success":true,
-* 	"fee":2500000000
+*   "success":true,
+*   "fee":2500000000
 * }
 **************************************************/
 std::string ARK::API::ONE::Accounts::accountDelegatesFee(
-		const char *const arkAddress
-) {
-	char uri[95 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Accounts::delegatesFee_s);
-		strcat(uri, "?address=");
-		strcat(uri, arkAddress);
-	return netConnector.callback(uri);
+    const char *const arkAddress)
+{
+    char uri[95 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Accounts::delegatesFee_s);
+    strcat(uri, "?address=");
+    strcat(uri, arkAddress);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -112,13 +112,13 @@ std::string ARK::API::ONE::Accounts::accountDelegatesFee(
 * }
 **************************************************/
 std::string ARK::API::ONE::Accounts::accountDelegates(
-		const char *const arkAddress
-) {
-	char uri[91 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Accounts::delegates_s);
-		strcat(uri, "?address=");
-		strcat(uri, arkAddress);
-	return netConnector.callback(uri);
+    const char *const arkAddress)
+{
+    char uri[91 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Accounts::delegates_s);
+    strcat(uri, "?address=");
+    strcat(uri, arkAddress);
+    return netConnector.callback(uri);
 };
 /*************************************************/
 
@@ -150,12 +150,12 @@ std::string ARK::API::ONE::Accounts::accountDelegates(
 * }
 **************************************************/
 std::string ARK::API::ONE::Accounts::account(
-		const char *const arkAddress
-) {
-	char uri[81 + 1] = { '\0' };
-		strcpy(uri, ARK::API::ONE::Paths::Accounts::accounts_s);
-		strcat(uri, "?address=");
-		strcat(uri, arkAddress);
-	return netConnector.callback(uri);
+    const char *const arkAddress)
+{
+    char uri[81 + 1] = {'\0'};
+    strcpy(uri, ARK::API::ONE::Paths::Accounts::accounts_s);
+    strcat(uri, "?address=");
+    strcat(uri, arkAddress);
+    return netConnector.callback(uri);
 };
 /*************************************************/
