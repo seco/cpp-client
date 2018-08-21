@@ -4,7 +4,7 @@
 
 std::string ARK::API::TWO::Votes::vote(const char *const identifier)
 {
-    char uri[80] = { '\0' };
+    char uri[96] = { '\0' };
 	    strcpy(uri, ARK::API::TWO::Paths::Votes::base);
         strcat(uri, "/");
         strcat(uri, identifier);
@@ -17,7 +17,7 @@ std::string ARK::API::TWO::Votes::votes(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Votes::base);
         strcat(uri, "?limit=");
         std::stringstream limitStream;

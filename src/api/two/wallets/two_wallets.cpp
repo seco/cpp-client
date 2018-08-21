@@ -4,7 +4,7 @@
 
 std::string ARK::API::TWO::Wallets::wallet(const char *const identifier)
 {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);
@@ -18,7 +18,7 @@ std::string ARK::API::TWO::Wallets::wallets(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);
@@ -39,7 +39,7 @@ std::string ARK::API::TWO::Wallets::walletsTop(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::top);
         strcat(uri, "?limit=");
         std::stringstream limitStream;
@@ -82,7 +82,7 @@ std::string ARK::API::TWO::Wallets::walletsTransactionsSent(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);
@@ -105,7 +105,7 @@ std::string ARK::API::TWO::Wallets::walletsTransactionsReceived(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);
@@ -128,7 +128,7 @@ std::string ARK::API::TWO::Wallets::walletsVotes(
         int limit,
         int page
 ) {
-    char uri[120] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);

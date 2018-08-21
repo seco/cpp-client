@@ -31,7 +31,7 @@ std::string ARK::API::TWO::Blocks::blocks(
         const int limit,
         const int page
 ) {
-    char uri[80] = { '\0' };
+    char uri[256] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Blocks::base);
         strcat(uri, "?limit=");
         std::stringstream limitStream;
@@ -49,7 +49,7 @@ std::string ARK::API::TWO::Blocks::blocks(
 std::string ARK::API::TWO::Blocks::blockTransactions(
         const char *const blockId
 ) {
-    char uri[80] = { '\0' };
+    char uri[256] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Blocks::base);
         strcat(uri, "/");
         strcat(uri, blockId);

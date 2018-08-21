@@ -28,7 +28,7 @@ std::string ARK::API::TWO::Transactions::transactions(
         int limit,
         int page
 ) {
-    char uri[80] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::base);
         strcat(uri, "?limit=");
         std::stringstream limitStream;
@@ -69,7 +69,7 @@ std::string ARK::API::TWO::Transactions::transactionsUnconfirmed(
         int limit,
         int page
 ) {
-    char uri[80] = { '\0' };
+    char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Transactions::unconfirmed);
         strcat(uri, "?limit=");
         std::stringstream limitStream;
