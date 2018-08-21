@@ -392,7 +392,6 @@ TEST(api, test_two_delegates_delegate_blocks)
         ASSERT_STRNE("", id.c_str());
 
         const auto version = parser->subarrayValueIn("data", i, "version");
-        ASSERT_STREQ("0", version.c_str());
         ASSERT_STRNE("", version.c_str());
 
         const auto height = parser->subarrayValueIn("data", i, "height");
