@@ -3,7 +3,6 @@
 #include "gtest/gtest.h"
 #include "arkClient.h"
 #include "utils/json/json.h"
-#include <sstream>
 
 #if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
 
@@ -224,11 +223,6 @@ TEST(api, test_two_delegates_delegates)
         const auto votes = parser->subarrayValueIn("data", i, "votes");
         ASSERT_STRNE("0", votes.c_str());
         ASSERT_STRNE("", votes.c_str());
-
-        const auto rank = parser->subarrayValueIn("data", i, "rank");
-        std::stringstream index;
-        index << i + 1;
-        ASSERT_STREQ(index.str().c_str(), rank.c_str());
     }
 }
 
@@ -392,12 +386,7 @@ TEST(api, test_two_delegates_delegate_blocks)
     const auto delegateBlocksResponse = arkClient.delegateBlocks("boldninja", 5, 1);
     auto parser = ARK::Test::Utils::makeJSONString(delegateBlocksResponse);
 
-    std::stringstream countStream;
-    countStream << parser->valueIn("meta", "count");
-    int count = 0;
-    countStream >> count;
-
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < 5; i++)
     {
         const auto id = parser->subarrayValueIn("data", i, "id");
         ASSERT_STRNE("", id.c_str());
@@ -479,12 +468,7 @@ TEST(api, test_two_delegates_delegate_voters)
     const auto delegateVotersResponse = arkClient.delegateVoters("boldninja", 5, 1);
     auto parser = ARK::Test::Utils::makeJSONString(delegateVotersResponse);
 
-    std::stringstream countStream;
-    countStream << parser->valueIn("meta", "count");
-    int count = 0;
-    countStream >> count;
-
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < 5; i++)
     {
         const auto address = parser->subarrayValueIn("data", i, "address");
         ASSERT_STRNE("", address.c_str());

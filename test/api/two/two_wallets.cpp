@@ -145,12 +145,7 @@ TEST(api, test_two_wallets_top)
     ASSERT_STRNE("0", totalCount.c_str());
     ASSERT_STRNE("", totalCount.c_str());
 
-    std::stringstream countStream;
-    countStream << count;
-    int countAsInt = 0;
-    countStream >> countAsInt;
-
-    for (int i = 0; i < countAsInt; i++)
+    for (int i = 0; i < 5; i++)
     {
         const auto address = parser->subarrayValueIn("data", i, "address");
         ASSERT_STRNE("", address.c_str());
@@ -238,12 +233,7 @@ TEST(api, test_two_wallets_transactions)
     const auto totalCount = parser->valueIn("meta", "totalCount");
     ASSERT_STREQ("4", totalCount.c_str());
 
-    std::stringstream countStream;
-    countStream << count;
-    int countAsInt = 0;
-    countStream >> countAsInt;
-
-    for (int i = 0; i < countAsInt; i++)
+    for (int i = 0; i < 2; i++)
     {
         const auto id = parser->subarrayValueIn("data", i, "id");
         ASSERT_STRNE("", id.c_str());
@@ -411,12 +401,7 @@ TEST(api, test_two_wallets_votes)
     const auto totalCount = parser->valueIn("meta", "totalCount");
     ASSERT_STREQ("1", totalCount.c_str());
 
-    std::stringstream countStream;
-    countStream << count;
-    int countAsInt = 0;
-    countStream >> countAsInt;
-
-    for (int i = 0; i < countAsInt; i++)
+    for (int i = 0; i < 1; i++)
     {
         const auto id = parser->subarrayValueIn("data", i, "id");
         ASSERT_STREQ("eae0711f7cc6ba1028996a434af62f4594c83435b5e67622d76308cd47734d09", id.c_str());

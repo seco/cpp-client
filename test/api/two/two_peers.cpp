@@ -121,12 +121,7 @@ TEST(api, test_two_peers_peers)
     const auto totalCount = parser->valueIn("meta", "totalCount");
     ASSERT_STREQ("5", totalCount.c_str());
 
-    std::stringstream countStream;
-    countStream << count;
-    int countAsInt = 0;
-    countStream >> countAsInt;
-
-    for (int i = 0; i < countAsInt; i++)
+    for (int i = 0; i < 5; i++)
     {
         const auto ip = parser->subarrayValueIn("data", i, "ip");
         ASSERT_STRNE("", ip.c_str());

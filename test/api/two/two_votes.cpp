@@ -218,12 +218,7 @@ TEST(api, test_two_votes)
     const auto totalCount = parser->valueIn("meta", "totalCount");
     ASSERT_STREQ("5", totalCount.c_str());
 
-    std::stringstream countStream;
-    countStream << count;
-    int countAsInt = 0;
-    countStream >> countAsInt;
-
-    for (int i = 0; i < countAsInt; i++)
+    for (int i = 0; i < 5; i++)
     {
         const auto type = parser->subarrayValueIn("data", i, "type");
         ASSERT_STREQ("3", type.c_str());
