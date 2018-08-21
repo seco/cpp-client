@@ -27,7 +27,7 @@ Connector::Connector() : host_(), port_(), fingerprint_() {};
 **************************************************/
 Connector::Connector(
 		const char *const newHost,
-		const unsigned int newPort,
+		const int newPort,
 		const char *const newFingerprint
 ) {
 	this->connect(newHost, newPort, newFingerprint);
@@ -75,7 +75,7 @@ std::string Connector::callback(const char *const request)
 
 void Connector::connect(
 		const char *const newHost,
-		const unsigned int newPort,
+		const int newPort,
 		const char *const newFingerprint = ""
 ) {
 	strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));

@@ -8,12 +8,10 @@
 #include <string>
 #include <cstring>
 
-namespace ARK
-{
-namespace Utilities
-{
-namespace Network
-{
+namespace ARK {
+namespace Utilities {
+namespace Network {
+
 /*************************************************
 * ARK::Utilities::Network::Connectable
 * @brief: Forward Declaration.
@@ -26,22 +24,21 @@ class Connectable;
 /*************************************************
 * ARK::Utilities::Network::Connector
 **************************************************/
-class Connector :
-		virtual HTTPConnectable
+class Connector : virtual HTTPConnectable
 {
 	private:
 		char host_[17];
-		unsigned int port_;
+		int port_;
 		char fingerprint_[60] = { '\0' };
 		bool hasSSL = false;
 
 	public:
 		Connector();
-		Connector(const char *const newHost, const unsigned int newPort, const char *const newFingerprint = "");
+		Connector(const char *const newHost, const int newPort, const char *const newFingerprint = "");
 
 		Connector& operator=(Connector&& other);
 
-		void connect(const char *const newHost, const unsigned int newPort, const char *const newFingerprint); // Connect to the given connection.
+		void connect(const char *const newHost, const int newPort, const char *const newFingerprint); // Connect to the given connection.
 		void disconnect(); // Disconnect from the given connection.
 		
 		std::string getConnection(); // Get a connection string (host:port).
