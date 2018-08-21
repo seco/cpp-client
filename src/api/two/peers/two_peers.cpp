@@ -20,7 +20,6 @@ std::string ARK::API::TWO::Peers::peers(
     char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Peers::base);
         strcat(uri, "?limit=");
-        strcat(uri, "?limit=");
         char limitBuffer[1];
         sprintf(limitBuffer, "%d", limit); 
         std::strcat(uri, limitBuffer);
