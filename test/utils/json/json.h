@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include <memory>
+#include <vector>
 
 namespace ARK
 {
@@ -30,7 +31,10 @@ class JSONInterface
 		virtual std::string valueFor(const char *const key) = 0;
 		virtual std::string valueIn(const char *const key, const char *const subkey) = 0;
 		virtual std::string subvalueFor(const char *const key, int pos) = 0;
+		virtual std::string subvalueNestedIn(const char *const key, const char *const subkey, const char *const nested) = 0;
 		virtual std::string subarrayValueIn(const char *const key, int pos, const char *const subkey) = 0;
+		virtual std::string subarrayValueNestedIn(const char *const key, int pos, const char *const subkey, const char *const nested) = 0;
+
 };
 /*************************************************/
 
