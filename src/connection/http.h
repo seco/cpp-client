@@ -6,12 +6,9 @@
 #include "platform/platform.h"
 #include <memory>
 
-namespace ARK
-{
-namespace Utilities
-{
-namespace Network
-{
+namespace ARK {
+namespace Utilities {
+namespace Network {
 /**************************************************
 * ARK::Utilities::Network::Connectable 
 * @brief: Forward Delcaration

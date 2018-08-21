@@ -10,17 +10,12 @@
 #include <sstream>
 #include <iostream>
 
-namespace ARK
-{
-namespace Utilities
-{
-namespace Network
-{
+namespace ARK {
+namespace Utilities {
+namespace Network {
+namespace {
 
-namespace
-{
-class HTTP :
-		public HTTPInterface
+class HTTP : public HTTPInterface
 {
 	public: 
 		HTTP() = default;
