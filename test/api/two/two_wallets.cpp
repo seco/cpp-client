@@ -274,8 +274,8 @@ TEST(api, test_two_wallets_transactions)
         const auto epoch = parser->subarrayValueNestedIn("data", i, "timestamp", "epoch");
         ASSERT_STRNE("", epoch.c_str());
 
-        const auto unix = parser->subarrayValueNestedIn("data", i, "timestamp", "unix");
-        ASSERT_STRNE("", unix.c_str());
+        const auto timestampUnix = parser->subarrayValueNestedIn("data", i, "timestamp", "unix");
+        ASSERT_STRNE("", timestampUnix.c_str());
 
         const auto human = parser->subarrayValueNestedIn("data", i, "timestamp", "human");
         ASSERT_STRNE("", human.c_str());
@@ -450,8 +450,8 @@ TEST(api, test_two_wallets_votes)
         const auto epoch = parser->subarrayValueNestedIn("data", i, "timestamp", "epoch");
         ASSERT_STREQ("43232419", epoch.c_str());
 
-        const auto unix = parser->subarrayValueNestedIn("data", i, "timestamp", "unix");
-        ASSERT_STREQ("1533333619", unix.c_str());
+        const auto timestampUnix = parser->subarrayValueNestedIn("data", i, "timestamp", "unix");
+        ASSERT_STREQ("1533333619", timestampUnix.c_str());
 
         const auto human = parser->subarrayValueNestedIn("data", i, "timestamp", "human");
         ASSERT_STREQ("2018-08-03T22:00:19Z", human.c_str());

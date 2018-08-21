@@ -66,8 +66,8 @@ TEST(api, test_two_transactions_transaction)
     const auto epoch = parser->subvalueNestedIn("data", "timestamp", "epoch");
     ASSERT_STREQ("44678050", epoch.c_str());
 
-    const auto unix = parser->subvalueNestedIn("data", "timestamp", "unix");
-    ASSERT_STREQ("1534779250", unix.c_str());
+    const auto timestampUnix = parser->subvalueNestedIn("data", "timestamp", "unix");
+    ASSERT_STREQ("1534779250", timestampUnix.c_str());
 
     const auto human = parser->subvalueNestedIn("data", "timestamp", "human");
     ASSERT_STREQ("2018-08-20T15:34:10Z", human.c_str());
