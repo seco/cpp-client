@@ -23,13 +23,13 @@ std::string ARK::API::TWO::Wallets::wallets(
         strcat(uri, "/");
         strcat(uri, identifier);
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 
@@ -42,13 +42,13 @@ std::string ARK::API::TWO::Wallets::walletsTop(
     char uri[128] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Wallets::top);
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 
@@ -65,13 +65,13 @@ std::string ARK::API::TWO::Wallets::walletsTransactions(
         strcat(uri, identifier);
         strcat(uri, "/transactions");
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 
@@ -88,13 +88,13 @@ std::string ARK::API::TWO::Wallets::walletsTransactionsSent(
         strcat(uri, identifier);
         strcat(uri, "/transactions/sent");
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 
@@ -111,13 +111,13 @@ std::string ARK::API::TWO::Wallets::walletsTransactionsReceived(
         strcat(uri, identifier);
         strcat(uri, "/transactions/received");
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 
@@ -134,13 +134,13 @@ std::string ARK::API::TWO::Wallets::walletsVotes(
         strcat(uri, identifier);
         strcat(uri, "/votes");
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 

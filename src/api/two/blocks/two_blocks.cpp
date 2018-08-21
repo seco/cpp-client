@@ -34,13 +34,13 @@ std::string ARK::API::TWO::Blocks::blocks(
     char uri[256] = { '\0' };
         strcpy(uri, ARK::API::TWO::Paths::Blocks::base);
         strcat(uri, "?limit=");
-        std::stringstream limitStream;
-        limitStream << limit;
-        strcat(uri, limitStream.str().c_str());
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
         strcat(uri, "&page=");
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
 

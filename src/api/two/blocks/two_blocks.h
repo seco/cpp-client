@@ -6,7 +6,6 @@
 #include "platform/platform.h"
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
-#include <sstream>
 
 namespace ARK {
 namespace API {
