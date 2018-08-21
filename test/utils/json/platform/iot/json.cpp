@@ -29,25 +29,6 @@ struct JSON :
         JSON(std::string _jsonStr) { jsonStr = _jsonStr; }
         /*************************************************/
 
-
-        std::string value(
-                std::vector<const char*> keys
-        ) override {
-            DynamicJsonBuffer jsonBuffer(capacity);
-            JsonObject &root = jsonBuffer.parseObject(this->jsonStr.c_str());
-            std::string value;
-            switch (keys.size()) { // 
-                case 1: value = std::string(root[key[0]].as<const char*>()) break;
-                case 2: value = std::string(root[key[0]][key[1]].as<const char*>()) break;
-                case 3: value = std::string(root[key[0]][key[1]][key[2]].as<const char*>()) break;
-                case 4: value = std::string(root[key[0]][key[1]][key[2]][key[3]].as<const char*>()) break;
-                case 5: value = std::string(root[key[0]][key[1]][key[2]][key[3]][key[4]].as<const char*>()) break;
-                case 6: value = std::string(root[key[0]][key[1]][key[2]][key[3]][key[4]][key[5]].as<const char*>()) break;
-                default: value = "";
-            }
-            return value;
-        };
-
         /**************************************************
         * valueFor(key)
         *
