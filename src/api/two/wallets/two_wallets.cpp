@@ -155,8 +155,13 @@ std::string ARK::API::TWO::Wallets::walletsSearch(
         strcpy(uri, ARK::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, parameter);
-        std::stringstream pageStream;
-        pageStream << page;
-        strcat(uri, pageStream.str().c_str());
+        strcat(uri, "?limit=");
+        char limitBuffer[1];
+        sprintf(limitBuffer, "%d", limit); 
+        std::strcat(uri, limitBuffer);
+        strcat(uri, "&page=");
+        char pageBuffer[1];
+        sprintf(pageBuffer, "%d", page); 
+        std::strcat(uri, pageBuffer);
     return netConnector.callback(uri);
 }
