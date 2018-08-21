@@ -4,8 +4,6 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#include <iostream>
-
 #if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
 
 /* test_two_peers_peer
