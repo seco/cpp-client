@@ -10,6 +10,11 @@
 
 #define USE_IOT
 
+// undef the C macros to allow the C++ STL to take over
+// This is to have compatibility with various board implementations of the STL
+#undef min
+#undef max
+
 #include <Arduino.h>
 #include <pgmspace.h>
 
