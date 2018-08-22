@@ -19,10 +19,6 @@ include_directories(${PROJECT_SOURCE_DIR}/../src)
 include_directories(${PROJECT_SOURCE_DIR}/../test)
 include_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
-set(PLATFORM_SRC 
-	${PROJECT_SOURCE_DIR}/utils/json/os/json.cpp
-)
-
 set (TEST_ONE_SRC
 	${PROJECT_SOURCE_DIR}/api/one/one_accounts.cpp
 	${PROJECT_SOURCE_DIR}/api/one/one_blocks.cpp
@@ -43,18 +39,11 @@ set (TEST_TWO_SRC
 	${PROJECT_SOURCE_DIR}/api/two/two_wallets.cpp
 )
 
-find_library(
-	Ark-Cpp-Client-tests NAMES
-	Ark-Cpp-Client-lib PATHS
-	${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-)
+set(PLATFORM_SRC ${PROJECT_SOURCE_DIR}/utils/json/os/json.cpp)
 
-add_executable(
-	Ark-Cpp-Client-tests
-	${PLATFORM_SRC}
-	${TEST_ONE_SRC}
-	${TEST_TWO_SRC}
-)
+find_library(Ark-Cpp-Client-tests NAMES Ark-Cpp-Client-lib PATHS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+
+add_executable(Ark-Cpp-Client-tests ${TEST_ONE_SRC} ${TEST_TWO_SRC} ${PLATFORM_SRC})
 
 target_link_libraries(Ark-Cpp-Client-tests Ark-Cpp-Client-lib)
 
