@@ -5,7 +5,6 @@
 #include "utils/helpers.h"
 #include <cstring>
 #include <memory>
-#include <vector>
 
 namespace Ark
 {
