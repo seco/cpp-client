@@ -5,15 +5,15 @@
 #ifndef TWO_TRANSACTIONS_H
 #define TWO_TRANSACTIONS_H
 
-#include "platform/platform.h"
+#include "utils/helpers.h"
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
 
-namespace ARK {
+namespace Ark {
 namespace API {
 namespace TWO {
 
-class Transactions : virtual ARK::Utilities::Network::Connectable
+class Transactions : virtual Ark::Utilities::Network::Connectable
 {
     public:
         std::string transaction(const char *const identifier);

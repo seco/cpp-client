@@ -5,15 +5,15 @@
 #ifndef TWO_DELEGATES_H
 #define TWO_DELEGATES_H
 
-#include "platform/platform.h"
+#include "utils/helpers.h"
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
 
-namespace ARK {
+namespace Ark {
 namespace API {
 namespace TWO {
 
-class Delegates : virtual ARK::Utilities::Network::Connectable
+class Delegates : virtual Ark::Utilities::Network::Connectable
 {
     public:
         std::string delegate(const char *const identifier);

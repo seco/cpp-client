@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_ONE_API) && !defined(HAS_TWO_API)
+#ifdef HAS_ONE_API
 
 namespace
 {
@@ -13,10 +13,10 @@ namespace
 
 TEST(api, test_one_delegates_fee)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto delegateFeeResponse = arkClient.delegateFee();
-    auto parser = ARK::Test::Utils::makeJSONString(delegateFeeResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegateFeeResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());
@@ -27,16 +27,15 @@ TEST(api, test_one_delegates_fee)
 
 TEST(api, test_one_delegates_forged_by_account)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto forgedByAccountResponse = arkClient.delegateForgedByAccount(darkPubkey);
-    auto parser = ARK::Test::Utils::makeJSONString(forgedByAccountResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(forgedByAccountResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());
 
     const auto fees = parser->valueFor("fees");
-    ASSERT_STRNE("0", fees.c_str());
     ASSERT_STRNE("", fees.c_str());
 
     const auto rewards = parser->valueFor("rewards");
@@ -50,10 +49,10 @@ TEST(api, test_one_delegates_forged_by_account)
 
 TEST(api, test_one_delegates_next_forgers)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto nextForgersResponse = arkClient.delegateNextForgers();
-    auto parser = ARK::Test::Utils::makeJSONString(nextForgersResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(nextForgersResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());
@@ -75,13 +74,10 @@ TEST(api, test_one_delegates_next_forgers)
 
 TEST(api, test_one_delegates_delegate_by_public_key)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     auto delegateResponse = arkClient.delegate(darkPubkey);
-    auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
-
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
     const auto username = parser->valueIn("delegate", "username");
     ASSERT_STREQ("sleepdeficit", username.c_str());
@@ -119,13 +115,10 @@ TEST(api, test_one_delegates_delegate_by_public_key)
 
 TEST(api, test_one_delegates_delegate_by_username)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
-    auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
-
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
     const auto username = parser->valueIn("delegate", "username");
     ASSERT_STREQ("sleepdeficit", username.c_str());
@@ -163,10 +156,10 @@ TEST(api, test_one_delegates_delegate_by_username)
 
 TEST(api, test_one_delegates_delegates)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto delegatesResponse = arkClient.delegates();
-    auto parser = ARK::Test::Utils::makeJSONString(delegatesResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegatesResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());
@@ -210,16 +203,16 @@ TEST(api, test_one_delegates_delegates)
 
 TEST(api, test_one_delegates_voters)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto votersResponse = arkClient.delegateVoters(darkPubkey);
-    auto parser = ARK::Test::Utils::makeJSONString(votersResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(votersResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());
 
-    const auto username0 = parser->subarrayValueIn("accounts", 0, "username");
-    ASSERT_STREQ("io.pi.relay.ds3", username0.c_str());
+    // const auto username0 = parser->subarrayValueIn("accounts", 0, "username");
+    // ASSERT_STREQ("io.pi.relay.ds3", username0.c_str());
 
     const auto address0 = parser->subarrayValueIn("accounts", 0, "address");
     ASSERT_STREQ("DS3jiY1uPToqfGKmmfsdFnBhMmsrQY47gd", address0.c_str());
@@ -247,13 +240,10 @@ TEST(api, test_one_delegates_voters)
 
 TEST(api, test_one_delegates_search)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
-    auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
-
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
     const auto username = parser->valueIn("delegate", "username");
     ASSERT_STREQ("sleepdeficit", username.c_str());
@@ -291,10 +281,10 @@ TEST(api, test_one_delegates_search)
 
 TEST(api, test_one_delegates_count)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V1::Client arkClient(DEVNET);
 
     const auto delegatesCountResponse = arkClient.delegatesCount();
-    auto parser = ARK::Test::Utils::makeJSONString(delegatesCountResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegatesCountResponse);
 
     const auto success = parser->valueFor("success");
     ASSERT_STREQ("true", success.c_str());

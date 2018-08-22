@@ -1,15 +1,15 @@
 
 
-#include "platform/platform.h"
+#include "utils/helpers.h"
 
 #ifndef USE_IOT
 
-#include "test/utils/json/json.h"
+#include "utils/json/json.h"
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 #include <cstring>
 
-namespace ARK
+namespace Ark
 {
 namespace Test
 {

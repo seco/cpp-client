@@ -2,21 +2,21 @@
 
 #include "api/two/node/two_node.h"
 
-std::string ARK::API::TWO::Node::nodeConfiguration()
+std::string Ark::API::TWO::Node::nodeConfiguration()
 {
-    return netConnector.callback(ARK::API::TWO::Paths::Node::configuration);
+    return netConnector.callback(Ark::API::TWO::Paths::Node::configuration);
 }
 
 /**************************************************************************************************/
 
-std::string ARK::API::TWO::Node::nodeStatus()
+std::string Ark::API::TWO::Node::nodeStatus()
 {
-    return netConnector.callback(ARK::API::TWO::Paths::Node::status);
+    return netConnector.callback(Ark::API::TWO::Paths::Node::status);
 }
 
 /**************************************************************************************************/
 
-std::string ARK::API::TWO::Node::nodeSycing()
+std::string Ark::API::TWO::Node::nodeSycing()
 {
-    return netConnector.callback(ARK::API::TWO::Paths::Node::syncing);
+    return netConnector.callback(Ark::API::TWO::Paths::Node::syncing);
 }

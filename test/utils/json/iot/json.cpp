@@ -5,7 +5,7 @@
 #include <cstring>
 #include <memory>
 
-namespace ARK
+namespace Ark
 {
 namespace Test
 {

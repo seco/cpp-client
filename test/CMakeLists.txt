@@ -37,7 +37,7 @@ set (TEST_SRC
 )
 
 set(PLATFORM_SRC 
-	${PROJECT_SOURCE_DIR}/utils/json/platform/os/json.cpp
+	${PROJECT_SOURCE_DIR}/utils/json/os/json.cpp
 )
 
 find_library(Ark-Cpp-Client-tests NAMES Ark-Cpp-Client-lib PATHS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})

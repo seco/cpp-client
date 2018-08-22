@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_blocks_block
  * https://dexplorer.ark.io:8443/api/v2/blocks/17103087165885061305
@@ -41,10 +41,10 @@
  */
 TEST(api, test_two_blocks_block)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto blockResponse = arkClient.block("17103087165885061305");
-    auto parser = ARK::Test::Utils::makeJSONString(blockResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(blockResponse);
 
     const auto id = parser->valueIn("data", "id");
     ASSERT_STREQ("17103087165885061305", id.c_str());
@@ -389,10 +389,10 @@ TEST(api, test_two_blocks_block)
  */
 TEST(api, test_two_blocks_blocks)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto blocksResponse = arkClient.blocks();
-    auto parser = ARK::Test::Utils::makeJSONString(blocksResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(blocksResponse);
 
     for (int i = 0; i < 10; i++)
     {
@@ -691,12 +691,12 @@ TEST(api, test_two_blocks_blocks)
  */
 TEST(api, test_two_blocks_blocks_limit_page)
 {
-	ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const int limit = 10;
     const int page = 1;
     const auto blocksResponse = arkClient.blocks(limit, page);
-    auto parser = ARK::Test::Utils::makeJSONString(blocksResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(blocksResponse);
 
     for (int i = 0; i < 10; i++)
     {
@@ -742,10 +742,10 @@ TEST(api, test_two_blocks_blocks_limit_page)
  */
 TEST(api, test_two_blocks_block_transactions)
 {
-	ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto blockTransactionsResponse = arkClient.blockTransactions("4738358981673511380");
-    auto parser = ARK::Test::Utils::makeJSONString(blockTransactionsResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(blockTransactionsResponse);
 
     const auto id = parser->subarrayValueIn("data", 0, "id");
     ASSERT_STREQ("752cf99e5c247f61bf64878377b809409edece83be0e236c2e470899cde15e24", id.c_str());

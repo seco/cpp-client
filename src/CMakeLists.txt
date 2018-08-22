@@ -30,7 +30,7 @@ set(COMMON_SRC
 )
 
 set(PLATFORM_SRC 
-	${PROJECT_SOURCE_DIR}/platform/os/http.cpp
+	${PROJECT_SOURCE_DIR}/utils/http/os/http.cpp
 )
 
 add_library(Ark-Cpp-Client-lib STATIC ${COMMON_SRC} ${PLATFORM_SRC})

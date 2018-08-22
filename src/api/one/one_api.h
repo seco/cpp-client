@@ -1,10 +1,10 @@
 /***************************************
-* Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
-* https://github.com/ArkEcosystem/Cpp-Client
-*
-* sleepdeficit(simon@ark.io)
-* MIT | Copyright S. Downey 2017-2018
-***************************************/
+ * Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
+ * https://github.com/ArkEcosystem/Cpp-Client
+ *
+ * sleepdeficit(simon@ark.io)
+ * MIT | Copyright S. Downey 2017-2018
+ ***************************************/
 
 #ifndef ONE_API_H
 #define ONE_API_H
@@ -19,15 +19,13 @@
 #include "api/one/signatures/one_signatures.h"
 #include "api/one/transactions/one_transactions.h"
 
-class ONE_API : public ARK::API::ONE::Accounts,
-                public ARK::API::ONE::Blocks,
-                public ARK::API::ONE::Delegates,
-                public ARK::API::ONE::Loader,
-                public ARK::API::ONE::Peers,
-                public ARK::API::ONE::Signatures,
-                public ARK::API::ONE::Transactions,
-                virtual ARK::Utilities::Network::Connectable
-{
-};
+class ONE_API : public Ark::API::ONE::Accounts,
+                public Ark::API::ONE::Blocks,
+                public Ark::API::ONE::Delegates,
+                public Ark::API::ONE::Loader,
+                public Ark::API::ONE::Peers,
+                public Ark::API::ONE::Signatures,
+                public Ark::API::ONE::Transactions,
+                virtual Ark::Utilities::Network::Connectable {};
 
 #endif

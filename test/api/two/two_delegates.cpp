@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_delegates_delegate
  * https://dexplorer.ark.io:8443/api/v2/delegates/boldninja
@@ -37,10 +37,10 @@
  */
 TEST(api, test_two_delegates_delegate)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("boldninja");
-    auto parser = ARK::Test::Utils::makeJSONString(delegateResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
     const auto username = parser->valueIn("data", "username");
     ASSERT_STREQ("boldninja", username.c_str());
@@ -213,10 +213,10 @@ TEST(api, test_two_delegates_delegate)
  */
 TEST(api, test_two_delegates_delegates)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto delegates = arkClient.delegates(5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(delegates);
+    auto parser = Ark::Test::Utils::makeJSONString(delegates);
 
     for (int i = 0; i < 5; i++)
     {
@@ -381,10 +381,10 @@ TEST(api, test_two_delegates_delegates)
  */
 TEST(api, test_two_delegates_delegate_blocks)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto delegateBlocksResponse = arkClient.delegateBlocks("boldninja", 5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(delegateBlocksResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegateBlocksResponse);
 
     for (int i = 0; i < 5; i++)
     {
@@ -462,10 +462,10 @@ TEST(api, test_two_delegates_delegate_blocks)
  */
 TEST(api, test_two_delegates_delegate_voters)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto delegateVotersResponse = arkClient.delegateVoters("boldninja", 5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(delegateVotersResponse);
+    auto parser = Ark::Test::Utils::makeJSONString(delegateVotersResponse);
 
     for (int i = 0; i < 5; i++)
     {

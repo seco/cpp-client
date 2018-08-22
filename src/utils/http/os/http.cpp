@@ -1,16 +1,16 @@
 
 
-#include "platform/platform.h"
+#include "utils/helpers.h"
+#include "utils/http/http.h"
 
 #ifndef USE_IOT
 
-#include "connection/http.h"
 #include <curl/curl.h>
 #include <cstring>
 #include <sstream>
 #include <iostream>
 
-namespace ARK {
+namespace Ark {
 namespace Utilities {
 namespace Network {
 namespace {

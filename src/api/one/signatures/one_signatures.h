@@ -6,21 +6,18 @@
 #include "connection/connector.h"
 #include "api/one/one_paths.h"
 
-namespace ARK
-{
-namespace API
-{
-namespace ONE
-{
+namespace Ark {
+namespace API {
+namespace ONE {
 
-class Signatures : virtual ARK::Utilities::Network::Connectable
+class Signatures : virtual Ark::Utilities::Network::Connectable
 {
-  public:
+public:
     std::string signaturesFee();
 };
 
-}; // namespace ONE
-}; // namespace API
-}; // namespace ARK
+};
+};
+};
 
 #endif

@@ -3,14 +3,13 @@
 #ifndef HTTP_H
 #define HTTP_H
 
-#include "platform/platform.h"
 #include <memory>
 
-namespace ARK {
+namespace Ark {
 namespace Utilities {
 namespace Network {
 /**************************************************
-* ARK::Utilities::Network::Connectable 
+* Ark::Utilities::Network::Connectable 
 * @brief: Forward Delcaration
 **************************************************/
 class HTTPConnectable;
@@ -19,7 +18,7 @@ class HTTPConnectable;
 /**************************************************************************************************/
 
 /**************************************************
-* ARK::Utilities::Network::HTTP 
+* Ark::Utilities::Network::HTTP 
 * Currently using ESP8266 libs
 *
 * The purpose of this class is to serve as an
@@ -62,13 +61,13 @@ std::unique_ptr<HTTPInterface> makeHTTP();
 };
 
 /**************************************************
-* ARK::Utilities::Network::Connectable 
+* Ark::Utilities::Network::Connectable 
 *	Inheritable HTTPConnectable object
 **************************************************/
-class ARK::Utilities::Network::HTTPConnectable
+class Ark::Utilities::Network::HTTPConnectable
 {
 	public:
-		std::unique_ptr<ARK::Utilities::Network::HTTPInterface> http;
+		std::unique_ptr<Ark::Utilities::Network::HTTPInterface> http;
 		HTTPConnectable() : http(makeHTTP()) { }
 };
 /*************************************************/

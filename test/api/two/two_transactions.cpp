@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_transactions_transaction
  * https://dexplorer.ark.io:8443/api/v2/transactions/26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa
@@ -30,10 +30,10 @@
  */
 TEST(api, test_two_transactions_transaction)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transaction = arkClient.transaction("26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa");
-    auto parser = ARK::Test::Utils::makeJSONString(transaction);
+    auto parser = Ark::Test::Utils::makeJSONString(transaction);
 
     const auto id = parser->valueIn("data", "id");
     ASSERT_STREQ("26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa", id.c_str());
@@ -94,10 +94,10 @@ TEST(api, test_two_transactions_transaction)
  */
 TEST(api, test_two_transactions_transaction_unconfirmed)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transactionUnconfirmed = arkClient.transactionUnconfirmed("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48");
-    auto parser = ARK::Test::Utils::makeJSONString(transactionUnconfirmed);
+    auto parser = Ark::Test::Utils::makeJSONString(transactionUnconfirmed);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("0", count.c_str());
@@ -162,10 +162,10 @@ TEST(api, test_two_transactions_transaction_unconfirmed)
  */
 TEST(api, test_two_transactions_transactions)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transactions = arkClient.transactions(2, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(transactions);
+    auto parser = Ark::Test::Utils::makeJSONString(transactions);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("2", count.c_str());
@@ -179,7 +179,7 @@ TEST(api, test_two_transactions_transactions)
     for (int i = 0; i < 2; i++)
     {
         const auto type = parser->subarrayValueIn("data", i, "type");
-        ASSERT_STREQ("0", type.c_str());
+        ASSERT_STRNE("", type.c_str());
 
         const auto fee = parser->subarrayValueIn("data", i, "fee");
         ASSERT_STRNE("", fee.c_str());
@@ -211,10 +211,10 @@ TEST(api, test_two_transactions_transactions)
  */
 TEST(api, test_two_transactions_transactions_unconfirmed)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transactionsUnconfirmed = arkClient.transactionsUnconfirmed(5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(transactionsUnconfirmed);
+    auto parser = Ark::Test::Utils::makeJSONString(transactionsUnconfirmed);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("0", count.c_str());
@@ -234,10 +234,10 @@ TEST(api, test_two_transactions_transactions_unconfirmed)
  */
 TEST(api, test_two_transactions_transactions_search)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transactions = arkClient.transactions("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48", 5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(transactions);
+    auto parser = Ark::Test::Utils::makeJSONString(transactions);
 
 }
 
@@ -260,10 +260,10 @@ TEST(api, test_two_transactions_transactions_search)
  */
 TEST(api, test_two_transactions_transaction_types)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto types = arkClient.transactionTypes();
-    auto parser = ARK::Test::Utils::makeJSONString(types);
+    auto parser = Ark::Test::Utils::makeJSONString(types);
 
     const auto TRANSFER = parser->valueIn("data", "TRANSFER");
     ASSERT_STREQ("0", TRANSFER.c_str());

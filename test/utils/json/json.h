@@ -1,22 +1,20 @@
 
-
 #ifndef JSON_H
 #define JSON_H
 
-#include "platform/platform.h"
-
+#include "utils/helpers.h"
 #include <cstring>
 #include <memory>
 #include <vector>
 
-namespace ARK
+namespace Ark
 {
 namespace Test
 {
 namespace Utils
 {
 /**************************************************
-* ARK::Utilities::JSONInterface 
+* Ark::Utilities::JSONInterface 
 *
 * The purpose of this class is to serve as an
 * entry point for integrating and simplifying
@@ -24,17 +22,16 @@ namespace Utils
 **************************************************/
 class JSONInterface
 {
-	protected:
-		JSONInterface() { }
-	public:
-		virtual ~JSONInterface() { }
-		virtual std::string valueFor(const char *const key) = 0;
-		virtual std::string valueIn(const char *const key, const char *const subkey) = 0;
-		virtual std::string subvalueFor(const char *const key, int pos) = 0;
-		virtual std::string subvalueNestedIn(const char *const key, const char *const subkey, const char *const nested) = 0;
-		virtual std::string subarrayValueIn(const char *const key, int pos, const char *const subkey) = 0;
-		virtual std::string subarrayValueNestedIn(const char *const key, int pos, const char *const subkey, const char *const nested) = 0;
-
+    protected:
+        JSONInterface() { }
+    public:
+        virtual ~JSONInterface() { }
+        virtual std::string valueFor(const char *const key) = 0;
+        virtual std::string valueIn(const char *const key, const char *const subkey) = 0;
+        virtual std::string subvalueFor(const char *const key, int pos) = 0;
+        virtual std::string subvalueNestedIn(const char *const key, const char *const subkey, const char *const nested) = 0;
+        virtual std::string subarrayValueIn(const char *const key, int pos, const char *const subkey) = 0;
+        virtual std::string subarrayValueNestedIn(const char *const key, int pos, const char *const subkey, const char *const nested) = 0;
 };
 /*************************************************/
 

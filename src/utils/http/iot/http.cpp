@@ -1,7 +1,7 @@
 
 
-#include "platform/platform.h"
-#include "connection/http.h"
+
+#include "utils/http/http.h"
 #include <memory>
 #include <vector>
 
@@ -15,7 +15,7 @@
 	#include <WiFiClientSecure.h>
 #endif
 
-namespace ARK {
+namespace Ark {
 namespace Utilities {
 namespace Network {
 namespace {

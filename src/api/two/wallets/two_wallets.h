@@ -5,15 +5,15 @@
 #ifndef TWO_WALLETS_H
 #define TWO_WALLETS_H
 
-#include "platform/platform.h"
+#include "utils/helpers.h"
 #include "connection/connector.h"
 #include "api/two/two_paths.h"
 
-namespace ARK {
+namespace Ark {
 namespace API {
 namespace TWO {
 
-class Wallets : virtual ARK::Utilities::Network::Connectable
+class Wallets : virtual Ark::Utilities::Network::Connectable
 {
     public:
         std::string wallet(const char *const identifier);

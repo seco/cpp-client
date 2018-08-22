@@ -6,23 +6,20 @@
 #include "connection/connector.h"
 #include "api/one/one_paths.h"
 
-namespace ARK
-{
-namespace API
-{
-namespace ONE
-{
+namespace Ark {
+namespace API {
+namespace ONE {
 
-class Loader : virtual ARK::Utilities::Network::Connectable
+class Loader : virtual Ark::Utilities::Network::Connectable
 {
-  public:
-    std::string loaderAutoconfigure();
-    std::string loaderStatus();
-    std::string loaderSync();
+    public:
+        std::string loaderAutoconfigure();
+        std::string loaderStatus();
+        std::string loaderSync();
 };
 
-}; // namespace ONE
-}; // namespace API
-}; // namespace ARK
+};
+};
+};
 
 #endif

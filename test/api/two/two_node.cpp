@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_node_configuration
  * https://dexplorer.ark.io:8443/api/v2/node/configuration
@@ -102,10 +102,10 @@
 */
 TEST(api, test_two_node_configuration)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto nodeConfiguration = arkClient.nodeConfiguration();
-    auto parser = ARK::Test::Utils::makeJSONString(nodeConfiguration);
+    auto parser = Ark::Test::Utils::makeJSONString(nodeConfiguration);
 
     const auto nethash = parser->valueIn("data", "nethash");
     ASSERT_STREQ("2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867", nethash.c_str());
@@ -142,10 +142,10 @@ TEST(api, test_two_node_configuration)
  */
 TEST(api, test_two_node_status)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto nodeStatus = arkClient.nodeStatus();
-    auto parser = ARK::Test::Utils::makeJSONString(nodeStatus);
+    auto parser = Ark::Test::Utils::makeJSONString(nodeStatus);
 
     const auto synced = parser->valueIn("data", "synced");
     ASSERT_STREQ("true", synced.c_str());
@@ -174,10 +174,10 @@ TEST(api, test_two_node_status)
  */
 TEST(api, test_two_node_syncing)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto nodeSycing = arkClient.nodeSycing();
-    auto parser = ARK::Test::Utils::makeJSONString(nodeSycing);
+    auto parser = Ark::Test::Utils::makeJSONString(nodeSycing);
 
     const auto syncing = parser->valueIn("data", "syncing");
     ASSERT_STREQ("false", syncing.c_str());

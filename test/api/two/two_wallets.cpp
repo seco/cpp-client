@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_vote_identifier
  * https://dexplorer.ark.io:8443/api/v2/wallets/DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk
@@ -21,10 +21,10 @@
  */
 TEST(api, test_two_wallet)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto wallet = arkClient.wallet("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk");
-    auto parser = ARK::Test::Utils::makeJSONString(wallet);
+    auto parser = Ark::Test::Utils::makeJSONString(wallet);
 
     const auto address = parser->valueIn("data", "address");
     ASSERT_STREQ("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", address.c_str());
@@ -55,10 +55,10 @@ TEST(api, test_two_wallet)
  */
 TEST(api, test_two_wallets)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto wallets = arkClient.wallets("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(wallets);
+    auto parser = Ark::Test::Utils::makeJSONString(wallets);
 
     const auto address = parser->valueIn("data", "address");
     ASSERT_STREQ("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", address.c_str());
@@ -129,10 +129,10 @@ TEST(api, test_two_wallets)
  */
 TEST(api, test_two_wallets_top)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsTop = arkClient.walletsTop(5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsTop);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsTop);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("5", count.c_str());
@@ -219,10 +219,10 @@ TEST(api, test_two_wallets_top)
  */
 TEST(api, test_two_wallets_transactions)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsTransactions = arkClient.walletsTransactions("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsTransactions);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsTransactions);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("2", count.c_str());
@@ -292,10 +292,10 @@ TEST(api, test_two_wallets_transactions)
  */
 TEST(api, test_two_wallets_transactions_received)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsTransactionsReceived = arkClient.walletsTransactionsReceived("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsTransactionsReceived);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsReceived);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("0", count.c_str());
@@ -328,10 +328,10 @@ TEST(api, test_two_wallets_transactions_received)
  */
 TEST(api, test_two_wallets_transactions_sent)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsTransactionsSent = arkClient.walletsTransactionsSent("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsTransactionsSent);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsSent);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("0", count.c_str());
@@ -387,10 +387,10 @@ TEST(api, test_two_wallets_transactions_sent)
  */
 TEST(api, test_two_wallets_votes)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsVotes = arkClient.walletsVotes("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 1, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsVotes);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsVotes);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("1", count.c_str());
@@ -449,10 +449,10 @@ TEST(api, test_two_wallets_votes)
  */
 TEST(api, test_two_wallets_search)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto walletsSearch = arkClient.walletsSearch("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(walletsSearch);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
 
 }
 

@@ -4,7 +4,7 @@
 #include "arkClient.h"
 #include "utils/json/json.h"
 
-#if defined(HAS_TWO_API) && !defined(HAS_ONE_API)
+#ifdef HAS_TWO_API
 
 /* test_two_vote
  * https://dexplorer.ark.io:8443/api/v2/votes/18226518e7bba7feaf242c1210b868bdd41173e37238a3bb9d78f0462bc760d6
@@ -35,10 +35,10 @@
  */
 TEST(api, test_two_vote)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto vote = arkClient.vote("18226518e7bba7feaf242c1210b868bdd41173e37238a3bb9d78f0462bc760d6");
-    auto parser = ARK::Test::Utils::makeJSONString(vote);
+    auto parser = Ark::Test::Utils::makeJSONString(vote);
 
     const auto id = parser->valueIn("data", "id");
     ASSERT_STREQ("18226518e7bba7feaf242c1210b868bdd41173e37238a3bb9d78f0462bc760d6", id.c_str());
@@ -204,10 +204,10 @@ TEST(api, test_two_vote)
  */
 TEST(api, test_two_votes)
 {
-    ARK::Client arkClient(DEVNET);
+    Ark::V2::Client arkClient(DEVNET);
 
     const auto transactionUnconfirmed = arkClient.votes(5, 1);
-    auto parser = ARK::Test::Utils::makeJSONString(transactionUnconfirmed);
+    auto parser = Ark::Test::Utils::makeJSONString(transactionUnconfirmed);
 
     const auto count = parser->valueIn("meta", "count");
     ASSERT_STREQ("5", count.c_str());
