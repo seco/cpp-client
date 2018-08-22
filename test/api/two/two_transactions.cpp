@@ -28,7 +28,7 @@
     }
     }
  */
-TEST(api, test_two_transactions_transaction)
+TEST(api, test_two_transaction)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -73,6 +73,58 @@ TEST(api, test_two_transactions_transaction)
     ASSERT_STREQ("2018-08-20T15:34:10Z", human.c_str());
 }
 
+/* test_two_transactions_transaction_types
+ * https://dexplorer.ark.io:8443/api/v2/transactions/types
+ * Expected Response:
+    {
+        "data": {
+            "TRANSFER": 0,
+            "SECOND_SIGNATURE": 1,
+            "DELEGATE_REGISTRATION": 2,
+            "VOTE": 3,
+            "MULTI_SIGNATURE": 4,
+            "IPFS": 5,
+            "TIMELOCK_TRANSFER": 6,
+            "MULTI_PAYMENT": 7,
+            "DELEGATE_RESIGNATION": 8
+        }
+    }
+ */
+TEST(api, test_two_transaction_types)
+{
+    Ark::V2::Client arkClient(DEVNET);
+
+    const auto types = arkClient.transactionTypes();
+    auto parser = Ark::Test::Utils::makeJSONString(types);
+
+    const auto TRANSFER = parser->valueIn("data", "TRANSFER");
+    ASSERT_STREQ("0", TRANSFER.c_str());
+
+    const auto SECOND_SIGNATURE = parser->valueIn("data", "SECOND_SIGNATURE");
+    ASSERT_STREQ("1", SECOND_SIGNATURE.c_str());
+
+    const auto DELEGATE_REGISTRATION = parser->valueIn("data", "DELEGATE_REGISTRATION");
+    ASSERT_STREQ("2", DELEGATE_REGISTRATION.c_str());
+
+    const auto VOTE = parser->valueIn("data", "VOTE");
+    ASSERT_STREQ("3", VOTE.c_str());
+
+    const auto MULTI_SIGNATURE = parser->valueIn("data", "MULTI_SIGNATURE");
+    ASSERT_STREQ("4", MULTI_SIGNATURE.c_str());
+
+    const auto IPFS = parser->valueIn("data", "IPFS");
+    ASSERT_STREQ("5", IPFS.c_str());
+
+    const auto TIMELOCK_TRANSFER = parser->valueIn("data", "TIMELOCK_TRANSFER");
+    ASSERT_STREQ("6", TIMELOCK_TRANSFER.c_str());
+
+    const auto MULTI_PAYMENT = parser->valueIn("data", "MULTI_PAYMENT");
+    ASSERT_STREQ("7", MULTI_PAYMENT.c_str());
+
+    const auto DELEGATE_RESIGNATION = parser->valueIn("data", "DELEGATE_RESIGNATION");
+    ASSERT_STREQ("8", DELEGATE_RESIGNATION.c_str());
+}
+
 /* test_two_transactions_transaction_unconfirmed
  * https://dexplorer.ark.io:8443/api/v2/transactions/unconfirmed?id=4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48
  * Expected Response (if unconfirmed tx is not found):
@@ -92,7 +144,7 @@ TEST(api, test_two_transactions_transaction)
     ]
     }
  */
-TEST(api, test_two_transactions_transaction_unconfirmed)
+TEST(api, test_two_transaction_unconfirmed)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -160,7 +212,7 @@ TEST(api, test_two_transactions_transaction_unconfirmed)
     ]
     }
  */
-TEST(api, test_two_transactions_transactions)
+TEST(api, test_two_transactions)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -209,7 +261,7 @@ TEST(api, test_two_transactions_transactions)
     ]
     }
  */
-TEST(api, test_two_transactions_transactions_unconfirmed)
+TEST(api, test_two_transactions_unconfirmed)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -224,7 +276,6 @@ TEST(api, test_two_transactions_transactions_unconfirmed)
 
     const auto totalCount = parser->valueIn("meta", "totalCount");
     ASSERT_STREQ("0", totalCount.c_str());
-
 }
 
 /* test_two_transactions_transactions_search
@@ -232,65 +283,12 @@ TEST(api, test_two_transactions_transactions_unconfirmed)
  * Expected Response:
     ??????????
  */
-TEST(api, test_two_transactions_transactions_search)
+TEST(api, test_two_transactions_search)
 {
     Ark::V2::Client arkClient(DEVNET);
 
     const auto transactions = arkClient.transactions("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48", 5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(transactions);
-
-}
-
-/* test_two_transactions_transaction_types
- * https://dexplorer.ark.io:8443/api/v2/transactions/types
- * Expected Response:
-    {
-        "data": {
-            "TRANSFER": 0,
-            "SECOND_SIGNATURE": 1,
-            "DELEGATE_REGISTRATION": 2,
-            "VOTE": 3,
-            "MULTI_SIGNATURE": 4,
-            "IPFS": 5,
-            "TIMELOCK_TRANSFER": 6,
-            "MULTI_PAYMENT": 7,
-            "DELEGATE_RESIGNATION": 8
-        }
-    }
- */
-TEST(api, test_two_transactions_transaction_types)
-{
-    Ark::V2::Client arkClient(DEVNET);
-
-    const auto types = arkClient.transactionTypes();
-    auto parser = Ark::Test::Utils::makeJSONString(types);
-
-    const auto TRANSFER = parser->valueIn("data", "TRANSFER");
-    ASSERT_STREQ("0", TRANSFER.c_str());
-
-    const auto SECOND_SIGNATURE = parser->valueIn("data", "SECOND_SIGNATURE");
-    ASSERT_STREQ("1", SECOND_SIGNATURE.c_str());
-
-    const auto DELEGATE_REGISTRATION = parser->valueIn("data", "DELEGATE_REGISTRATION");
-    ASSERT_STREQ("2", DELEGATE_REGISTRATION.c_str());
-
-    const auto VOTE = parser->valueIn("data", "VOTE");
-    ASSERT_STREQ("3", VOTE.c_str());
-
-    const auto MULTI_SIGNATURE = parser->valueIn("data", "MULTI_SIGNATURE");
-    ASSERT_STREQ("4", MULTI_SIGNATURE.c_str());
-
-    const auto IPFS = parser->valueIn("data", "IPFS");
-    ASSERT_STREQ("5", IPFS.c_str());
-
-    const auto TIMELOCK_TRANSFER = parser->valueIn("data", "TIMELOCK_TRANSFER");
-    ASSERT_STREQ("6", TIMELOCK_TRANSFER.c_str());
-
-    const auto MULTI_PAYMENT = parser->valueIn("data", "MULTI_PAYMENT");
-    ASSERT_STREQ("7", MULTI_PAYMENT.c_str());
-
-    const auto DELEGATE_RESIGNATION = parser->valueIn("data", "DELEGATE_RESIGNATION");
-    ASSERT_STREQ("8", DELEGATE_RESIGNATION.c_str());
 }
 
 #endif

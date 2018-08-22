@@ -74,6 +74,20 @@ TEST(api, test_two_wallets)
     ASSERT_STREQ("true", isDelegate.c_str());
 }
 
+/* test_two_wallets_search
+ *
+ * Expected Response:
+    ??????????
+ */
+TEST(api, test_two_wallets_search)
+{
+    Ark::V2::Client arkClient(DEVNET);
+
+    const auto walletsSearch = arkClient.walletsSearch("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
+    auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
+
+}
+
 /* test_two_wallets_top_limit_page
  * https://dexplorer.ark.io:8443/api/v2/wallets/top?limit=5&page=1
  * Expected Response:
@@ -160,7 +174,6 @@ TEST(api, test_two_wallets_top)
         ASSERT_STRNE("", isDelegate.c_str());
     };
 }
-
 
 /* test_two_wallets_transactions
  * https://dexplorer.ark.io:8443/api/v2/wallets/DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk/transactions?limit=2&page=1
@@ -344,8 +357,6 @@ TEST(api, test_two_wallets_transactions_sent)
 
 }
 
-
-
 /* test_two_wallets_votes
  * https://dexplorer.ark.io:8443/api/v2/wallets/DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk/votes?limit=2&page=1
  * Expected Response:
@@ -440,20 +451,6 @@ TEST(api, test_two_wallets_votes)
         const auto human = parser->subarrayValueNestedIn("data", i, "timestamp", "human");
         ASSERT_STREQ("2018-08-03T22:00:19Z", human.c_str());
     };
-}
-
-/* test_two_wallets_search
- *
- * Expected Response:
-    ??????????
- */
-TEST(api, test_two_wallets_search)
-{
-    Ark::V2::Client arkClient(DEVNET);
-
-    const auto walletsSearch = arkClient.walletsSearch("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
-    auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
-
 }
 
 #endif

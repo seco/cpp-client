@@ -35,7 +35,7 @@
         }
     }
  */
-TEST(api, test_two_delegates_delegate)
+TEST(api, test_two_delegate)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -76,154 +76,6 @@ TEST(api, test_two_delegates_delegate)
     ASSERT_STRNE("100.00", productivity.c_str());
     ASSERT_STRNE("0.00", productivity.c_str());
     ASSERT_STRNE("", productivity.c_str());
-}
-
-/* test_two_delegates_delegates
- * https://dexplorer.ark.io:8443/api/v2/delegates?limit=5&page=1
- * Expected Response:
-    {
-    "meta": {
-        "count": 5,
-        "pageCount": 23,
-        "totalCount": 111,
-        "next": "\/api\/v2\/delegates?limit=5&page=2",
-        "previous": null,
-        "self": "\/api\/v2\/delegates?limit=5&page=1",
-        "first": "\/api\/v2\/delegates?limit=5&page=1",
-        "last": "\/api\/v2\/delegates?limit=5&page=23"
-    },
-    "data": [
-        {
-        "username": "arkx",
-        "address": "DNjuJEDQkhrJ7cA9FZ2iVXt5anYiM8Jtc9",
-        "publicKey": "03bbfb43ecb5a54a1e227bb37b5812b5321213838d376e2b455b6af78442621dec",
-        "votes": 49565819956800,
-        "rank": 1,
-        "blocks": {
-            "produced": 785,
-            "missed": 1,
-            "last": {
-            "id": "1407421525749284122",
-            "timestamp": {
-                "epoch": 44610994,
-                "unix": 1534712194,
-                "human": "2018-08-19T20:56:34Z"
-            }
-            }
-        },
-        "production": {
-            "approval": 0.4,
-            "productivity": 99.87
-        }
-        },
-        {
-        "username": "boldninja",
-        "address": "DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T",
-        "publicKey": "03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d",
-        "votes": 6619620000000,
-        "rank": 2,
-        "blocks": {
-            "produced": 3254,
-            "missed": 145,
-            "last": {
-            "id": "6277036907304685213",
-            "timestamp": {
-                "epoch": 44611370,
-                "unix": 1534712570,
-                "human": "2018-08-19T21:02:50Z"
-            }
-            }
-        },
-        "production": {
-            "approval": 0.05,
-            "productivity": 95.73
-        }
-        },
-        {
-        "username": "genesis_7",
-        "address": "DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk",
-        "publicKey": "03b12f99375c3b0e4f5f5c7ea74e723f0b84a6f169b47d9105ed2a179f30c82df2",
-        "votes": 6153180000000,
-        "rank": 3,
-        "blocks": {
-            "produced": 3439,
-            "missed": 6,
-            "last": {
-            "id": "10247780330689404313",
-            "timestamp": {
-                "epoch": 44611250,
-                "unix": 1534712450,
-                "human": "2018-08-19T21:00:50Z"
-            }
-            }
-        },
-        "production": {
-            "approval": 0.05,
-            "productivity": 99.83
-        }
-        },
-        {
-        "username": "genesis_8",
-        "address": "DEHtM61jVo4uJWP23B6mGrb6p9batXCHZs",
-        "publicKey": "02c3d1ae1b8fe831218f78cf09d864e60818ebdba4aacc74ecc2bcf2734aadf5ea",
-        "votes": 5648160000000,
-        "rank": 4,
-        "blocks": {
-            "produced": 3440,
-            "missed": 7,
-            "last": {
-            "id": "13083236844605217497",
-            "timestamp": {
-                "epoch": 44611178,
-                "unix": 1534712378,
-                "human": "2018-08-19T20:59:38Z"
-            }
-            }
-        },
-        "production": {
-            "approval": 0.05,
-            "productivity": 99.8
-        }
-        },
-        {
-        "username": "genesis_13",
-        "address": "DLnysb6HbtTcNpff87P5f47qVpFxYAqUSY",
-        "publicKey": "02bc4cfee3716fcf191caa51c7bd2205a796b504b9ad5461864681cf1b33912003",
-        "votes": 5645170000000,
-        "rank": 5,
-        "blocks": {
-            "produced": 3425,
-            "missed": 14,
-            "last": {
-            "id": "105798996341228290",
-            "timestamp": {
-                "epoch": 44611162,
-                "unix": 1534712362,
-                "human": "2018-08-19T20:59:22Z"
-            }
-            }
-        },
-        "production": {
-            "approval": 0.05,
-            "productivity": 99.59
-        }
-        }
-    ]
-    }
- */
-TEST(api, test_two_delegates_delegates)
-{
-    Ark::V2::Client arkClient(DEVNET);
-
-    const auto delegates = arkClient.delegates(5, 1);
-    auto parser = Ark::Test::Utils::makeJSONString(delegates);
-
-    for (int i = 0; i < 5; i++)
-    {
-        const auto votes = parser->subarrayValueIn("data", i, "votes");
-        ASSERT_STRNE("0", votes.c_str());
-        ASSERT_STRNE("", votes.c_str());
-    }
 }
 
 /* test_two_delegates_delegate_blocks
@@ -379,7 +231,7 @@ TEST(api, test_two_delegates_delegates)
     ]
     }
  */
-TEST(api, test_two_delegates_delegate_blocks)
+TEST(api, test_two_delegate_blocks)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -411,7 +263,6 @@ TEST(api, test_two_delegates_delegate_blocks)
         const auto publicKey = parser->subarrayValueNestedIn("data", 0, "generator", "publicKey");
         ASSERT_STRNE("03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d", publicKey.c_str());
     };
-
 }
 
 /* test_two_delegates_delegate_voters
@@ -460,7 +311,7 @@ TEST(api, test_two_delegates_delegate_blocks)
     ]
     }
  */
-TEST(api, test_two_delegates_delegate_voters)
+TEST(api, test_two_delegate_voters)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -484,6 +335,154 @@ TEST(api, test_two_delegates_delegate_voters)
         const auto isDelegate = parser->subarrayValueIn("data", i, "isDelegate");
         ASSERT_STRNE("", isDelegate.c_str());
     };
+}
+
+/* test_two_delegates_delegates
+ * https://dexplorer.ark.io:8443/api/v2/delegates?limit=5&page=1
+ * Expected Response:
+    {
+    "meta": {
+        "count": 5,
+        "pageCount": 23,
+        "totalCount": 111,
+        "next": "\/api\/v2\/delegates?limit=5&page=2",
+        "previous": null,
+        "self": "\/api\/v2\/delegates?limit=5&page=1",
+        "first": "\/api\/v2\/delegates?limit=5&page=1",
+        "last": "\/api\/v2\/delegates?limit=5&page=23"
+    },
+    "data": [
+        {
+        "username": "arkx",
+        "address": "DNjuJEDQkhrJ7cA9FZ2iVXt5anYiM8Jtc9",
+        "publicKey": "03bbfb43ecb5a54a1e227bb37b5812b5321213838d376e2b455b6af78442621dec",
+        "votes": 49565819956800,
+        "rank": 1,
+        "blocks": {
+            "produced": 785,
+            "missed": 1,
+            "last": {
+            "id": "1407421525749284122",
+            "timestamp": {
+                "epoch": 44610994,
+                "unix": 1534712194,
+                "human": "2018-08-19T20:56:34Z"
+            }
+            }
+        },
+        "production": {
+            "approval": 0.4,
+            "productivity": 99.87
+        }
+        },
+        {
+        "username": "boldninja",
+        "address": "DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T",
+        "publicKey": "03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d",
+        "votes": 6619620000000,
+        "rank": 2,
+        "blocks": {
+            "produced": 3254,
+            "missed": 145,
+            "last": {
+            "id": "6277036907304685213",
+            "timestamp": {
+                "epoch": 44611370,
+                "unix": 1534712570,
+                "human": "2018-08-19T21:02:50Z"
+            }
+            }
+        },
+        "production": {
+            "approval": 0.05,
+            "productivity": 95.73
+        }
+        },
+        {
+        "username": "genesis_7",
+        "address": "DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk",
+        "publicKey": "03b12f99375c3b0e4f5f5c7ea74e723f0b84a6f169b47d9105ed2a179f30c82df2",
+        "votes": 6153180000000,
+        "rank": 3,
+        "blocks": {
+            "produced": 3439,
+            "missed": 6,
+            "last": {
+            "id": "10247780330689404313",
+            "timestamp": {
+                "epoch": 44611250,
+                "unix": 1534712450,
+                "human": "2018-08-19T21:00:50Z"
+            }
+            }
+        },
+        "production": {
+            "approval": 0.05,
+            "productivity": 99.83
+        }
+        },
+        {
+        "username": "genesis_8",
+        "address": "DEHtM61jVo4uJWP23B6mGrb6p9batXCHZs",
+        "publicKey": "02c3d1ae1b8fe831218f78cf09d864e60818ebdba4aacc74ecc2bcf2734aadf5ea",
+        "votes": 5648160000000,
+        "rank": 4,
+        "blocks": {
+            "produced": 3440,
+            "missed": 7,
+            "last": {
+            "id": "13083236844605217497",
+            "timestamp": {
+                "epoch": 44611178,
+                "unix": 1534712378,
+                "human": "2018-08-19T20:59:38Z"
+            }
+            }
+        },
+        "production": {
+            "approval": 0.05,
+            "productivity": 99.8
+        }
+        },
+        {
+        "username": "genesis_13",
+        "address": "DLnysb6HbtTcNpff87P5f47qVpFxYAqUSY",
+        "publicKey": "02bc4cfee3716fcf191caa51c7bd2205a796b504b9ad5461864681cf1b33912003",
+        "votes": 5645170000000,
+        "rank": 5,
+        "blocks": {
+            "produced": 3425,
+            "missed": 14,
+            "last": {
+            "id": "105798996341228290",
+            "timestamp": {
+                "epoch": 44611162,
+                "unix": 1534712362,
+                "human": "2018-08-19T20:59:22Z"
+            }
+            }
+        },
+        "production": {
+            "approval": 0.05,
+            "productivity": 99.59
+        }
+        }
+    ]
+    }
+ */
+TEST(api, test_two_delegates)
+{
+    Ark::V2::Client arkClient(DEVNET);
+
+    const auto delegates = arkClient.delegates(5, 1);
+    auto parser = Ark::Test::Utils::makeJSONString(delegates);
+
+    for (int i = 0; i < 5; i++)
+    {
+        const auto votes = parser->subarrayValueIn("data", i, "votes");
+        ASSERT_STRNE("0", votes.c_str());
+        ASSERT_STRNE("", votes.c_str());
+    }
 }
 
 #endif

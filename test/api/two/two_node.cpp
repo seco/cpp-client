@@ -157,7 +157,6 @@ TEST(api, test_two_node_status)
     const auto blocksCount = parser->valueIn("data", "blocksCount");
     ASSERT_STRNE("0", blocksCount.c_str());
     ASSERT_STRNE("", blocksCount.c_str());
-
 }
 
 /* test_two_node_status

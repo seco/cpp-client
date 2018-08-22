@@ -28,7 +28,7 @@ struct JSON : public JSONInterface
         * Constructor
         **************************************************/
         JSON(std::string _jsonStr)
-            :	_json(json::parse(_jsonStr)) {}
+            :   _json(json::parse(_jsonStr)) {}
         /*************************************************/
 
         /*************************************************/

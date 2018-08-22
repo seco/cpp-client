@@ -20,7 +20,7 @@
     }
     }
  */
-TEST(api, test_two_peers_peer)
+TEST(api, test_two_peer)
 {
     Ark::V2::Client arkClient(DEVNET);
 
@@ -105,7 +105,7 @@ TEST(api, test_two_peers_peer)
     ]
     }
  */
-TEST(api, test_two_peers_peers)
+TEST(api, test_two_peers)
 {
     Ark::V2::Client arkClient(DEVNET);
 
