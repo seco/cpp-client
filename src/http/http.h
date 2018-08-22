@@ -9,10 +9,10 @@ namespace Ark {
 namespace Utilities {
 namespace Network {
 /**************************************************
- * Ark::Utilities::Network::Connectable 
+ * Ark::Utilities::Network::HTTP 
  * @brief: Forward Delcaration
  **************************************************/
-class HTTPConnectable;
+class HTTP;
 /*************************************************/
 
 /**************************************************************************************************/
@@ -25,13 +25,13 @@ class HTTPConnectable;
  * entry point for integrating the HTTPClient
  * library for different boards/chipsets
  **************************************************/
-class HTTPInterface
+class AbstractHTTP
 {
     protected: 
-        HTTPInterface() = default;
+        AbstractHTTP() = default;
 
     public:
-        virtual ~HTTPInterface() { }
+        virtual ~AbstractHTTP() { }
 
         virtual std::string get(
                 const char *const peer,
@@ -53,7 +53,7 @@ class HTTPInterface
 /**************************************************
  *	HTTP object factory
  **************************************************/
-std::unique_ptr<HTTPInterface> makeHTTP();
+std::unique_ptr<AbstractHTTP> makeHTTP();
 /*************************************************/
 
 };
@@ -62,13 +62,12 @@ std::unique_ptr<HTTPInterface> makeHTTP();
 
 /**************************************************
  * Ark::Utilities::Network::Connectable 
- *	Inheritable HTTPConnectable object
  **************************************************/
-class Ark::Utilities::Network::HTTPConnectable
+class Ark::Utilities::Network::HTTP
 {
     public:
-        std::unique_ptr<Ark::Utilities::Network::HTTPInterface> http;
-        HTTPConnectable() : http(makeHTTP()) { }
+        std::unique_ptr<Ark::Utilities::Network::AbstractHTTP> http;
+        HTTP() : http(makeHTTP()) { }
 };
 /*************************************************/
 

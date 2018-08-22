@@ -3,8 +3,7 @@
 #ifndef ONE_DELEGATES_H
 #define ONE_DELEGATES_H
 
-
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 
 namespace Ark
@@ -14,7 +13,7 @@ namespace API
 namespace ONE
 {
 
-class Delegates : virtual Ark::Utilities::Network::Connectable
+class Delegates : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string delegate(const char *const parameter);

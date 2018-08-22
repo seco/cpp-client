@@ -23,13 +23,13 @@
 #ifdef HAS_ONE_API
     Ark::V1::Client::Client(const char *const customBaseURL, const int customBasePort)
     {
-        this->netConnector = Ark::Utilities::Network::Connector(customBaseURL, customBasePort, "");
+        this->connection = Ark::Utilities::Network::AbstractConnection(customBaseURL, customBasePort, "");
     };
 #endif
 #ifdef HAS_TWO_API
     Ark::V2::Client::Client(const char *const customBaseURL, const int customBasePort)
     {
-        this->netConnector = Ark::Utilities::Network::Connector(customBaseURL, customBasePort, "");
+        this->connection = Ark::Utilities::Network::AbstractConnection(customBaseURL, customBasePort, "");
     };
 #endif
 /*************************************************/
@@ -47,13 +47,13 @@
         switch (netType)
         {
             case NetworkType::DEVNET:
-                this->netConnector = {
+                this->connection = {
                     DEVNET_EXPLORER_URL,
                     DEFAULT_EXPLORER_API_PORT,
                     DEFAULT_EXPLORER_SSL_FINGERPRINT
                 }; break;
             case NetworkType::MAINNET:
-                this->netConnector = {
+                this->connection = {
                     MAINNET_EXPLORER_URL,
                     DEFAULT_EXPLORER_API_PORT,
                     DEFAULT_EXPLORER_SSL_FINGERPRINT
@@ -67,13 +67,13 @@
         switch (netType)
         {
             case NetworkType::DEVNET:
-                this->netConnector = {
+                this->connection = {
                     DEVNET_EXPLORER_URL,
                     DEFAULT_EXPLORER_API_PORT,
                     DEFAULT_EXPLORER_SSL_FINGERPRINT
                 }; break;
             case NetworkType::MAINNET:
-                this->netConnector = {
+                this->connection = {
                     MAINNET_EXPLORER_URL,
                     DEFAULT_EXPLORER_API_PORT,
                     DEFAULT_EXPLORER_SSL_FINGERPRINT

@@ -23,13 +23,13 @@ namespace {
 /*************************************************
 *
 **************************************************/
-class HTTP : public HTTPInterface
+class PlatformHTTP : public AbstractHTTP
 {
 	public:
 		/*************************************************
 		*
 		**************************************************/
-		HTTP() = default;
+		PlatformHTTP() = default;
 		/*************************************************/
 
 		/*************************************************
@@ -176,8 +176,8 @@ class HTTP : public HTTPInterface
 /*************************************************
 *		HTTP object factory
 **************************************************/
-std::unique_ptr<HTTPInterface> makeHTTP() {
-	return std::unique_ptr<HTTPInterface>(new HTTP());
+std::unique_ptr<AbstractHTTP> makeHTTP() {
+	return std::unique_ptr<AbstractHTTP>(new PlatformHTTP());
 }
 /*************************************************/
 

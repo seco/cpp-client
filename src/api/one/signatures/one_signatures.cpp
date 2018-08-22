@@ -6,6 +6,6 @@
  *************************************************/
 std::string Ark::API::ONE::Signatures::signaturesFee()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Signatures::fee_s);
+    return connection.callback(Ark::API::ONE::Paths::Signatures::fee_s);
 };
 /*************************************************/

@@ -3,9 +3,8 @@
 #ifndef ONE_PEERS_H
 #define ONE_PEERS_H
 
-
 #include "utils/helpers.h"
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 
 #include <cstring>
@@ -18,7 +17,7 @@ namespace API
 namespace ONE
 {
 
-class Peers : virtual Ark::Utilities::Network::Connectable
+class Peers : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string peer(const char *const ip, const int port);

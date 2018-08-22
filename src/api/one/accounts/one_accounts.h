@@ -3,14 +3,14 @@
 #ifndef ONE_ACCOUNTS_H
 #define ONE_ACCOUNTS_H
 
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 
 namespace Ark {
 namespace API {
 namespace ONE {
 
-class Accounts : virtual Ark::Utilities::Network::Connectable
+class Accounts : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string accountBalance(const char *const arkAddress);

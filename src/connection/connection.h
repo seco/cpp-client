@@ -1,8 +1,7 @@
 
 
-#ifndef CONNECTOR_H
-#define CONNECTOR_H
-
+#ifndef CONNECTION_H
+#define CONNECTION_H
 
 #include "http/http.h"
 #include <string>
@@ -13,18 +12,18 @@ namespace Utilities {
 namespace Network {
 
 /*************************************************
-* Ark::Utilities::Network::Connectable
+* Ark::Utilities::Network::Connection
 * @brief: Forward Declaration.
 **************************************************/
-class Connectable; 
+class Connection; 
 /*************************************************/
 
 /**************************************************************************************************/
 
 /*************************************************
-* Ark::Utilities::Network::Connector
+* Ark::Utilities::Network::AbstractConnection
 **************************************************/
-class Connector : virtual HTTPConnectable
+class AbstractConnection : virtual HTTP
 {
     private:
         char host_[17];
@@ -33,10 +32,10 @@ class Connector : virtual HTTPConnectable
         bool hasSSL = false;
 
     public:
-        Connector() : host_(), port_(), fingerprint_() {};
-        Connector(const char *const newHost, const int newPort, const char *const newFingerprint = "");
+        AbstractConnection() : host_(), port_(), fingerprint_() {};
+        AbstractConnection(const char *const newHost, const int newPort, const char *const newFingerprint = "");
 
-        Connector& operator=(Connector&& other);
+        AbstractConnection& operator=(AbstractConnection&& other);
 
         void connect(const char *const newHost, const int newPort, const char *const newFingerprint); // Connect to the given connection.
         void disconnect(); // Disconnect from the given connection.
@@ -53,13 +52,12 @@ class Connector : virtual HTTPConnectable
 };
 
 /**************************************************
-* Ark::Utilities::Network::Connectable
-* Inheritable Connector object
+* Ark::Utilities::Network::Connection
 **************************************************/
-class Ark::Utilities::Network::Connectable
+class Ark::Utilities::Network::Connection
 {
     public:
-        Ark::Utilities::Network::Connector netConnector;
+        Ark::Utilities::Network::AbstractConnection connection;
 };
 /*************************************************/
 

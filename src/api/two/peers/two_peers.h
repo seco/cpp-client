@@ -6,14 +6,14 @@
 #define TWO_PEERS_H
 
 #include "utils/helpers.h"
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/two/two_paths.h"
 
 namespace Ark {
 namespace API {
 namespace TWO {
 
-class Peers : virtual Ark::Utilities::Network::Connectable
+class Peers : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string peer(const char *const ip);

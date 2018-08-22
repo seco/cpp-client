@@ -12,7 +12,7 @@ std::string Ark::API::ONE::Blocks::block(
     strcpy(uri, Ark::API::ONE::Paths::Blocks::get_s);
     strcat(uri, "?id=");
     strcat(uri, blockId);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 /*************************************************/
 
@@ -23,7 +23,7 @@ std::string Ark::API::ONE::Blocks::block(
  *************************************************/
 std::string Ark::API::ONE::Blocks::blocks()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::blocks_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::blocks_s);
 }
 /*************************************************/
 
@@ -34,7 +34,7 @@ std::string Ark::API::ONE::Blocks::blocks()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockEpoch()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getEpoch_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getEpoch_s);
 }
 /*************************************************/
 
@@ -45,7 +45,7 @@ std::string Ark::API::ONE::Blocks::blockEpoch()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockFee()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getFee_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getFee_s);
 }
 /*************************************************/
 
@@ -56,7 +56,7 @@ std::string Ark::API::ONE::Blocks::blockFee()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockFees()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getFees_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getFees_s);
 }
 /*************************************************/
 
@@ -67,7 +67,7 @@ std::string Ark::API::ONE::Blocks::blockFees()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockHeight()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getHeight_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getHeight_s);
 }
 /*************************************************/
 
@@ -78,7 +78,7 @@ std::string Ark::API::ONE::Blocks::blockHeight()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockMilestone()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getMilestone_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getMilestone_s);
 }
 /*************************************************/
 
@@ -89,7 +89,7 @@ std::string Ark::API::ONE::Blocks::blockMilestone()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockNethash()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getNethash_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getNethash_s);
 }
 /*************************************************/
 
@@ -100,7 +100,7 @@ std::string Ark::API::ONE::Blocks::blockNethash()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockReward()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getReward_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getReward_s);
 }
 /*************************************************/
 
@@ -111,7 +111,7 @@ std::string Ark::API::ONE::Blocks::blockReward()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockSupply()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getSupply_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getSupply_s);
 }
 /*************************************************/
 
@@ -122,6 +122,6 @@ std::string Ark::API::ONE::Blocks::blockSupply()
  *************************************************/
 std::string Ark::API::ONE::Blocks::blockStatus()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Blocks::getStatus_s);
+    return connection.callback(Ark::API::ONE::Paths::Blocks::getStatus_s);
 }
 /*************************************************/

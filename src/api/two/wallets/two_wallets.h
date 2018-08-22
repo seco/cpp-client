@@ -6,14 +6,14 @@
 #define TWO_WALLETS_H
 
 #include "utils/helpers.h"
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/two/two_paths.h"
 
 namespace Ark {
 namespace API {
 namespace TWO {
 
-class Wallets : virtual Ark::Utilities::Network::Connectable
+class Wallets : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string wallet(const char *const identifier);

@@ -15,7 +15,7 @@ std::string Ark::API::ONE::Delegates::delegate(
     auto key = (isUsername) ? ("?username=") : ("?publicKey=");
     strcat(uri, key);
     strcat(uri, parameter);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -28,7 +28,7 @@ std::string Ark::API::ONE::Delegates::delegates()
 {
     char uri[43] = {'\0'};
     strcpy(uri, Ark::API::ONE::Paths::Delegates::delegates_s);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -39,7 +39,7 @@ std::string Ark::API::ONE::Delegates::delegates()
  *************************************************/
 std::string Ark::API::ONE::Delegates::delegatesCount()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Delegates::count_s);
+    return connection.callback(Ark::API::ONE::Paths::Delegates::count_s);
 };
 /*************************************************/
 
@@ -55,7 +55,7 @@ std::string Ark::API::ONE::Delegates::delegateSearch(
     strcpy(uri, Ark::API::ONE::Paths::Delegates::search_s);
     strcat(uri, "?q=");
     strcat(uri, username);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -66,7 +66,7 @@ std::string Ark::API::ONE::Delegates::delegateSearch(
  *************************************************/
 std::string Ark::API::ONE::Delegates::delegateFee()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Delegates::fee_s);
+    return connection.callback(Ark::API::ONE::Paths::Delegates::fee_s);
 };
 /*************************************************/
 
@@ -82,7 +82,7 @@ std::string Ark::API::ONE::Delegates::delegateForgedByAccount(
     strcpy(uri, Ark::API::ONE::Paths::Delegates::getForgedByAccount_s);
     strcat(uri, "?generatorPublicKey=");
     strcat(uri, generatorPublicKey);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -93,7 +93,7 @@ std::string Ark::API::ONE::Delegates::delegateForgedByAccount(
  *************************************************/
 std::string Ark::API::ONE::Delegates::delegateNextForgers()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Delegates::getNextForgers_s);
+    return connection.callback(Ark::API::ONE::Paths::Delegates::getNextForgers_s);
 };
 /*************************************************/
 
@@ -109,6 +109,6 @@ std::string Ark::API::ONE::Delegates::delegateVoters(
     strcpy(uri, Ark::API::ONE::Paths::Delegates::voters_s);
     strcat(uri, "?publicKey=");
     strcat(uri, publicKey);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/

@@ -12,7 +12,7 @@ std::string Ark::API::ONE::Accounts::accountBalance(
     strcpy(uri, Ark::API::ONE::Paths::Accounts::getBalance_s);
     strcat(uri, "?address=");
     strcat(uri, arkAddress);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -28,7 +28,7 @@ std::string Ark::API::ONE::Accounts::accountPublickey(
     strcpy(uri, Ark::API::ONE::Paths::Accounts::getPublickey_s);
     strcat(uri, "?address=");
     strcat(uri, arkAddress);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -44,7 +44,7 @@ std::string Ark::API::ONE::Accounts::accountDelegatesFee(
     strcpy(uri, Ark::API::ONE::Paths::Accounts::delegatesFee_s);
     strcat(uri, "?address=");
     strcat(uri, arkAddress);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -60,7 +60,7 @@ std::string Ark::API::ONE::Accounts::accountDelegates(
     strcpy(uri, Ark::API::ONE::Paths::Accounts::delegates_s);
     strcat(uri, "?address=");
     strcat(uri, arkAddress);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -76,6 +76,6 @@ std::string Ark::API::ONE::Accounts::account(
     strcpy(uri, Ark::API::ONE::Paths::Accounts::accounts_s);
     strcat(uri, "?address=");
     strcat(uri, arkAddress);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/

@@ -27,6 +27,6 @@ class TWO_API :
         public Ark::API::TWO::Transactions,
         public Ark::API::TWO::Votes,
         public Ark::API::TWO::Wallets,
-        virtual Ark::Utilities::Network::Connectable {};
+        virtual Ark::Utilities::Network::Connection {};
 
 #endif

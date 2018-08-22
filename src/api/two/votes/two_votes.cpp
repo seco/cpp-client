@@ -8,7 +8,7 @@ std::string Ark::API::TWO::Votes::vote(const char *const identifier)
         strcpy(uri, Ark::API::TWO::Paths::Votes::base);
         strcat(uri, "/");
         strcat(uri, identifier);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -23,5 +23,5 @@ std::string Ark::API::TWO::Votes::votes(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

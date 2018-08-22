@@ -4,19 +4,19 @@
 
 std::string Ark::API::TWO::Node::nodeConfiguration()
 {
-    return netConnector.callback(Ark::API::TWO::Paths::Node::configuration);
+    return connection.callback(Ark::API::TWO::Paths::Node::configuration);
 }
 
 /**************************************************************************************************/
 
 std::string Ark::API::TWO::Node::nodeStatus()
 {
-    return netConnector.callback(Ark::API::TWO::Paths::Node::status);
+    return connection.callback(Ark::API::TWO::Paths::Node::status);
 }
 
 /**************************************************************************************************/
 
 std::string Ark::API::TWO::Node::nodeSycing()
 {
-    return netConnector.callback(Ark::API::TWO::Paths::Node::syncing);
+    return connection.callback(Ark::API::TWO::Paths::Node::syncing);
 }

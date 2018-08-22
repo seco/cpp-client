@@ -8,7 +8,7 @@ std::string Ark::API::TWO::Transactions::transaction(const char *const identifie
     strcpy(uri, Ark::API::TWO::Paths::Transactions::base);
         strcat(uri, "/");
         strcat(uri, identifier);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -19,7 +19,7 @@ std::string Ark::API::TWO::Transactions::transactionUnconfirmed(const char *cons
         strcpy(uri, Ark::API::TWO::Paths::Transactions::unconfirmed);
         strcat(uri, "?id=");
         strcat(uri, identifier);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -34,7 +34,7 @@ std::string Ark::API::TWO::Transactions::transactions(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -52,7 +52,7 @@ std::string Ark::API::TWO::Transactions::transactions(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -67,7 +67,7 @@ std::string Ark::API::TWO::Transactions::transactionsUnconfirmed(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -82,5 +82,5 @@ std::string Ark::API::TWO::Transactions::transactionTypes(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

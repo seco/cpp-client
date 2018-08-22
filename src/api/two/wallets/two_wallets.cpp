@@ -8,7 +8,7 @@ std::string Ark::API::TWO::Wallets::wallet(const char *const identifier)
         strcpy(uri, Ark::API::TWO::Paths::Wallets::base);
         strcat(uri, "/");
         strcat(uri, identifier);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -26,7 +26,7 @@ std::string Ark::API::TWO::Wallets::wallets(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -41,7 +41,7 @@ std::string Ark::API::TWO::Wallets::walletsTop(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -60,7 +60,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactions(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -79,7 +79,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsSent(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -98,7 +98,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsReceived(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -117,7 +117,7 @@ std::string Ark::API::TWO::Wallets::walletsVotes(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -135,5 +135,5 @@ std::string Ark::API::TWO::Wallets::walletsSearch(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

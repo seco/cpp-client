@@ -15,7 +15,7 @@ std::string Ark::API::ONE::Peers::peer(
     strcat(uri, ip);
     strcat(uri, "&port=");
     strcat(uri, toString(port).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -28,7 +28,7 @@ std::string Ark::API::ONE::Peers::peers()
 {
     char uri[39 + 1] = {'\0'};
     strcpy(uri, Ark::API::ONE::Paths::Peers::peers_s);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 };
 /*************************************************/
 
@@ -39,6 +39,6 @@ std::string Ark::API::ONE::Peers::peers()
  *************************************************/
 std::string Ark::API::ONE::Peers::peerVersion()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Peers::version_s);
+    return connection.callback(Ark::API::ONE::Paths::Peers::version_s);
 };
 /*************************************************/

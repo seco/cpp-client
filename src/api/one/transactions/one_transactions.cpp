@@ -11,7 +11,7 @@ std::string Ark::API::ONE::Transactions::transaction(const char *const id)
     strcpy(uri, Ark::API::ONE::Paths::Transactions::getSingle_s);
     strcat(uri, "?id=");
     strcat(uri, id);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 /*************************************************/
 
@@ -22,7 +22,7 @@ std::string Ark::API::ONE::Transactions::transaction(const char *const id)
  *************************************************/
 std::string Ark::API::ONE::Transactions::transactions()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Transactions::transactions_s);
+    return connection.callback(Ark::API::ONE::Paths::Transactions::transactions_s);
 }
 /*************************************************/
 
@@ -37,7 +37,7 @@ std::string Ark::API::ONE::Transactions::transactionUnconfirmed(const char *cons
     strcpy(uri, Ark::API::ONE::Paths::Transactions::getSingleUnconfirmed_s);
     strcat(uri, "?id=");
     strcat(uri, id);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 /*************************************************/
 
@@ -48,7 +48,7 @@ std::string Ark::API::ONE::Transactions::transactionUnconfirmed(const char *cons
  *************************************************/
 std::string Ark::API::ONE::Transactions::transactionsUnconfirmed()
 {
-    return netConnector.callback(Ark::API::ONE::Paths::Transactions::unconfirmed_s);
+    return connection.callback(Ark::API::ONE::Paths::Transactions::unconfirmed_s);
 }
 /*************************************************/
 
@@ -63,6 +63,6 @@ std::string Ark::API::ONE::Transactions::getVendorField(const char *const txID)
     strcpy(uri, Ark::API::ONE::Paths::Transactions::getSingle_s);
     strcat(uri, "?id=");
     strcat(uri, txID);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 /*************************************************/

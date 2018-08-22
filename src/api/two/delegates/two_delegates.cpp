@@ -8,7 +8,7 @@ std::string Ark::API::TWO::Delegates::delegate(const char *const identifier)
         strcpy(uri, Ark::API::TWO::Paths::Delegates::base);
         strcat(uri, "/");
         strcat(uri, identifier);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -24,7 +24,7 @@ std::string Ark::API::TWO::Delegates::delegates(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -42,7 +42,7 @@ std::string Ark::API::TWO::Delegates::delegateBlocks(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -61,5 +61,5 @@ std::string Ark::API::TWO::Delegates::delegateVoters(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

@@ -8,7 +8,7 @@ std::string Ark::API::TWO::Peers::peer(const char *const ip)
 	    strcpy(uri, Ark::API::TWO::Paths::Peers::base);
         strcat(uri, "/");
         strcat(uri, ip);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -23,5 +23,5 @@ std::string Ark::API::TWO::Peers::peers(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

@@ -9,7 +9,7 @@ std::string Ark::API::TWO::Blocks::block(
         strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
         strcat(uri, "/");
         strcat(uri, blockId);
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -22,7 +22,7 @@ std::string Ark::API::TWO::Blocks::blocks() {
         strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
         strcat(uri, "?limit=10&page=1");
     #endif
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -37,7 +37,7 @@ std::string Ark::API::TWO::Blocks::blocks(
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
         std::strcat(uri, toString(page).c_str());
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }
 
 /**************************************************************************************************/
@@ -50,5 +50,5 @@ std::string Ark::API::TWO::Blocks::blockTransactions(
         strcat(uri, "/");
         strcat(uri, blockId);
         strcat(uri, "/transactions");
-    return netConnector.callback(uri);
+    return connection.callback(uri);
 }

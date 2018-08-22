@@ -3,8 +3,7 @@
 #ifndef ONE_BLOCKS_H
 #define ONE_BLOCKS_H
 
-
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 
 #include <memory>
@@ -14,7 +13,7 @@ namespace Ark {
 namespace API {
 namespace ONE {
 
-class Blocks : virtual Ark::Utilities::Network::Connectable
+class Blocks : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string block(const char *const blockId);

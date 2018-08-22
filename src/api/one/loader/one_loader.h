@@ -3,14 +3,14 @@
 #ifndef ONE_LOADER_H
 #define ONE_LOADER_H
 
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 
 namespace Ark {
 namespace API {
 namespace ONE {
 
-class Loader : virtual Ark::Utilities::Network::Connectable
+class Loader : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string loaderAutoconfigure();

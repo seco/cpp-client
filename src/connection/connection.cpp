@@ -1,11 +1,11 @@
 
 
 #include "utils/helpers.h"
-#include "connector.h"
+#include "connection.h"
 #include <string>
 #include <memory>
 
-Ark::Utilities::Network::Connector::Connector(
+Ark::Utilities::Network::AbstractConnection::AbstractConnection(
         const char *const newHost,
         const int newPort,
         const char *const newFingerprint
@@ -15,7 +15,7 @@ Ark::Utilities::Network::Connector::Connector(
 
 /**************************************************************************************************/
 
-Ark::Utilities::Network::Connector& Ark::Utilities::Network::Connector::operator=(Connector&& other)
+Ark::Utilities::Network::AbstractConnection& Ark::Utilities::Network::AbstractConnection::operator=(AbstractConnection&& other)
 {
     if (this != &other)
     {
@@ -26,7 +26,7 @@ Ark::Utilities::Network::Connector& Ark::Utilities::Network::Connector::operator
 
 /**************************************************************************************************/
 
-std::string Ark::Utilities::Network::Connector::callback(const char *const request)
+std::string Ark::Utilities::Network::AbstractConnection::callback(const char *const request)
 {
     if (this->hasSSL) {
         return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
@@ -37,7 +37,7 @@ std::string Ark::Utilities::Network::Connector::callback(const char *const reque
 
 /**************************************************************************************************/
 
-void Ark::Utilities::Network::Connector::connect(
+void Ark::Utilities::Network::AbstractConnection::connect(
         const char *const newHost,
         const int newPort,
         const char *const newFingerprint = ""
@@ -53,7 +53,7 @@ void Ark::Utilities::Network::Connector::connect(
 
 /**************************************************************************************************/
 
-void Ark::Utilities::Network::Connector::disconnect()
+void Ark::Utilities::Network::AbstractConnection::disconnect()
 {
     strncpy(this->host_, "\0", sizeof(this->host_) / sizeof(this->host_[0]));
     this->port_ = 0;
@@ -66,7 +66,7 @@ void Ark::Utilities::Network::Connector::disconnect()
 
 /**************************************************************************************************/
 
-std::string Ark::Utilities::Network::Connector::getConnection()
+std::string Ark::Utilities::Network::AbstractConnection::getConnection()
 {
     char connectionStr[32] = { "\0" };
         std::strcpy(connectionStr, this->host_);
@@ -77,6 +77,6 @@ std::string Ark::Utilities::Network::Connector::getConnection()
 
 /**************************************************************************************************/
 
-std::string Ark::Utilities::Network::Connector::getFingerprint() { return this->fingerprint_; }
+std::string Ark::Utilities::Network::AbstractConnection::getFingerprint() { return this->fingerprint_; }
 
 /**************************************************************************************************/

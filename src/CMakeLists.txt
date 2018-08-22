@@ -12,7 +12,7 @@ find_package(CURL CONFIG REQUIRED)
 
 set(COMMON_SRC 
 	${PROJECT_SOURCE_DIR}/arkClient.cpp
-	${PROJECT_SOURCE_DIR}/connection/connector.cpp
+	${PROJECT_SOURCE_DIR}/connection/connection.cpp
 )
 
 set(PLATFORM_SRC 

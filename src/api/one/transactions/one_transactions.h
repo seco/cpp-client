@@ -3,7 +3,7 @@
 #ifndef ONE_TRANSACTIONS_H
 #define ONE_TRANSACTIONS_H
 
-#include "connection/connector.h"
+#include "connection/connection.h"
 #include "api/one/one_paths.h"
 #include <cstring>
 #include <memory>
@@ -12,7 +12,7 @@ namespace Ark {
 namespace API {
 namespace ONE {
 
-class Transactions : virtual Ark::Utilities::Network::Connectable
+class Transactions : virtual Ark::Utilities::Network::Connection
 {
   public:
     std::string transaction(const char *const id);
