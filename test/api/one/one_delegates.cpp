@@ -13,7 +13,7 @@ namespace
 
 TEST(api, test_one_delegates_fee)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateFeeResponse = arkClient.delegateFee();
     auto parser = Ark::Test::Utils::makeJSONString(delegateFeeResponse);
@@ -27,7 +27,7 @@ TEST(api, test_one_delegates_fee)
 
 TEST(api, test_one_delegates_forged_by_account)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto forgedByAccountResponse = arkClient.delegateForgedByAccount(darkPubkey);
     auto parser = Ark::Test::Utils::makeJSONString(forgedByAccountResponse);
@@ -49,7 +49,7 @@ TEST(api, test_one_delegates_forged_by_account)
 
 TEST(api, test_one_delegates_next_forgers)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto nextForgersResponse = arkClient.delegateNextForgers();
     auto parser = Ark::Test::Utils::makeJSONString(nextForgersResponse);
@@ -74,7 +74,7 @@ TEST(api, test_one_delegates_next_forgers)
 
 TEST(api, test_one_delegates_delegate_by_public_key)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     auto delegateResponse = arkClient.delegate(darkPubkey);
     auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
@@ -115,7 +115,7 @@ TEST(api, test_one_delegates_delegate_by_public_key)
 
 TEST(api, test_one_delegates_delegate_by_username)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
     auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
@@ -156,7 +156,7 @@ TEST(api, test_one_delegates_delegate_by_username)
 
 TEST(api, test_one_delegates_delegates)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegatesResponse = arkClient.delegates();
     auto parser = Ark::Test::Utils::makeJSONString(delegatesResponse);
@@ -203,7 +203,7 @@ TEST(api, test_one_delegates_delegates)
 
 TEST(api, test_one_delegates_voters)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto votersResponse = arkClient.delegateVoters(darkPubkey);
     auto parser = Ark::Test::Utils::makeJSONString(votersResponse);
@@ -240,7 +240,7 @@ TEST(api, test_one_delegates_voters)
 
 TEST(api, test_one_delegates_search)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
     auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
@@ -281,7 +281,7 @@ TEST(api, test_one_delegates_search)
 
 TEST(api, test_one_delegates_count)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegatesCountResponse = arkClient.delegatesCount();
     auto parser = Ark::Test::Utils::makeJSONString(delegatesCountResponse);

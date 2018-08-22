@@ -35,7 +35,7 @@
  */
 TEST(api, test_two_vote)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto vote = arkClient.vote("18226518e7bba7feaf242c1210b868bdd41173e37238a3bb9d78f0462bc760d6");
     auto parser = Ark::Test::Utils::makeJSONString(vote);
@@ -204,7 +204,7 @@ TEST(api, test_two_vote)
  */
 TEST(api, test_two_votes)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactionUnconfirmed = arkClient.votes(5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(transactionUnconfirmed);

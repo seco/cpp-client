@@ -8,7 +8,7 @@
 
 TEST(api, test_signature_fees)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto signaturesFeeResponse = arkClient.signaturesFee();
     auto parser = Ark::Test::Utils::makeJSONString(signaturesFeeResponse);

@@ -13,7 +13,7 @@ namespace
 
 TEST(api, test_one_accounts_account)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto accountResponse = arkClient.account(darkAddress);
     auto parser = Ark::Test::Utils::makeJSONString(accountResponse);
@@ -45,7 +45,7 @@ TEST(api, test_one_accounts_account)
 
 TEST(api, test_one_accounts_balance)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto accountBalanceResponse = arkClient.accountBalance(darkAddress);
     auto parser = Ark::Test::Utils::makeJSONString(accountBalanceResponse);
@@ -63,7 +63,7 @@ TEST(api, test_one_accounts_balance)
 
 TEST(api, test_one_accounts_delegates)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.accountDelegates(darkAddress);
     auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
@@ -103,7 +103,7 @@ TEST(api, test_one_accounts_delegates)
 
 TEST(api, test_one_accounts_delegates_fee)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegatesFeeResponse = arkClient.accountDelegatesFee(darkAddress);
     auto parser = Ark::Test::Utils::makeJSONString(delegatesFeeResponse);
@@ -117,7 +117,7 @@ TEST(api, test_one_accounts_delegates_fee)
 
 TEST(api, test_one_accounts_public_key)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto pubkeyResponse = arkClient.accountPublickey(darkAddress);
     auto parser = Ark::Test::Utils::makeJSONString(pubkeyResponse);

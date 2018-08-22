@@ -102,7 +102,7 @@
 */
 TEST(api, test_two_node_configuration)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto nodeConfiguration = arkClient.nodeConfiguration();
     auto parser = Ark::Test::Utils::makeJSONString(nodeConfiguration);
@@ -142,7 +142,7 @@ TEST(api, test_two_node_configuration)
  */
 TEST(api, test_two_node_status)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto nodeStatus = arkClient.nodeStatus();
     auto parser = Ark::Test::Utils::makeJSONString(nodeStatus);
@@ -173,7 +173,7 @@ TEST(api, test_two_node_status)
  */
 TEST(api, test_two_node_syncing)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto nodeSycing = arkClient.nodeSycing();
     auto parser = Ark::Test::Utils::makeJSONString(nodeSycing);

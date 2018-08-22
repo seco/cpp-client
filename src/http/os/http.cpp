@@ -34,18 +34,14 @@ class PlatformHTTP : public AbstractHTTP
 
             curl = curl_easy_init();
             if(curl) {
+                curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
                 curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
                 curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-
-                curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
-                
                 curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                 curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
                 res = curl_easy_perform(curl);
                 curl_easy_cleanup(curl);
             }
-
             return readBuffer;
         }
 
@@ -71,20 +67,16 @@ class PlatformHTTP : public AbstractHTTP
 
             curl = curl_easy_init();
             if(curl) {
+                curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
                 curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
                 curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-
-                curl_easy_setopt(curl, CURLOPT_URL, ss.str().c_str());
-                // curl_easy_setopt(curl, CURLOPT_SSLKEY, fingerprint);
-                
                 curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                 curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
                 res = curl_easy_perform(curl);
                 curl_easy_cleanup(curl);
             }
             return readBuffer;
-        } // needs real HTTPS (fingerprint/cert-checking) implemented
+        } // needs HTTPS thumbprint/cert verification
 };
 
 }

@@ -37,7 +37,7 @@
  */
 TEST(api, test_two_delegate)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("boldninja");
     auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
@@ -233,7 +233,7 @@ TEST(api, test_two_delegate)
  */
 TEST(api, test_two_delegate_blocks)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateBlocksResponse = arkClient.delegateBlocks("boldninja", 5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(delegateBlocksResponse);
@@ -313,7 +313,7 @@ TEST(api, test_two_delegate_blocks)
  */
 TEST(api, test_two_delegate_voters)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegateVotersResponse = arkClient.delegateVoters("boldninja", 5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(delegateVotersResponse);
@@ -472,7 +472,7 @@ TEST(api, test_two_delegate_voters)
  */
 TEST(api, test_two_delegates)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto delegates = arkClient.delegates(5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(delegates);

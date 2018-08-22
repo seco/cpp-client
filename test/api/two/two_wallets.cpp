@@ -21,7 +21,7 @@
  */
 TEST(api, test_two_wallet)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto wallet = arkClient.wallet("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk");
     auto parser = Ark::Test::Utils::makeJSONString(wallet);
@@ -55,7 +55,7 @@ TEST(api, test_two_wallet)
  */
 TEST(api, test_two_wallets)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto wallets = arkClient.wallets("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(wallets);
@@ -81,7 +81,7 @@ TEST(api, test_two_wallets)
  */
 TEST(api, test_two_wallets_search)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsSearch = arkClient.walletsSearch("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
@@ -143,7 +143,7 @@ TEST(api, test_two_wallets_search)
  */
 TEST(api, test_two_wallets_top)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsTop = arkClient.walletsTop(5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsTop);
@@ -232,7 +232,7 @@ TEST(api, test_two_wallets_top)
  */
 TEST(api, test_two_wallets_transactions)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsTransactions = arkClient.walletsTransactions("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsTransactions);
@@ -305,7 +305,7 @@ TEST(api, test_two_wallets_transactions)
  */
 TEST(api, test_two_wallets_transactions_received)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsTransactionsReceived = arkClient.walletsTransactionsReceived("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsReceived);
@@ -341,7 +341,7 @@ TEST(api, test_two_wallets_transactions_received)
  */
 TEST(api, test_two_wallets_transactions_sent)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsTransactionsSent = arkClient.walletsTransactionsSent("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsSent);
@@ -398,7 +398,7 @@ TEST(api, test_two_wallets_transactions_sent)
  */
 TEST(api, test_two_wallets_votes)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto walletsVotes = arkClient.walletsVotes("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 1, 1);
     auto parser = Ark::Test::Utils::makeJSONString(walletsVotes);

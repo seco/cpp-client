@@ -8,7 +8,7 @@
 
 TEST(api, test_one_peers_peer)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto peerResponse = arkClient.peer("167.114.29.54", 4002);
     auto parser = Ark::Test::Utils::makeJSONString(peerResponse);
@@ -47,7 +47,7 @@ TEST(api, test_one_peers_peer)
 
 TEST(api, test_one_peers_peers)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto peersResponse = arkClient.peers();
     auto parser = Ark::Test::Utils::makeJSONString(peersResponse);
@@ -88,7 +88,7 @@ TEST(api, test_one_peers_peers)
 
 TEST(api, test_one_peers_version)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto versionResponse = arkClient.peerVersion();
     auto parser = Ark::Test::Utils::makeJSONString(versionResponse);

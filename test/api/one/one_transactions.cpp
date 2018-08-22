@@ -14,7 +14,7 @@ namespace
 
 TEST(api, test_transactions_transaction)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactionResponse = arkClient.transaction(transactionID);
     auto parser = Ark::Test::Utils::makeJSONString(transactionResponse);
@@ -67,7 +67,7 @@ TEST(api, test_transactions_transaction)
 
 TEST(api, test_transactions_transactions)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactionsResponse = arkClient.transactions();
     auto parser = Ark::Test::Utils::makeJSONString(transactionsResponse);

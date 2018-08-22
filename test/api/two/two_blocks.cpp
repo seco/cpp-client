@@ -41,7 +41,7 @@
  */
 TEST(api, test_two_block)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockResponse = arkClient.block("17103087165885061305");
     auto parser = Ark::Test::Utils::makeJSONString(blockResponse);
@@ -135,7 +135,7 @@ TEST(api, test_two_block)
  */
 TEST(api, test_two_block_transactions)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockTransactionsResponse = arkClient.blockTransactions("4738358981673511380");
     auto parser = Ark::Test::Utils::makeJSONString(blockTransactionsResponse);
@@ -471,7 +471,7 @@ TEST(api, test_two_block_transactions)
  */
 TEST(api, test_two_blocks)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blocksResponse = arkClient.blocks();
     auto parser = Ark::Test::Utils::makeJSONString(blocksResponse);
@@ -773,7 +773,7 @@ TEST(api, test_two_blocks)
  */
 TEST(api, test_two_blocks_limit_page)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const int limit = 10;
     const int page = 1;

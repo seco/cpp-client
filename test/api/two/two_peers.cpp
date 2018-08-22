@@ -22,7 +22,7 @@
  */
 TEST(api, test_two_peer)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto peer = arkClient.peer("167.114.29.55");
     auto parser = Ark::Test::Utils::makeJSONString(peer);
@@ -107,7 +107,7 @@ TEST(api, test_two_peer)
  */
 TEST(api, test_two_peers)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto peers = arkClient.peers(5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(peers);

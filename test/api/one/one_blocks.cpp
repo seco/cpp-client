@@ -8,7 +8,7 @@
 
 TEST(api, test_one_blocks_block)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockResponse = arkClient.block("4367122150875693402");
     auto parser = Ark::Test::Utils::makeJSONString(blockResponse);
@@ -65,7 +65,7 @@ TEST(api, test_one_blocks_block)
 
 TEST(api, test_one_blocks_blocks)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blocksResponse = arkClient.blocks();
     auto parser = Ark::Test::Utils::makeJSONString(blocksResponse);
@@ -82,7 +82,7 @@ TEST(api, test_one_blocks_blocks)
 
 TEST(api, test_one_blocks_epoch)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto epochResponse = 	arkClient.blockEpoch();
     auto parser = Ark::Test::Utils::makeJSONString(epochResponse);
@@ -96,7 +96,7 @@ TEST(api, test_one_blocks_epoch)
 
 TEST(api, test_one_blocks_fee)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockFeeResponse = arkClient.blockFee();
     auto parser = Ark::Test::Utils::makeJSONString(blockFeeResponse);
@@ -110,7 +110,7 @@ TEST(api, test_one_blocks_fee)
 
 TEST(api, test_one_blocks_fees)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockFeesResponse = arkClient.blockFees();
     auto parser = Ark::Test::Utils::makeJSONString(blockFeesResponse);
@@ -136,7 +136,7 @@ TEST(api, test_one_blocks_fees)
 
 TEST(api, test_one_blocks_height)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockHeightResponse = arkClient.blockHeight();
     auto parser = Ark::Test::Utils::makeJSONString(blockHeightResponse);
@@ -155,7 +155,7 @@ TEST(api, test_one_blocks_height)
 
 TEST(api, test_one_blocks_milestone)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockMilestoneResponse = arkClient.blockMilestone();
     auto parser = Ark::Test::Utils::makeJSONString(blockMilestoneResponse);
@@ -170,7 +170,7 @@ TEST(api, test_one_blocks_milestone)
 
 TEST(api, test_one_blocks_nethash)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto nethashResponse = arkClient.blockNethash();
     auto parser = Ark::Test::Utils::makeJSONString(nethashResponse);
@@ -185,7 +185,7 @@ TEST(api, test_one_blocks_nethash)
 
 TEST(api, test_one_blocks_reward)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockRewardResponse = arkClient.blockReward();
     auto parser = Ark::Test::Utils::makeJSONString(blockRewardResponse);
@@ -199,7 +199,7 @@ TEST(api, test_one_blocks_reward)
 
 TEST(api, test_one_blocks_status)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockStatusResponse = arkClient.blockStatus();
     auto parser = Ark::Test::Utils::makeJSONString(blockStatusResponse);
@@ -237,7 +237,7 @@ TEST(api, test_one_blocks_status)
 
 TEST(api, test_one_blocks_supply)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto blockSupplyResponse = arkClient.blockSupply();
     auto parser = Ark::Test::Utils::makeJSONString(blockSupplyResponse);

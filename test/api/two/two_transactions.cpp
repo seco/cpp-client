@@ -30,7 +30,7 @@
  */
 TEST(api, test_two_transaction)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transaction = arkClient.transaction("26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa");
     auto parser = Ark::Test::Utils::makeJSONString(transaction);
@@ -92,7 +92,7 @@ TEST(api, test_two_transaction)
  */
 TEST(api, test_two_transaction_types)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto types = arkClient.transactionTypes();
     auto parser = Ark::Test::Utils::makeJSONString(types);
@@ -146,7 +146,7 @@ TEST(api, test_two_transaction_types)
  */
 TEST(api, test_two_transaction_unconfirmed)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactionUnconfirmed = arkClient.transactionUnconfirmed("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48");
     auto parser = Ark::Test::Utils::makeJSONString(transactionUnconfirmed);
@@ -214,7 +214,7 @@ TEST(api, test_two_transaction_unconfirmed)
  */
 TEST(api, test_two_transactions)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactions = arkClient.transactions(2, 1);
     auto parser = Ark::Test::Utils::makeJSONString(transactions);
@@ -263,7 +263,7 @@ TEST(api, test_two_transactions)
  */
 TEST(api, test_two_transactions_unconfirmed)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactionsUnconfirmed = arkClient.transactionsUnconfirmed(5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(transactionsUnconfirmed);
@@ -285,7 +285,7 @@ TEST(api, test_two_transactions_unconfirmed)
  */
 TEST(api, test_two_transactions_search)
 {
-    Ark::V2::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto transactions = arkClient.transactions("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48", 5, 1);
     auto parser = Ark::Test::Utils::makeJSONString(transactions);

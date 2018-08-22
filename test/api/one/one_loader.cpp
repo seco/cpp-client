@@ -8,7 +8,7 @@
 
 TEST(api, test_one_loader_autoconfigure)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
 
     const auto autoconfigureResponse = arkClient.loaderAutoconfigure();
     auto parser = Ark::Test::Utils::makeJSONString(autoconfigureResponse);
@@ -35,7 +35,7 @@ TEST(api, test_one_loader_autoconfigure)
 
 TEST(api, test_one_loader_status)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
     
     const auto statusResponse = arkClient.loaderStatus();
     auto parser = Ark::Test::Utils::makeJSONString(statusResponse);
@@ -57,7 +57,7 @@ TEST(api, test_one_loader_status)
 
 TEST(api, test_one_loader_sync)
 {
-    Ark::V1::Client arkClient(DEVNET);
+    Ark::Client arkClient(DEVNET);
     
     const auto syncResponse = arkClient.loaderSync();
     auto parser = Ark::Test::Utils::makeJSONString(syncResponse);
