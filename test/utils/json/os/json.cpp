@@ -1,5 +1,4 @@
 
-
 #include "utils/helpers.h"
 
 #ifndef USE_IOT
@@ -124,8 +123,8 @@ struct JSON : public JSONInterface
             ss << j;
             std::string jStr = ss.str();
             return jStr;
-        }
-        /*************************************************/	
+        };
+        /*************************************************/
 
 };
 

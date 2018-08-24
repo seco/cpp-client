@@ -7,6 +7,7 @@ namespace Ark {
 namespace API {
 namespace ONE {
 namespace Paths {
+
 namespace Accounts
 {
     const auto getBalance_s = "/api/accounts/getBalance";
@@ -15,7 +16,6 @@ namespace Accounts
     const auto delegates_s = "/api/accounts/delegates";
     const auto accounts_s = "/api/accounts";
 };
-
 /**************************************************************************************************/
 namespace Blocks
 {

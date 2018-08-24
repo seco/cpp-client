@@ -163,12 +163,12 @@ TEST(api, test_two_node_status)
  * https://dexplorer.ark.io:8443/api/v2/node/syncing
  * Expected Response:
     {
-        "data": {
-            "syncing": false,
-            "blocks": -6303,
-            "height": 174893,
-            "id": "8997771716382553758"
-        }
+    "data": {
+        "syncing": false,
+        "blocks": -5199,
+        "height": 6916,
+        "id": "13992612323153287486"
+    }
     }
  */
 TEST(api, test_two_node_syncing)
@@ -190,7 +190,6 @@ TEST(api, test_two_node_syncing)
     ASSERT_STRNE("", height.c_str());
 
     const auto id = parser->valueIn("data", "id");
-    ASSERT_STRNE("0", id.c_str());
     ASSERT_STRNE("", id.c_str());
 }
 

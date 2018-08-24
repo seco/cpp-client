@@ -7,23 +7,28 @@
 #ifdef HAS_TWO_API
 
 /* test_two_transactions_transaction
- * https://dexplorer.ark.io:8443/api/v2/transactions/26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa
+ * https://dexplorer.ark.io:8443/api/v2/transactions/b324cea5c5a6c15e6ced3ec9c3135a8022eeadb8169f7ba66c80ebc82b0ac850
  * Expected Response:
     {
     "data": {
-        "id": "26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa",
-        "blockId": "127299823224199004",
-        "type": 0,
-        "amount": 100000000,
-        "fee": 10000000,
-        "sender": "DFyUhQW52sNB5PZdS7VD9HknwYrSNHPQDq",
-        "recipient": "DFyUhQW52sNB5PZdS7VD9HknwYrSNHPQDq",
-        "signature": "304402207536fe55d98fda006739596527fd3016238e27bcbea3e708456071e6d71ec54102202adea25988f3159b00d1a19290817a306d6162c0beb7bac9707cc1139309677e",
-        "confirmations": 1743,
+        "id": "b324cea5c5a6c15e6ced3ec9c3135a8022eeadb8169f7ba66c80ebc82b0ac850",
+        "blockId": "4375573732170746923",
+        "type": 3,
+        "amount": 0,
+        "fee": 100000000,
+        "sender": "DKcFDN6mhLAheRAfmN6LT1e4AeyF1Fd9bY",
+        "recipient": "DKcFDN6mhLAheRAfmN6LT1e4AeyF1Fd9bY",
+        "signature": "3045022100dc27398f4f3a24e55dc1ee87900de988254daa3fed71e82f4d6ef85ed4f9d9f8022025d71158cc15672863b2263622026ec19fa9cc9d2e8c78fa79eb2d8f4ef45fc7",
+        "asset": {
+            "votes": [
+                "+02a1b28b59216ea270349c6be5881fba356cb324f320cb59b74a13f28588cce253"
+            ]
+        },
+        "confirmations": 379,
         "timestamp": {
-            "epoch": 44678050,
-            "unix": 1534779250,
-            "human": "2018-08-20T15:34:10Z"
+            "epoch": 45024866,
+            "unix": 1535126066,
+            "human": "2018-08-24T15:54:26Z"
         }
     }
     }
@@ -32,45 +37,45 @@ TEST(api, test_two_transaction)
 {
     Ark::Client arkClient(DEVNET);
 
-    const auto transaction = arkClient.transaction("26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa");
+    const auto transaction = arkClient.transaction("b324cea5c5a6c15e6ced3ec9c3135a8022eeadb8169f7ba66c80ebc82b0ac850");
     auto parser = Ark::Test::Utils::makeJSONString(transaction);
 
     const auto id = parser->valueIn("data", "id");
-    ASSERT_STREQ("26394cc3d609edec346151a21cce24e6aea09ecc95812dd1a86fff46732466fa", id.c_str());
+    ASSERT_STREQ("b324cea5c5a6c15e6ced3ec9c3135a8022eeadb8169f7ba66c80ebc82b0ac850", id.c_str());
 
     const auto blockId = parser->valueIn("data", "blockId");
-    ASSERT_STREQ("127299823224199004", blockId.c_str());
+    ASSERT_STREQ("4375573732170746923", blockId.c_str());
 
     const auto type = parser->valueIn("data", "type");
-    ASSERT_STREQ("0", type.c_str());
+    ASSERT_STREQ("3", type.c_str());
 
     const auto amount = parser->valueIn("data", "amount");
-    ASSERT_STREQ("100000000", amount.c_str());
+    ASSERT_STREQ("0", amount.c_str());
 
     const auto fee = parser->valueIn("data", "fee");
-    ASSERT_STREQ("10000000", fee.c_str());
+    ASSERT_STREQ("100000000", fee.c_str());
 
     const auto sender = parser->valueIn("data", "sender");
-    ASSERT_STREQ("DFyUhQW52sNB5PZdS7VD9HknwYrSNHPQDq", sender.c_str());
+    ASSERT_STREQ("DKcFDN6mhLAheRAfmN6LT1e4AeyF1Fd9bY", sender.c_str());
 
     const auto recipient = parser->valueIn("data", "recipient");
-    ASSERT_STREQ("DFyUhQW52sNB5PZdS7VD9HknwYrSNHPQDq", recipient.c_str());
+    ASSERT_STREQ("DKcFDN6mhLAheRAfmN6LT1e4AeyF1Fd9bY", recipient.c_str());
 
     const auto signature = parser->valueIn("data", "signature");
-    ASSERT_STREQ("304402207536fe55d98fda006739596527fd3016238e27bcbea3e708456071e6d71ec54102202adea25988f3159b00d1a19290817a306d6162c0beb7bac9707cc1139309677e", signature.c_str());
+    ASSERT_STREQ("3045022100dc27398f4f3a24e55dc1ee87900de988254daa3fed71e82f4d6ef85ed4f9d9f8022025d71158cc15672863b2263622026ec19fa9cc9d2e8c78fa79eb2d8f4ef45fc7", signature.c_str());
 
     const auto confirmations = parser->valueIn("data", "confirmations");
     ASSERT_STRNE("0", confirmations.c_str());
     ASSERT_STRNE("", confirmations.c_str());
 
     const auto epoch = parser->subvalueNestedIn("data", "timestamp", "epoch");
-    ASSERT_STREQ("44678050", epoch.c_str());
+    ASSERT_STREQ("45024866", epoch.c_str());
 
     const auto timestampUnix = parser->subvalueNestedIn("data", "timestamp", "unix");
-    ASSERT_STREQ("1534779250", timestampUnix.c_str());
+    ASSERT_STREQ("1535126066", timestampUnix.c_str());
 
     const auto human = parser->subvalueNestedIn("data", "timestamp", "human");
-    ASSERT_STREQ("2018-08-20T15:34:10Z", human.c_str());
+    ASSERT_STREQ("2018-08-24T15:54:26Z", human.c_str());
 }
 
 /* test_two_transactions_transaction_types

@@ -14,14 +14,11 @@ std::string Ark::API::TWO::Wallets::wallet(const char *const identifier)
 /**************************************************************************************************/
 
 std::string Ark::API::TWO::Wallets::wallets(
-        const char *const identifier,
         int limit,
         int page
 ) {
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Wallets::base);
-        strcat(uri, "/");
-        strcat(uri, identifier);
         strcat(uri, "?limit=");
         std::strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");

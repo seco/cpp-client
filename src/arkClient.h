@@ -1,44 +1,41 @@
 /***************************************
-* Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
-* https://github.com/ArkEcosystem/Cpp-Client
-*
-* sleepdeficit(simon@ark.io)
-* MIT | Copyright S. Downey 2017-2018
-***************************************/
+ * Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
+ * https://github.com/ArkEcosystem/Cpp-Client
+ *
+ * sleepdeficit(simon@ark.io)
+ * MIT | Copyright S. Downey 2017-2018
+ ***************************************/
+
+/**************************************************************************************************/
+/**************************************************************************************************/
 
 #ifndef ARKCLIENT_H
 #define ARKCLIENT_H
 
 /*************************************************/
+
 #define HAS_CLIENT
+
 /*************************************************/
-// #define HAS_ONE_API
-#define HAS_TWO_API
+
+// #define USE_ONE_API
+#define USE_TWO_API
+
 /*************************************************/
-#define DEVNET_EXPLORER_URL "dexplorer.ark.io" // char[16+1]
-#define MAINNET_EXPLORER_URL "explorer.ark.io" // char[15+1]
+
+#define DEVNET_EXPLORER_URL "dexplorer.ark.io"
+#define MAINNET_EXPLORER_URL "explorer.ark.io"
 
 #define DEFAULT_EXPLORER_API_PORT 8443
-#define DEFAULT_EXPLORER_SSL_FINGERPRINT "94 44 0B 97 29 13 21 1A CF A5 D1 15 BE C3 10 F1 AB 12 B5 F5" // char[59+1]
-/*************************************************/
-enum NetworkType { DEVNET, MAINNET };
-/*************************************************/
+#define DEFAULT_EXPLORER_SSL_FINGERPRINT "BB A9 38 44 EB DD B6 9B D6 1C A2 1A 69 B3 A7 3E C1 B1 E2 B8"
 
-/*************************************************/
+/**************************************************************************************************/
+/**************************************************************************************************/
+
+#include "api/api.h"
 #include "connection/connection.h"
 
-#ifdef HAS_ONE_API
-
-    #include "api/one/one_api.h"
-    class VersionedAPI : public ONE_API, virtual Ark::Utilities::Network::Connection {};
-
-#elif defined(HAS_TWO_API)
-
-    #include "api/two/two_api.h"
-    class VersionedAPI : public TWO_API, virtual Ark::Utilities::Network::Connection {};
-
-#endif
-/*************************************************/
+enum NetworkType { DEVNET, MAINNET };
 
 /*************************************************
 * Ark:Client
@@ -52,5 +49,9 @@ class Client : public VersionedAPI, virtual Ark::Utilities::Network::Connection
         explicit Client(const NetworkType netType);
 };
 };
+/*************************************************/
+
+/**************************************************************************************************/
+/**************************************************************************************************/
 
 #endif

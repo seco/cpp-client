@@ -18,17 +18,17 @@
 #include <Arduino.h>
 #include <pgmspace.h>
 
-	const static inline std::string toString(int integer)
-	{
-		return String(integer).c_str();
-	}
+    const static inline std::string toString(int integer)
+    {
+        return String(integer).c_str();
+    }
 
 #else
 
-	static std::string toString(int integer)
-	{
-		return std::to_string(integer);
-	}
+    static std::string toString(int integer)
+    {
+        return std::to_string(integer);
+    }
 
 #endif
 

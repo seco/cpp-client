@@ -16,8 +16,7 @@ std::string Ark::API::TWO::Delegates::delegate(const char *const identifier)
 std::string Ark::API::TWO::Delegates::delegates(
         int limit,
         int page
-)
-{
+) {
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Delegates::base);
         strcat(uri, "?limit=");
@@ -36,6 +35,7 @@ std::string Ark::API::TWO::Delegates::delegateBlocks(
 ) {
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Delegates::base);
+        strcat(uri, "/");
         strcat(uri, identifier);
         strcat(uri, "/blocks");
         strcat(uri, "?limit=");

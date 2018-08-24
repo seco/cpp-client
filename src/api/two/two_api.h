@@ -1,10 +1,4 @@
-/***************************************
-* Ark-Cpp-Client - for the Ark Ecosystem (ark.io)
-* https://github.com/ArkEcosystem/Cpp-Client
-*
-* sleepdeficit(simon@ark.io)
-* MIT | Copyright S. Downey 2017-2018
-***************************************/
+
 
 #ifndef TWO_API_H
 #define TWO_API_H
