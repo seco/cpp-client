@@ -11,12 +11,12 @@
  * Expected Response:
     {
     "data": {
-        "ip": "167.114.29.55",
-        "port": 4002,
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 190
+        "ip": "string",
+        "port": int,
+        "version": "string",
+        "status": "string",
+        "os": "string",
+        "latency": int
     }
     }
  */
@@ -25,26 +25,26 @@ TEST(api, test_two_peer)
     Ark::Client arkClient(DEVNET);
 
     const auto peer = arkClient.peer("167.114.29.55");
-    auto parser = Ark::Test::Utils::makeJSONString(peer);
 
-    const auto ip = parser->valueIn("data", "ip");
-    ASSERT_STREQ("167.114.29.55", ip.c_str());
+    auto parser = Ark::Test::Utils::JSONParser(peer);
 
-    const auto port = parser->valueIn("data", "port");
-    ASSERT_STREQ("4002", port.c_str());
+    const auto ip = parser->getRoot()["data"]["ip"].as<const char*>();
+    ASSERT_STREQ("167.114.29.55", ip);
 
-    const auto version = parser->valueIn("data", "version");
-    ASSERT_STREQ("2.0.0", version.c_str());
+    const auto port = parser->getRoot()["data"]["port"].as<int>();
+    ASSERT_STREQ("4002", toString(port).c_str());
 
-    const auto status = parser->valueIn("data", "status");
-    ASSERT_STREQ("OK", status.c_str());
+    const auto version = parser->getRoot()["data"]["version"].as<const char*>();
+    ASSERT_STREQ("2.0.0", version);
 
-    const auto os = parser->valueIn("data", "os");
-    ASSERT_STREQ("linux", os.c_str());
+    const auto status = parser->getRoot()["data"]["status"].as<const char*>();
+    ASSERT_STREQ("OK", status);
 
-    const auto latency = parser->valueIn("data", "latency");
-    ASSERT_STRNE("0", latency.c_str());
-    ASSERT_STRNE("", latency.c_str());
+    const auto os = parser->getRoot()["data"]["os"].as<const char*>();
+    ASSERT_STREQ("linux", os);
+
+    const auto latency = parser->getRoot()["data"]["latency"].as<int>();
+    ASSERT_STRNE("0", toString(latency).c_str());
 }
 
 /* test_two_peers_peers
@@ -52,55 +52,23 @@ TEST(api, test_two_peer)
  * Expected Response:
     {
     "meta": {
-        "count": 5,
-        "pageCount": 1,
-        "totalCount": 5,
-        "next": null,
-        "previous": null,
-        "self": "\/api\/v2\/peers?limit=5&page=1",
-        "first": "\/api\/v2\/peers?limit=5&page=1",
-        "last": "\/api\/v2\/peers?limit=5&page=1"
+        "count": int,
+        "pageCount": int,
+        "totalCount": int,
+        "next": "string",
+        "previous": "string",
+        "self": "/api/v2/peers?limit=5&page=1",
+        "first": "/api/v2/peers?limit=5&page=1",
+        "last": "/api/v2/peers?limit=5&page=1"
     },
     "data": [
         {
-        "ip": "37.59.70.165",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 35
-        },
-        {
-        "ip": "145.239.75.25",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 36
-        },
-        {
-        "ip": "104.238.173.32",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
-        },
-        {
-        "ip": "45.77.90.28",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
-        },
-        {
-        "ip": "209.250.228.98",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
+        "ip": "string",
+        "port": "string",
+        "version": "string",
+        "status": "string",
+        "os": "string",
+        "latency": int
         }
     ]
     }
@@ -110,38 +78,37 @@ TEST(api, test_two_peers)
     Ark::Client arkClient(DEVNET);
 
     const auto peers = arkClient.peers(5, 1);
-    auto parser = Ark::Test::Utils::makeJSONString(peers);
+    auto parser = Ark::Test::Utils::JSONParser(peers);
 
-    const auto count = parser->valueIn("meta", "count");
-    ASSERT_STREQ("5", count.c_str());
+    const auto count = parser->getRoot()["meta"]["count"].as<int>();
+    ASSERT_EQ(5, count);
 
-    const auto pageCount = parser->valueIn("meta", "pageCount");
-    ASSERT_STREQ("1", pageCount.c_str());
+    const auto pageCount = parser->getRoot()["meta"]["pageCount"].as<int>();
+    ASSERT_EQ(1, pageCount);
 
-    const auto totalCount = parser->valueIn("meta", "totalCount");
-    ASSERT_STREQ("5", totalCount.c_str());
+    const auto totalCount = parser->getRoot()["meta"]["totalCount"].as<int>();
+    ASSERT_EQ(5, totalCount);
 
     for (int i = 0; i < 5; i++)
     {
-        const auto ip = parser->subarrayValueIn("data", i, "ip");
-        ASSERT_STRNE("", ip.c_str());
+        const auto ip = parser->getRoot()["data"][i]["ip"].as<const char*>();
+        ASSERT_STRNE("", ip);
 
-        const auto port = parser->subarrayValueIn("data", i, "port");
-        ASSERT_STREQ("4002", port.c_str());
+        const auto port = parser->getRoot()["data"][i]["port"].as<int>();
+        ASSERT_EQ(4002, port);
 
-        const auto version = parser->subarrayValueIn("data", i, "version");
-        ASSERT_STREQ("2.0.0", version.c_str());
+        const auto version = parser->getRoot()["data"][i]["version"].as<const char*>();
+        ASSERT_STREQ("2.0.0", version);
 
-        const auto status = parser->subarrayValueIn("data", i, "status");
-        // ASSERT_STREQ("OK", status.c_str());
-        // ASSERT_STREQ("ECONNABORTED", status.c_str());
+        // const auto status = parser->getRoot()["data"][i]["status"].as<const char*>();
+        // ASSERT_STREQ("OK", status);
+        // ASSERT_STREQ("ECONNABORTED", status);
 
-        const auto os = parser->subarrayValueIn("data", 0, "os");
-        ASSERT_STRNE("", os.c_str());
+        const auto os = parser->getRoot()["data"][0]["os"].as<const char*>();
+        ASSERT_STRNE("", os);
 
-        const auto latency = parser->subarrayValueIn("data", 0, "latency");
-        ASSERT_STRNE("0", latency.c_str());
-        ASSERT_STRNE("", latency.c_str());
+        const auto latency = parser->getRoot()["data"][0]["latency"].as<int>();
+        ASSERT_STRNE("0", toString(latency).c_str());
     };
 }
 

@@ -18,16 +18,22 @@
 #include <Arduino.h>
 #include <pgmspace.h>
 
-    const static inline std::string toString(int integer)
-    {
-        return String(integer).c_str();
+    const static inline std::string toString(unsigned long long val) {
+        char buffer[20];
+        sprintf(buffer, "%llu", val);
+        return buffer;
     }
 
 #else
 
-    static std::string toString(int integer)
-    {
-        return std::to_string(integer);
+#include <string>
+#include <sstream>
+
+    template <typename T>
+    std::string toString(T val) {
+        std::stringstream stream;
+        stream << val;
+        return stream.str();
     }
 
 #endif
