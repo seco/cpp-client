@@ -18,14 +18,14 @@
 #include <Arduino.h>
 #include <pgmspace.h>
 
-    const static inline std::string toString(unsigned long long val) {
-        char buffer[20];
-        sprintf(buffer, "%llu", val);
-        return buffer;
+    const static inline std::string toString(int integer)
+    {
+        return String(integer).c_str();
     }
 
 #else
 
+<<<<<<< HEAD
 #include <sstream>
 
     template <typename T>
@@ -33,6 +33,11 @@
         std::stringstream stream;
         stream << val;
         return stream.str();
+=======
+    static std::string toString(int integer)
+    {
+        return std::to_string(integer);
+>>>>>>> parent of 878b983... rewrite json dependency
     }
 
 #endif

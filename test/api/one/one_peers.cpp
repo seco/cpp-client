@@ -11,36 +11,38 @@ TEST(api, test_one_peers_peer)
     Ark::Client arkClient(DEVNET);
 
     const auto peerResponse = arkClient.peer("167.114.29.54", 4002);
+    auto parser = Ark::Test::Utils::makeJSONString(peerResponse);
 
-    auto parser = Ark::Test::Utils::ParseJSON(peerResponse);
+    const auto success = parser->valueFor("success");
+    ASSERT_STREQ("true", success.c_str());
 
-    const auto success = parser->getRoot()["success"].as<bool>();
-    ASSERT_EQ(1, success);
+    const auto ip = parser->valueIn("peer", "ip");
+    ASSERT_STREQ("167.114.29.54", ip.c_str());
 
-    const auto ip = parser->getRoot()["peer"]["ip"].as<const char*>();
-    ASSERT_STREQ("167.114.29.54", ip);
+    const auto peer = parser->valueIn("peer", "port");
+    ASSERT_STREQ("4002", peer.c_str()); // actual value 4002 (int).
 
-    const auto peer = parser->getRoot()["peer"]["port"].as<int>();
-    ASSERT_EQ(4002, peer);
+    const auto version = parser->valueIn("peer", "version");
+    // ASSERT_STREQ("1.1.1", version.c_str());
+    ASSERT_STREQ("2.0.0", version.c_str());
 
-    const auto version = parser->getRoot()["peer"]["version"].as<const char*>();
-    // ASSERT_STREQ("1.1.1", version);
-    ASSERT_STREQ("2.0.0", version);
+    const auto errors = parser->valueIn("peer", "errors");
+    ASSERT_STREQ("0", errors.c_str()); // actual value 0 (int).
+    ASSERT_STRNE("", errors.c_str());
 
-    const auto errors = parser->getRoot()["peer"]["errors"].as<int>();
-    ASSERT_EQ(0, errors);
+    const auto os = parser->valueIn("peer", "os");
+    ASSERT_STREQ("linux4.4.0-79-generic", os.c_str());
 
-    const auto os = parser->getRoot()["peer"]["os"].as<const char*>();
-    ASSERT_STREQ("linux4.4.0-79-generic", os);
+    const auto height = parser->valueIn("peer", "height");
+    ASSERT_STRNE("0", height.c_str());
+    ASSERT_STRNE("", height.c_str());
 
-    const auto height = parser->getRoot()["peer"]["height"].as<int>();
-    ASSERT_NE(0, height);
+    const auto status = parser->valueIn("peer", "status");
+    ASSERT_STREQ("OK", status.c_str());
 
-    const auto status = parser->getRoot()["peer"]["status"].as<const char*>();
-    ASSERT_STREQ("OK", status);
-
-    const auto delay = parser->getRoot()["peer"]["delay"].as<int>();
-    ASSERT_NE(0, delay);
+    const auto delay = parser->valueIn("peer", "delay");
+    ASSERT_STRNE("0", delay.c_str()); // actual value is (int).
+    ASSERT_STRNE("", delay.c_str());
 }
 
 TEST(api, test_one_peers_peers)
@@ -48,37 +50,39 @@ TEST(api, test_one_peers_peers)
     Ark::Client arkClient(DEVNET);
 
     const auto peersResponse = arkClient.peers();
+    auto parser = Ark::Test::Utils::makeJSONString(peersResponse);
 
-    auto parser = Ark::Test::Utils::ParseJSON(peersResponse);
-
-    const auto success = parser->getRoot()["success"].as<bool>();
-    ASSERT_EQ(1, success);
+    const auto success = parser->valueFor("success");
+    ASSERT_STREQ("true", success.c_str());
 
     for (int i = 0; i < 20; i++)
     {
-        const auto ip = parser->getRoot()["peers"][i]["ip"].as<const char*>();
-        ASSERT_STRNE("", ip);
+        const auto ip = parser->subarrayValueIn("peers", i, "ip");
+        ASSERT_STRNE("", ip.c_str());
 
-        const auto port = parser->getRoot()["peers"][i]["port"].as<int>();
-        ASSERT_EQ(4002, port); // actual value 4002 (int).
+        const auto port = parser->subarrayValueIn("peers", i, "port");
+        ASSERT_STREQ("4002", port.c_str()); // actual value 4002 (int).
 
-        const auto version = parser->getRoot()["peers"][i]["version"].as<int>();
-        ASSERT_STRNE("", toString(version).c_str());
+        const auto version = parser->subarrayValueIn("peers", i, "version");
+        ASSERT_STRNE("", version.c_str());
 
-        const auto errors = parser->getRoot()["peers"][i]["errors"].as<int>();
-        ASSERT_STRNE("", toString(errors).c_str());
+        const auto errors = parser->subarrayValueIn("peers", i, "errors");
+        // ASSERT_STREQ("0", errors.c_str()); // actual value 0 (int). (1-peer: error `12`).
+        ASSERT_STRNE("", errors.c_str());
 
-        const auto os = parser->getRoot()["peers"][i]["os"].as<const char*>();
-        ASSERT_STRNE("", os);
+        const auto os = parser->subarrayValueIn("peers", i, "os");
+        ASSERT_STRNE("", os.c_str());
 
-        const auto height = parser->getRoot()["peers"][i]["height"].as<int>();
-        ASSERT_NE(0, os);
+        const auto height = parser->subarrayValueIn("peers", i, "height");
+        ASSERT_STRNE("0", os.c_str()); // actual value is (int).
+        ASSERT_STRNE("", os.c_str());
 
-        const auto status = parser->getRoot()["peers"][i]["status"].as<const char*>();
-        ASSERT_STREQ("OK", status);
+        const auto status = parser->subarrayValueIn("peers", i, "status");
+        ASSERT_STREQ("OK", status.c_str());
 
-        const auto delay = parser->getRoot()["peers"][i]["delay"].as<int>();
-        ASSERT_NE(0, delay); // actual value is (int).
+        const auto delay = parser->subarrayValueIn("peers", i, "delay");
+        ASSERT_STRNE("0", delay.c_str()); // actual value is (int).
+        ASSERT_STRNE("", delay.c_str());
     };
 }
 
@@ -87,18 +91,17 @@ TEST(api, test_one_peers_version)
     Ark::Client arkClient(DEVNET);
 
     const auto versionResponse = arkClient.peerVersion();
+    auto parser = Ark::Test::Utils::makeJSONString(versionResponse);
 
-    auto parser = Ark::Test::Utils::ParseJSON(versionResponse);
+    const auto success = parser->valueFor("success");
+    ASSERT_STREQ("true", success.c_str());
 
-    const auto success = parser->getRoot()["success"].as<bool>();
-    ASSERT_EQ(1, success);
-
-    const auto version = parser->getRoot()["version"].as<const char*>();
+    const auto version = parser->valueFor("version");
     // ASSERT_STREQ("1.3.0", version.c_str());
-    // ASSERT_STREQ("2.0.0", version);
+    ASSERT_STREQ("2.0.0", version.c_str());
 
-    const auto build = parser->getRoot()["build"].as<const char*>();
-    ASSERT_STREQ("", build);
+    const auto build = parser->valueFor("build");
+    ASSERT_STREQ("", build.c_str());
 }
 
 #endif

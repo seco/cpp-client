@@ -5,4 +5,4 @@ sudo pip install -U platformio
 platformio update
 
 # install ArduinoJson (64) and AUnit (2778) libraries
-platformio lib -g install 64@5.13.2 2778
+platformio lib -g install 64 2778

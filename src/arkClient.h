@@ -13,10 +13,14 @@
 #define ARKCLIENT_H
 
 /*************************************************/
+
 #define HAS_CLIENT
+
 /*************************************************/
+
 // #define USE_ONE_API
 #define USE_TWO_API
+
 /*************************************************/
 
 #define DEVNET_EXPLORER_URL "dexplorer.ark.io"

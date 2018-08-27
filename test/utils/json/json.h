@@ -1,17 +1,10 @@
 
-
-
 #ifndef JSON_H
 #define JSON_H
 
-#define ARDUINOJSON_USE_LONG_LONG 1
-#define ARDUINOJSON_USE_ARDUINO_STRING 0
-
-#include <ArduinoJson.h>
 #include "utils/helpers.h"
 #include <cstring>
 #include <memory>
-#include <string>
 
 namespace Ark
 {
@@ -20,28 +13,33 @@ namespace Test
 namespace Utils
 {
 /**************************************************
+* Ark::Utilities::JSONInterface 
 *
+* The purpose of this class is to serve as an
+* entry point for integrating and simplifying
+* integration of a JSON library
 **************************************************/
-struct JSON
+class JSONInterface
 {
-    private:
-        std::string jsonStr_;
-
     protected:
-        JSON() { }
-
+        JSONInterface() { }
     public:
-        JSON(std::string jsonString);
-        ~JSON(){}
-
-        JsonObject& getRoot();
+        virtual ~JSONInterface() { }
+        virtual std::string valueFor(const char *const key) = 0;
+        virtual std::string valueIn(const char *const key, const char *const subkey) = 0;
+        virtual std::string subvalueFor(const char *const key, int pos) = 0;
+        virtual std::string subvalueNestedIn(const char *const key, const char *const subkey, const char *const nested) = 0;
+        virtual std::string subarrayValueIn(const char *const key, int pos, const char *const subkey) = 0;
+        virtual std::string subarrayValueNestedIn(const char *const key, int pos, const char *const subkey, const char *const nested) = 0;
 };
 /*************************************************/
+
+/**************************************************************************************************/
 
 /**************************************************
 *	JSON object factory
 **************************************************/
-std::unique_ptr<JSON> JSONParser(std::string newJsonStr);
+std::unique_ptr<JSONInterface> makeJSONString(std::string str);
 /*************************************************/
 
 };

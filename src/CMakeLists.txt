@@ -19,15 +19,15 @@ set(PLATFORM_SRC
 	${PROJECT_SOURCE_DIR}/http/os/http.cpp
 )
 
-# set(API_ONE_SRC 
-# 	${PROJECT_SOURCE_DIR}/api/one/accounts/one_accounts.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/blocks/one_blocks.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/delegates/one_delegates.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/loader/one_loader.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
-# 	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
-# )
+set(API_ONE_SRC 
+	${PROJECT_SOURCE_DIR}/api/one/accounts/one_accounts.cpp
+	${PROJECT_SOURCE_DIR}/api/one/blocks/one_blocks.cpp
+	${PROJECT_SOURCE_DIR}/api/one/delegates/one_delegates.cpp
+	${PROJECT_SOURCE_DIR}/api/one/loader/one_loader.cpp
+	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
+	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
+	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
+)
 
 set(API_TWO_SRC 
 	${PROJECT_SOURCE_DIR}/api/two/blocks/two_blocks.cpp
@@ -37,12 +37,6 @@ set(API_TWO_SRC
 	${PROJECT_SOURCE_DIR}/api/two/transactions/two_transactions.cpp
 	${PROJECT_SOURCE_DIR}/api/two/votes/two_votes.cpp
 	${PROJECT_SOURCE_DIR}/api/two/wallets/two_wallets.cpp
-)
-
-# clone submodules
-execute_process(
-	COMMAND git submodule update --init
-	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 
 add_library(
