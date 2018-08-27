@@ -26,7 +26,6 @@
 
 #else
 
-#include <string>
 #include <sstream>
 
     template <typename T>
