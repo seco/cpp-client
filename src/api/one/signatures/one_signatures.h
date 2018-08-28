@@ -12,8 +12,8 @@ namespace ONE {
 
 class Signatures : virtual Ark::Utilities::Network::Connection
 {
-public:
-    std::string signaturesFee();
+    public:
+        std::string signaturesFee();
 };
 
 };

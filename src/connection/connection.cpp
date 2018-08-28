@@ -17,8 +17,7 @@ Ark::Utilities::Network::AbstractConnection::AbstractConnection(
 
 Ark::Utilities::Network::AbstractConnection& Ark::Utilities::Network::AbstractConnection::operator=(AbstractConnection&& other)
 {
-    if (this != &other)
-    {
+    if (this != &other) {
         this->connect(other.host_, other.port_, other.fingerprint_);
     };
     return *this;
@@ -44,8 +43,7 @@ void Ark::Utilities::Network::AbstractConnection::connect(
 ) {
     strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));
     this->port_ = newPort;
-    if (strcmp(newFingerprint, ""))
-    {
+    if (strcmp(newFingerprint, "")) {
         this->hasSSL = true;
         strncpy(this->fingerprint_, newFingerprint, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
     };
@@ -57,8 +55,7 @@ void Ark::Utilities::Network::AbstractConnection::disconnect()
 {
     strncpy(this->host_, "\0", sizeof(this->host_) / sizeof(this->host_[0]));
     this->port_ = 0;
-    if (this->hasSSL)
-    {
+    if (this->hasSSL) {
         this->hasSSL = false;
         strncpy(this->fingerprint_, "\0", sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
     };

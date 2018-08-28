@@ -10,12 +10,9 @@
 #include <cstring>
 #include <cstdio>
 
-namespace Ark
-{
-namespace API
-{
-namespace ONE
-{
+namespace Ark {
+namespace API {
+namespace ONE {
 
 class Peers : virtual Ark::Utilities::Network::Connection
 {
@@ -25,8 +22,8 @@ class Peers : virtual Ark::Utilities::Network::Connection
         std::string peerVersion();
 };
 
-}; // namespace ONE
-}; // namespace API
-}; // namespace Ark
+};
+};
+};
 
 #endif
