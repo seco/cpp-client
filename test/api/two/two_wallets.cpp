@@ -117,6 +117,7 @@ TEST(api, test_two_wallets)
     };
 }
 
+#ifndef USE_IOT
 /* test_two_wallets_search
  *
  * Expected Response:
@@ -156,7 +157,7 @@ TEST(api, test_two_wallets_search)
     const auto publicKey = parser->subarrayValueIn("data", 0, "publicKey");
     ASSERT_STREQ("03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d", publicKey.c_str());
 }
-
+#endif
 /* test_two_wallets_top_limit_page
  * https://dexplorer.ark.io:8443/api/v2/wallets/top?limit=5&page=1
  * Expected Response:

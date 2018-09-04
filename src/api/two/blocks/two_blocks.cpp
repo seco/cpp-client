@@ -30,13 +30,19 @@ std::string Ark::API::TWO::Blocks::blocks(
 /**************************************************************************************************/
 
 std::string Ark::API::TWO::Blocks::blockTransactions(
-        const char *const blockId
+        const char *const blockId,
+        int limit,
+        int page
 ) {
     char uri[256] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
         strcat(uri, "/");
         strcat(uri, blockId);
         strcat(uri, "/transactions");
+        strcat(uri, "?limit=");
+        strcat(uri, toString(limit).c_str());
+        strcat(uri, "&page=");
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 

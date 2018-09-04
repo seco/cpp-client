@@ -83,8 +83,12 @@ std::string Ark::Utilities::Network::AbstractConnection::send(
         const char* const endpoint,
         const char *const bodyParameters
 ) {
+    if (this->hasSSL) {
+        return this->http->postHTTPS(this->host_, this->port_, endpoint, this->fingerprint_, bodyParameters);
 
+    } else {
         return this->http->post(this->host_, this->port_, endpoint, bodyParameters);
+    };
 }
 
 /**************************************************************************************************/

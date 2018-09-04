@@ -53,6 +53,14 @@ class AbstractHTTP
                 const char *bodyParameters
         ) = 0;
 
+        virtual std::string postHTTPS(
+                const char *const peer,
+                int port,
+                const char *const endpoint,
+                const char *const fingerprint,
+                const char *bodyParameters
+        ) = 0;
+
 };
 /*************************************************/
 

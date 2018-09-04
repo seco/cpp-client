@@ -20,21 +20,21 @@ namespace Utilities {
 namespace Network {
 namespace {
 
-/*************************************************
-*
-**************************************************/
+/**
+ *
+ **/
 class PlatformHTTP : public AbstractHTTP
 {
     public:
-        /*************************************************
-        *
-        **************************************************/
+        /**
+         *
+         /**/
         PlatformHTTP() = default;
-        /*************************************************/
+        /**/
 
-        /*************************************************
-        *
-        **************************************************/
+        /**
+         *
+         **/
         void printConnection(
                 const char *const peer,
                 const int port,
@@ -45,11 +45,11 @@ class PlatformHTTP : public AbstractHTTP
             Serial.print(port);
             Serial.println(request);
         };
-        /*************************************************/
+        /**/
 
-        /*************************************************
-        *
-        **************************************************/
+        /**
+         *
+         **/
         int tryConnection(
                 HTTPClient &client,
                 const char *const peer,
@@ -78,11 +78,11 @@ class PlatformHTTP : public AbstractHTTP
             };
             return code;
         };
-        /*************************************************/
+        /**/
 
-        /*************************************************
-        *
-        **************************************************/
+        /**
+         *
+         **/
         std::string get(
                 const char *const peer,
                 const int port,
@@ -97,13 +97,33 @@ class PlatformHTTP : public AbstractHTTP
             }
             return http.getString().c_str();
         }
-        /*************************************************/
+        /**/
 
-        /**************************************************************************************************/
+        /**
+         *
+         **/
+        std::string post(
+                const char *const peer,
+                int port,
+                const char *const endpoint,
+                const char *bodyParameters
+        ) override {
+            HTTPClient http;
+            http.setReuse(true);
+            http.setTimeout(3000);
+            http.begin(peer, port, endpoint);
 
-        /*************************************************
-        *
-        **************************************************/
+            http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            http.POST(bodyParameters);
+            return http.getString().c_str();
+        }
+        /**/
+
+        /************************************************/
+
+        /**
+         *
+         **/
         int tryHTTPSConnection(
                 WiFiClientSecure &client,
                 const char *const peer,
@@ -131,7 +151,7 @@ class PlatformHTTP : public AbstractHTTP
                 + request
                 + " HTTP/1.1\r\n"
                 + "Host: " + peer + "\r\n"
-                + "User-Agent: cpp-client-v0.5\r\n"
+                + "User-Agent: cpp-client-v0.9\r\n"
                 + "Connection: close\r\n\r\n"
             );
 
@@ -141,11 +161,12 @@ class PlatformHTTP : public AbstractHTTP
             }
             if (client.peek() != '{') { client.readStringUntil('\n'); };
             return 200;
-        };
+        }
+        /**/
 
-        /*************************************************
-        *
-        **************************************************/
+        /**
+         *
+         **/
         std::string getHTTPS(
                 const char *const peer,
                 const int port,
@@ -168,18 +189,65 @@ class PlatformHTTP : public AbstractHTTP
             client.stop();
             return response;
         }
-        /*************************************************/
+        /**/
+
+        /**
+         *
+         **/
+        std::string postHTTPS(
+                const char *const peer,
+                int port,
+                const char *const endpoint,
+                const char *const fingerprint,
+                const char *bodyParameters
+        ) override {
+            WiFiClientSecure client;
+
+            printConnection(peer, port, endpoint);
+            auto connected = client.connect(peer, port);
+            size_t count = 0;
+            while (!connected)
+            { Serial.println("\nconnection failed...");
+            if (count >=3) { return "-1"; };
+                delay(500);
+                Serial.println("\ntrying host again.");
+                connected = client.connect(peer, port);
+                count++;
+            }
+            if (!client.verify(fingerprint, peer)) { return "-1"; }
+            client.print(
+                String("POST ")
+                + endpoint
+                + " HTTP/1.1\r\n"
+                + "Host: " + peer + "\r\n"
+                + "User-Agent: cpp-client-v0.9\r\n"
+                + "Connection: close\r\n\r\n"
+            );
+            client.print(bodyParameters);
+
+            std::string response;
+            while (client.available())
+            {
+                char c = client.read();
+                if (c != '\n') { response += c; };
+            };
+
+            client.stop();
+            
+            return response;
+        }
+        /**/
 };
 
 }
 
-/*************************************************
-* HTTP object factory
-**************************************************/
+/**
+ * HTTP object factory
+ **/
 std::unique_ptr<AbstractHTTP> makeHTTP() {
     return std::unique_ptr<AbstractHTTP>(new PlatformHTTP());
 }
-/*************************************************/
+/**/
 
 }
 }
