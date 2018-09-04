@@ -14,19 +14,6 @@ std::string Ark::API::TWO::Blocks::block(
 
 /**************************************************************************************************/
 
-std::string Ark::API::TWO::Blocks::blocks() {
-    char uri[28] = { '\0' };
-    #ifdef USE_IOT
-        strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
-    #else
-        strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
-        strcat(uri, "?limit=10&page=1");
-    #endif
-    return connection.callback(uri);
-}
-
-/**************************************************************************************************/
-
 std::string Ark::API::TWO::Blocks::blocks(
         int limit,
         const int page
@@ -34,9 +21,9 @@ std::string Ark::API::TWO::Blocks::blocks(
     char uri[256] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Blocks::base);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -51,4 +38,26 @@ std::string Ark::API::TWO::Blocks::blockTransactions(
         strcat(uri, blockId);
         strcat(uri, "/transactions");
     return connection.callback(uri);
+}
+
+/**************************************************************************************************/
+
+std::string Ark::API::TWO::Blocks::blocksSearch(
+        std::pair<const char*, const char*> bodyParameters,
+        int limit,
+        int page
+) {
+    char uri[96] = { '\0' };
+        strcpy(uri, Ark::API::TWO::Paths::Blocks::search);
+        strcat(uri, "?limit=");
+        strcat(uri, toString(limit).c_str());
+        strcat(uri, "&page=");
+        strcat(uri, toString(page).c_str());
+
+    std::string parameterBuffer;
+        parameterBuffer += bodyParameters.first;
+        parameterBuffer += "=";
+        parameterBuffer += bodyParameters.second;
+
+    return connection.send(uri, parameterBuffer.c_str());
 }

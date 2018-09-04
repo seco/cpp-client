@@ -31,9 +31,9 @@ std::string Ark::API::TWO::Transactions::transactions(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Transactions::base);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -49,9 +49,9 @@ std::string Ark::API::TWO::Transactions::transactions(
         strcat(uri, "/");
         strcat(uri, identifier);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -64,9 +64,9 @@ std::string Ark::API::TWO::Transactions::transactionsUnconfirmed(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Transactions::unconfirmed);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -79,8 +79,8 @@ std::string Ark::API::TWO::Transactions::transactionTypes(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Transactions::types);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }

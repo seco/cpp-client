@@ -23,9 +23,9 @@ std::string Ark::API::TWO::Wallets::wallets(
         strcat(uri, "/");
         strcat(uri, identifier);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -38,9 +38,9 @@ std::string Ark::API::TWO::Wallets::wallets(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Wallets::base);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -53,9 +53,9 @@ std::string Ark::API::TWO::Wallets::walletsTop(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Wallets::top);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -72,9 +72,9 @@ std::string Ark::API::TWO::Wallets::walletsTransactions(
         strcat(uri, identifier);
         strcat(uri, "/transactions");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -91,9 +91,9 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsSent(
         strcat(uri, identifier);
         strcat(uri, "/transactions/sent");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -110,9 +110,9 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsReceived(
         strcat(uri, identifier);
         strcat(uri, "/transactions/received");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -129,26 +129,30 @@ std::string Ark::API::TWO::Wallets::walletsVotes(
         strcat(uri, identifier);
         strcat(uri, "/votes");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
 /**************************************************************************************************/
 
 std::string Ark::API::TWO::Wallets::walletsSearch(
-        const char *const parameter,
+        std::pair<const char*, const char*> bodyParameters,
         int limit,
         int page
 ) {
-    char uri[128] = { '\0' };
-        strcpy(uri, Ark::API::TWO::Paths::Wallets::base);
-        strcat(uri, "/");
-        strcat(uri, parameter);
+    char uri[96] = { '\0' };
+        strcpy(uri, Ark::API::TWO::Paths::Wallets::search);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
-    return connection.callback(uri);
+        strcat(uri, toString(page).c_str());
+
+    std::string parameterBuffer;
+        parameterBuffer += bodyParameters.first;
+        parameterBuffer += "=";
+        parameterBuffer += bodyParameters.second;
+
+    return connection.send(uri, parameterBuffer.c_str());
 }

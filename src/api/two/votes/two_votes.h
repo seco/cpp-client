@@ -17,7 +17,7 @@ class Votes : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string vote(const char *const identifier);
-        std::string votes(int limit, int page);
+        std::string votes(int limit = 5, int page = 1);
 };
 
 };

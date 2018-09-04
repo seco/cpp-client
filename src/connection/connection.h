@@ -44,6 +44,7 @@ class AbstractConnection : virtual HTTP
         std::string getFingerprint();  // Get an SSL connections' fingerprint.
 
         std::string callback(const char* const request);
+        std::string send(const char* const endpoint, const char *const bodyParameters);
 };
 /*************************************************/
 

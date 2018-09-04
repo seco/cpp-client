@@ -18,10 +18,10 @@ class Transactions : virtual Ark::Utilities::Network::Connection
     public:
         std::string transaction(const char *const identifier);
         std::string transactionUnconfirmed(const char *const identifier);
-        std::string transactions(int limit, int page);
-        std::string transactions(const char *const identifier, int limit, int page);
-        std::string transactionsUnconfirmed(int limit, int page);
-        std::string transactionTypes(int limit = 10, int page = 1);
+        std::string transactions(const char *const identifier, int limit = 5, int page = 1);
+        std::string transactions(int limit = 5, int page = 1);
+        std::string transactionsUnconfirmed(int limit = 5, int page = 1);
+        std::string transactionTypes(int limit = 5, int page = 1);
 };
 
 };

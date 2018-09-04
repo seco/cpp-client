@@ -20,9 +20,9 @@ std::string Ark::API::TWO::Delegates::delegates(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Delegates::base);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -39,9 +39,9 @@ std::string Ark::API::TWO::Delegates::delegateBlocks(
         strcat(uri, identifier);
         strcat(uri, "/blocks");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
@@ -58,8 +58,8 @@ std::string Ark::API::TWO::Delegates::delegateVoters(
         strcat(uri, identifier);
         strcat(uri, "/voters");
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }

@@ -17,7 +17,7 @@ class Peers : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string peer(const char *const ip);
-        std::string peers(int limit, int page);
+        std::string peers(int limit = 5, int page = 1);
 };
 
 };

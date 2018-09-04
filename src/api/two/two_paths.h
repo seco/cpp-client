@@ -36,7 +36,6 @@ namespace Peers
 namespace Transactions
 {	
     const auto base = "/api/v2/transactions";
-    const auto search = "/api/v2/transactions/search";
     const auto types = "/api/v2/transactions/types";
     const auto unconfirmed = "/api/v2/transactions/unconfirmed";
 };
@@ -50,6 +49,7 @@ namespace Votes
 namespace Wallets
 {
     const auto base = "/api/v2/wallets";
+    const auto search = "/api/v2/wallets/search";
     const auto top = "/api/v2/wallets/top";
 };
 

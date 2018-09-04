@@ -20,8 +20,8 @@ std::string Ark::API::TWO::Votes::votes(
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Votes::base);
         strcat(uri, "?limit=");
-        std::strcat(uri, toString(limit).c_str());
+        strcat(uri, toString(limit).c_str());
         strcat(uri, "&page=");
-        std::strcat(uri, toString(page).c_str());
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }

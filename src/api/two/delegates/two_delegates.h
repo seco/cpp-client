@@ -17,9 +17,9 @@ class Delegates : virtual Ark::Utilities::Network::Connection
 {
     public:
         std::string delegate(const char *const identifier);
-        std::string delegates(int limit, int page);
-        std::string delegateBlocks(const char *const identifier, int limit, int page);
-        std::string delegateVoters(const char *const identifier, int limit, int page);
+        std::string delegates(int limit = 5, int page = 1);
+        std::string delegateBlocks(const char *const identifier, int limit = 5, int page = 1);
+        std::string delegateVoters(const char *const identifier, int limit = 5, int page = 1);
 };
 
 };

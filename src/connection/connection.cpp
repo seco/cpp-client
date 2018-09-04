@@ -25,17 +25,6 @@ Ark::Utilities::Network::AbstractConnection& Ark::Utilities::Network::AbstractCo
 
 /**************************************************************************************************/
 
-std::string Ark::Utilities::Network::AbstractConnection::callback(const char *const request)
-{
-    if (this->hasSSL) {
-        return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
-    } else {
-        return this->http->get(this->host_, this->port_, request);
-    };
-}
-
-/**************************************************************************************************/
-
 void Ark::Utilities::Network::AbstractConnection::connect(
         const char *const newHost,
         const int newPort,
@@ -75,5 +64,27 @@ std::string Ark::Utilities::Network::AbstractConnection::getConnection()
 /**************************************************************************************************/
 
 std::string Ark::Utilities::Network::AbstractConnection::getFingerprint() { return this->fingerprint_; }
+
+/**************************************************************************************************/
+
+std::string Ark::Utilities::Network::AbstractConnection::callback(const char *const request)
+{
+    if (this->hasSSL) {
+        return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
+    } else {
+        return this->http->get(this->host_, this->port_, request);
+    };
+}
+
+/**************************************************************************************************/
+
+
+std::string Ark::Utilities::Network::AbstractConnection::send(
+        const char* const endpoint,
+        const char *const bodyParameters
+) {
+
+        return this->http->post(this->host_, this->port_, endpoint, bodyParameters);
+}
 
 /**************************************************************************************************/

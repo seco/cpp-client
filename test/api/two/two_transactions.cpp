@@ -283,17 +283,4 @@ TEST(api, test_two_transactions_unconfirmed)
     ASSERT_STREQ("0", totalCount.c_str());
 }
 
-/* test_two_transactions_transactions_search
- * 
- * Expected Response:
-    ??????????
- */
-TEST(api, test_two_transactions_search)
-{
-    Ark::Client arkClient(DEVNET);
-
-    const auto transactions = arkClient.transactions("4bbc5433e5a4e439369f1f57825e92d07cf9cb8e07aada69c122a2125e4b9d48", 5, 1);
-    auto parser = Ark::Test::Utils::makeJSONString(transactions);
-}
-
 #endif

@@ -36,15 +36,23 @@ class AbstractHTTP
         virtual std::string get(
                 const char *const peer,
                 int port,
-                const char *const request
+                const char *const endpoint
         ) = 0;
 
         virtual std::string getHTTPS(
                 const char *const peer,
                 int port,
                 const char *const fingerprint,
-                const char *const request
+                const char *const endpoint
         ) = 0;
+
+        virtual std::string post(
+                const char *const peer,
+                int port,
+                const char *const endpoint,
+                const char *bodyParameters
+        ) = 0;
+
 };
 /*************************************************/
 

@@ -793,4 +793,64 @@ TEST(api, test_two_blocks_limit_page)
     }
 }
 
+/* test_two_blocks_search
+ *
+ * Expected Response:
+    {
+    "meta": {
+        "count": 1,
+        "pageCount": 1,
+        "totalCount": "1",
+        "next": null,
+        "previous": null,
+        "self": "\/api\/v2\/blocks\/search?limit=5&page=1",
+        "first": "\/api\/v2\/blocks\/search?limit=5&page=1",
+        "last": "\/api\/v2\/blocks\/search?limit=5&page=1"
+    },
+    "data": [
+        {
+        "id": "8337447655053578871",
+        "version": 0,
+        "height": 118783,
+        "previous": "6440284271011893973",
+        "forged": {
+            "reward": 200000000,
+            "fee": 0,
+            "total": 200000000
+        },
+        "payload": {
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "length": 0
+        },
+        "generator": {
+            "username": "genesis_46",
+            "address": "DGKgCQ1srb8HZyr47RqQqMvGZ4cDyr4eMo",
+            "publicKey": "029a20963b506afabb2bd805830a46cef8d59218cd88c0dca9d2a0158045b1c3e0"
+        },
+        "signature": "304402201ec15a9bec30bad58c7d9f5ccf1447bccb36b39901d0b91f09217bb4c3efcf6a02207232bdfe9ab6e4d80eb2668d642b431ca704cf4ba8ce9958cfd202070e31f2c8",
+        "transactions": 0,
+        "timestamp": {
+            "epoch": 45988754,
+            "unix": 1536089954,
+            "human": "2018-09-04T19:39:14Z"
+        }
+        }
+    ]
+    }
+ */
+TEST(api, test_two_blocks_search)
+{
+    Ark::Client arkClient(DEVNET);
+
+    const auto walletsSearch = arkClient.blocksSearch({"id", "8337447655053578871"});
+
+    auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
+
+    const auto id = parser->subarrayValueIn("data", 0, "id");
+    ASSERT_STREQ("8337447655053578871", id.c_str());
+
+    const auto previous = parser->subarrayValueIn("data", 0, "previous");
+    ASSERT_STREQ("6440284271011893973", previous.c_str());
+}
+
 #endif

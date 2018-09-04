@@ -120,14 +120,41 @@ TEST(api, test_two_wallets)
 /* test_two_wallets_search
  *
  * Expected Response:
-    ??????????
+    {
+    "meta": {
+        "count": 1,
+        "pageCount": 1,
+        "totalCount": 1,
+        "next": null,
+        "previous": null,
+        "self": "\/api\/v2\/wallets\/search?limit=5&page=1",
+        "first": "\/api\/v2\/wallets\/search?limit=5&page=1",
+        "last": "\/api\/v2\/wallets\/search?limit=5&page=1"
+    },
+    "data": [
+        {
+        "address": "DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T",
+        "publicKey": "03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d",
+        "secondPublicKey": null,
+        "balance": 532210000000,
+        "isDelegate": true
+        }
+    ]
+    }
  */
 TEST(api, test_two_wallets_search)
 {
     Ark::Client arkClient(DEVNET);
 
-    const auto walletsSearch = arkClient.walletsSearch("DNv1iScT2DJBWzpJd1AFYkTx1xkAZ9XVJk", 2, 1);
+    const auto walletsSearch = arkClient.walletsSearch({"username", "baldninja"});
+
     auto parser = Ark::Test::Utils::makeJSONString(walletsSearch);
+
+    const auto address = parser->subarrayValueIn("data", 0, "address");
+    ASSERT_STREQ("DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T", address.c_str());
+
+    const auto publicKey = parser->subarrayValueIn("data", 0, "publicKey");
+    ASSERT_STREQ("03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d", publicKey.c_str());
 }
 
 /* test_two_wallets_top_limit_page
@@ -353,13 +380,13 @@ TEST(api, test_two_wallets_transactions_received)
     auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsReceived);
 
     const auto count = parser->valueIn("meta", "count");
-    ASSERT_STREQ("0", count.c_str());
+    ASSERT_STRNE("0", count.c_str());
 
     const auto pageCount = parser->valueIn("meta", "pageCount");
-    ASSERT_STREQ("0", pageCount.c_str());
+    ASSERT_STRNE("0", pageCount.c_str());
 
     const auto totalCount = parser->valueIn("meta", "totalCount");
-    ASSERT_STREQ("0", totalCount.c_str());
+    ASSERT_STRNE("0", totalCount.c_str());
 }
 
 /* test_two_wallets_transactions_sent
@@ -389,13 +416,13 @@ TEST(api, test_two_wallets_transactions_sent)
     auto parser = Ark::Test::Utils::makeJSONString(walletsTransactionsSent);
 
     const auto count = parser->valueIn("meta", "count");
-    ASSERT_STREQ("0", count.c_str());
+    ASSERT_STRNE("0", count.c_str());
 
     const auto pageCount = parser->valueIn("meta", "pageCount");
-    ASSERT_STREQ("0", pageCount.c_str());
+    ASSERT_STRNE("0", pageCount.c_str());
 
     const auto totalCount = parser->valueIn("meta", "totalCount");
-    ASSERT_STREQ("0", totalCount.c_str());
+    ASSERT_STRNE("0", totalCount.c_str());
 }
 
 /* test_two_wallets_votes
