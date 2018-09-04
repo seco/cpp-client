@@ -115,6 +115,16 @@ class PlatformHTTP : public AbstractHTTP
             curl_global_cleanup();
             return readBuffer;
         };
+        
+        std::string postHTTPS(
+                const char *const peer,
+                int port,
+                const char *const endpoint,
+                const char *const fingerprint,
+                const char *bodyParameters
+        ) override {
+            return post(peer, port, endpoint, bodyParameters);
+        };
 };
 
 }
