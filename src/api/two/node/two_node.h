@@ -5,7 +5,7 @@
 #ifndef TWO_NODE_H
 #define TWO_NODE_H
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection/connection.h"
 #include "api/two/two_paths.h"
 

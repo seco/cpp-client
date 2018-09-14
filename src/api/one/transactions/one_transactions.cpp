@@ -2,9 +2,9 @@
 
 #include "api/one/transactions/one_transactions.h"
 
-/*************************************************
+/**
  * /api/transactions/get?id=
- *************************************************/
+ **/
 std::string Ark::API::ONE::Transactions::transaction(const char *const id)
 {
     char uri[114 + 1] = {'\0'};
@@ -13,24 +13,24 @@ std::string Ark::API::ONE::Transactions::transaction(const char *const id)
     strcat(uri, id);
     return connection.callback(uri);
 }
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/transactions/?orderBy=timestamp:desc&limit=10"
- *************************************************/
+ **/
 std::string Ark::API::ONE::Transactions::transactions()
 {
     return connection.callback(Ark::API::ONE::Paths::Transactions::transactions_s);
 }
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/transactions/unconfirmed/get?id=
- *************************************************/
+ **/
 std::string Ark::API::ONE::Transactions::transactionUnconfirmed(const char *const id)
 {
     char uri[126 + 1] = {'\0'};
@@ -39,24 +39,24 @@ std::string Ark::API::ONE::Transactions::transactionUnconfirmed(const char *cons
     strcat(uri, id);
     return connection.callback(uri);
 }
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/transactions/unconfirmed
- *************************************************/
+ **/
 std::string Ark::API::ONE::Transactions::transactionsUnconfirmed()
 {
     return connection.callback(Ark::API::ONE::Paths::Transactions::unconfirmed_s);
 }
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/transactions/get?id=
- *************************************************/
+ **/
 std::string Ark::API::ONE::Transactions::getVendorField(const char *const txID)
 {
     char uri[114 + 1] = {'\0'};
@@ -65,4 +65,4 @@ std::string Ark::API::ONE::Transactions::getVendorField(const char *const txID)
     strcat(uri, txID);
     return connection.callback(uri);
 }
-/*************************************************/
+/**/

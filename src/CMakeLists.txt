@@ -8,7 +8,10 @@ set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 
 hunter_add_package(CURL)
+hunter_add_package(OpenSSL)
+
 find_package(CURL CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 set(COMMON_SRC 
 	${PROJECT_SOURCE_DIR}/arkClient.cpp
@@ -19,15 +22,15 @@ set(PLATFORM_SRC
 	${PROJECT_SOURCE_DIR}/http/os/http.cpp
 )
 
-set(API_ONE_SRC 
-	${PROJECT_SOURCE_DIR}/api/one/accounts/one_accounts.cpp
-	${PROJECT_SOURCE_DIR}/api/one/blocks/one_blocks.cpp
-	${PROJECT_SOURCE_DIR}/api/one/delegates/one_delegates.cpp
-	${PROJECT_SOURCE_DIR}/api/one/loader/one_loader.cpp
-	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
-	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
-	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
-)
+# set(API_ONE_SRC 
+# 	${PROJECT_SOURCE_DIR}/api/one/accounts/one_accounts.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/blocks/one_blocks.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/delegates/one_delegates.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/loader/one_loader.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/peers/one_peers.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/signatures/one_signatures.cpp
+# 	${PROJECT_SOURCE_DIR}/api/one/transactions/one_transactions.cpp
+# )
 
 set(API_TWO_SRC 
 	${PROJECT_SOURCE_DIR}/api/two/blocks/two_blocks.cpp
@@ -39,17 +42,18 @@ set(API_TWO_SRC
 	${PROJECT_SOURCE_DIR}/api/two/wallets/two_wallets.cpp
 )
 
-add_library(
-	Ark-Cpp-Client-lib STATIC
+add_library(Ark-Cpp-Client-lib STATIC
 	${COMMON_SRC}
 	${PLATFORM_SRC}
-	${API_ONE_SRC}
+#	${API_ONE_SRC}
 	${API_TWO_SRC}
 )
 
-target_link_libraries(
-	Ark-Cpp-Client-lib PUBLIC
+target_link_libraries(Ark-Cpp-Client-lib
+	PUBLIC
 	CURL::libcurl
+	OpenSSL::SSL
+	OpenSSL::Crypto
 )
 
 if (MSVC)

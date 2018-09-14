@@ -2,9 +2,9 @@
 
 #include "api/one/accounts/one_accounts.h"
 
-/*************************************************
+/**
  * /api/accounts/getBalance?address=arkAddress
- *************************************************/
+ **/
 std::string Ark::API::ONE::Accounts::accountBalance(
     const char *const arkAddress)
 {
@@ -14,13 +14,13 @@ std::string Ark::API::ONE::Accounts::accountBalance(
     strcat(uri, arkAddress);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * api/accounts/getPublickey?address=arkAddress
- *************************************************/
+ **/
 std::string Ark::API::ONE::Accounts::accountPublickey(
     const char *const arkAddress)
 {
@@ -30,13 +30,13 @@ std::string Ark::API::ONE::Accounts::accountPublickey(
     strcat(uri, arkAddress);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/accounts/delegates/fee?address=arkAddress
- *************************************************/
+ **/
 std::string Ark::API::ONE::Accounts::accountDelegatesFee(
     const char *const arkAddress)
 {
@@ -46,13 +46,13 @@ std::string Ark::API::ONE::Accounts::accountDelegatesFee(
     strcat(uri, arkAddress);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/accounts/delegates?address=arkAddress
- *************************************************/
+ **/
 std::string Ark::API::ONE::Accounts::accountDelegates(
     const char *const arkAddress)
 {
@@ -62,13 +62,13 @@ std::string Ark::API::ONE::Accounts::accountDelegates(
     strcat(uri, arkAddress);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/accounts?address=arkAddress
- *************************************************/
+ **/
 std::string Ark::API::ONE::Accounts::account(
     const char *const arkAddress)
 {
@@ -78,4 +78,4 @@ std::string Ark::API::ONE::Accounts::account(
     strcat(uri, arkAddress);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/

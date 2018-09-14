@@ -5,7 +5,7 @@
 #ifndef TWO_VOTES_H
 #define TWO_VOTES_H
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection/connection.h"
 #include "api/two/two_paths.h"
 

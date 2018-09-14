@@ -11,18 +11,25 @@ std::string Ark::API::TWO::Transactions::transaction(const char *const identifie
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
-std::string Ark::API::TWO::Transactions::transactionUnconfirmed(const char *const identifier)
-{
+std::string Ark::API::TWO::Transactions::transactionUnconfirmed(
+        const char *const identifier,
+        int limit,
+        int page
+) {
     char uri[128] = { '\0' };
         strcpy(uri, Ark::API::TWO::Paths::Transactions::unconfirmed);
         strcat(uri, "?id=");
         strcat(uri, identifier);
+        strcat(uri, "&limit=");
+        strcat(uri, toString(limit).c_str());
+        strcat(uri, "&page=");
+        strcat(uri, toString(page).c_str());
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Transactions::transactions(
         int limit,
@@ -37,7 +44,7 @@ std::string Ark::API::TWO::Transactions::transactions(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Transactions::transactions(
         const char *const identifier,
@@ -55,7 +62,7 @@ std::string Ark::API::TWO::Transactions::transactions(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Transactions::transactionsUnconfirmed(
         int limit,
@@ -70,7 +77,7 @@ std::string Ark::API::TWO::Transactions::transactionsUnconfirmed(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Transactions::transactionTypes(
         int limit,

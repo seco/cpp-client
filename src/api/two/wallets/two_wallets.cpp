@@ -11,7 +11,7 @@ std::string Ark::API::TWO::Wallets::wallet(const char *const identifier)
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::wallets(
         const char *const identifier,
@@ -29,7 +29,7 @@ std::string Ark::API::TWO::Wallets::wallets(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::wallets(
         int limit,
@@ -44,7 +44,7 @@ std::string Ark::API::TWO::Wallets::wallets(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsTop(
         int limit,
@@ -59,7 +59,7 @@ std::string Ark::API::TWO::Wallets::walletsTop(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsTransactions(
         const char *const identifier,
@@ -78,7 +78,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactions(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsTransactionsSent(
         const char *const identifier,
@@ -97,7 +97,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsSent(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsTransactionsReceived(
         const char *const identifier,
@@ -116,7 +116,7 @@ std::string Ark::API::TWO::Wallets::walletsTransactionsReceived(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsVotes(
         const char *const identifier,
@@ -135,7 +135,7 @@ std::string Ark::API::TWO::Wallets::walletsVotes(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Wallets::walletsSearch(
         std::pair<const char*, const char*> bodyParameters,

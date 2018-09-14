@@ -3,7 +3,7 @@
 #ifndef ONE_PEERS_H
 #define ONE_PEERS_H
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection/connection.h"
 #include "api/one/one_paths.h"
 

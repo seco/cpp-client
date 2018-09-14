@@ -11,7 +11,7 @@ std::string Ark::API::TWO::Delegates::delegate(const char *const identifier)
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Delegates::delegates(
         int limit,
@@ -26,7 +26,7 @@ std::string Ark::API::TWO::Delegates::delegates(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Delegates::delegateBlocks(
         const char *const identifier,
@@ -45,7 +45,7 @@ std::string Ark::API::TWO::Delegates::delegateBlocks(
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Delegates::delegateVoters(
         const char *const identifier,

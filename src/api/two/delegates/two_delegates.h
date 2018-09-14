@@ -5,7 +5,7 @@
 #ifndef TWO_DELEGATES_H
 #define TWO_DELEGATES_H
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection/connection.h"
 #include "api/two/two_paths.h"
 

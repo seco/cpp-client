@@ -2,10 +2,10 @@
 
 #include "api/one/delegates/one_delegates.h"
 
-/*************************************************
+/**
  * /api/delegates/get?username="username"
  * /api/delegates/get?publicKey=publicKey
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegate(
     const char *const parameter)
 {
@@ -17,37 +17,37 @@ std::string Ark::API::ONE::Delegates::delegate(
     strcat(uri, parameter);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates?limit=20
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegates()
 {
     char uri[43] = {'\0'};
     strcpy(uri, Ark::API::ONE::Paths::Delegates::delegates_s);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/count
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegatesCount()
 {
     return connection.callback(Ark::API::ONE::Paths::Delegates::count_s);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/search?q=sleepdeficit 
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegateSearch(
     const char *const username)
 {
@@ -57,24 +57,24 @@ std::string Ark::API::ONE::Delegates::delegateSearch(
     strcat(uri, username);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/fee
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegateFee()
 {
     return connection.callback(Ark::API::ONE::Paths::Delegates::fee_s);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/forging/getForgedByAccount?generatorPublicKey=_genPubkey
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegateForgedByAccount(
     const char *const generatorPublicKey)
 {
@@ -84,24 +84,24 @@ std::string Ark::API::ONE::Delegates::delegateForgedByAccount(
     strcat(uri, generatorPublicKey);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/getNextForgers
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegateNextForgers()
 {
     return connection.callback(Ark::API::ONE::Paths::Delegates::getNextForgers_s);
 };
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
  * /api/delegates/voters?publicKey=_pubKey
- *************************************************/
+ **/
 std::string Ark::API::ONE::Delegates::delegateVoters(
     const char *const publicKey)
 {
@@ -111,4 +111,4 @@ std::string Ark::API::ONE::Delegates::delegateVoters(
     strcat(uri, publicKey);
     return connection.callback(uri);
 };
-/*************************************************/
+/**/

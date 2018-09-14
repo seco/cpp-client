@@ -5,9 +5,10 @@
 #ifndef TWO_WALLETS_H
 #define TWO_WALLETS_H
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection/connection.h"
 #include "api/two/two_paths.h"
+#include <vector>
 
 namespace Ark {
 namespace API {

@@ -11,7 +11,7 @@ std::string Ark::API::TWO::Peers::peer(const char *const ip)
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Peers::peers(
         int limit,

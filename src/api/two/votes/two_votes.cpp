@@ -11,7 +11,7 @@ std::string Ark::API::TWO::Votes::vote(const char *const identifier)
     return connection.callback(uri);
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::API::TWO::Votes::votes(
         int limit,
