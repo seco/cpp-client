@@ -66,5 +66,4 @@ void setup() {
 }
 
 void loop() {}
-
 ```

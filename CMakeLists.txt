@@ -16,6 +16,14 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
+set(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/test/include)
+
+# clone submodules
+execute_process(
+	COMMAND git submodule update --init -- test/include/ArduinoJson
+	WORKING_DIRECTORY ${PROJECT_INCLUDE_DIR}
+)
+
 if (MSVC)
 	add_definitions(
 		-D_CRT_SECURE_NO_WARNINGS
