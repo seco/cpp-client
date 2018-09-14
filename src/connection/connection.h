@@ -11,18 +11,18 @@ namespace Ark {
 namespace Utilities {
 namespace Network {
 
-/*************************************************
+/**
 * Ark::Utilities::Network::Connection
 * @brief: Forward Declaration.
-**************************************************/
+**/
 class Connection; 
-/*************************************************/
+/**/
 
-/**************************************************************************************************/
+/***/
 
-/*************************************************
+/**
 * Ark::Utilities::Network::AbstractConnection
-**************************************************/
+**/
 class AbstractConnection : virtual HTTP
 {
     private:
@@ -33,11 +33,11 @@ class AbstractConnection : virtual HTTP
 
     public:
         AbstractConnection() : host_(), port_(), fingerprint_() {};
-        AbstractConnection(const char *const newHost, const int newPort, const char *const newFingerprint = "");
+        AbstractConnection(const char *const newHost, const int newPort, const char *const newFingerprint = nullptr);
 
         AbstractConnection& operator=(AbstractConnection&& other);
 
-        void connect(const char *const newHost, const int newPort, const char *const newFingerprint); // Connect to the given connection.
+        void connect(const char *const newHost, const int newPort, const char *const newFingerprint = nullptr); // Connect to the given connection.
         void disconnect(); // Disconnect from the given connection.
         
         std::string getConnection(); // Get a connection string (host:port).
@@ -46,20 +46,19 @@ class AbstractConnection : virtual HTTP
         std::string callback(const char* const request);
         std::string send(const char* const endpoint, const char *const bodyParameters);
 };
-/*************************************************/
-
+/**/
 };
 };
 };
 
-/**************************************************
+/***
 * Ark::Utilities::Network::Connection
-**************************************************/
+**/
 class Ark::Utilities::Network::Connection
 {
     public:
         Ark::Utilities::Network::AbstractConnection connection;
 };
-/*************************************************/
+/**/
 
 #endif

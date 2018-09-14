@@ -1,6 +1,6 @@
 
 
-#include "utils/helpers.h"
+#include "helpers/helpers.h"
 #include "connection.h"
 #include <string>
 #include <memory>
@@ -13,7 +13,7 @@ Ark::Utilities::Network::AbstractConnection::AbstractConnection(
     this->connect(newHost, newPort, newFingerprint);
 }
 
-/**************************************************************************************************/
+/***/
 
 Ark::Utilities::Network::AbstractConnection& Ark::Utilities::Network::AbstractConnection::operator=(AbstractConnection&& other)
 {
@@ -23,22 +23,22 @@ Ark::Utilities::Network::AbstractConnection& Ark::Utilities::Network::AbstractCo
     return *this;
 }
 
-/**************************************************************************************************/
+/***/
 
 void Ark::Utilities::Network::AbstractConnection::connect(
         const char *const newHost,
         const int newPort,
-        const char *const newFingerprint = ""
+        const char *const newFingerprint
 ) {
     strncpy(this->host_, newHost, sizeof(this->host_) / sizeof(this->host_[0]));
     this->port_ = newPort;
-    if (strcmp(newFingerprint, "")) {
+    if (newFingerprint) {
         this->hasSSL = true;
         strncpy(this->fingerprint_, newFingerprint, sizeof(this->fingerprint_) / sizeof(this->fingerprint_[0]));
     };
 }
 
-/**************************************************************************************************/
+/***/
 
 void Ark::Utilities::Network::AbstractConnection::disconnect()
 {
@@ -50,7 +50,7 @@ void Ark::Utilities::Network::AbstractConnection::disconnect()
     };
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::Utilities::Network::AbstractConnection::getConnection()
 {
@@ -61,34 +61,30 @@ std::string Ark::Utilities::Network::AbstractConnection::getConnection()
     return connectionStr;
 }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::Utilities::Network::AbstractConnection::getFingerprint() { return this->fingerprint_; }
 
-/**************************************************************************************************/
+/***/
 
 std::string Ark::Utilities::Network::AbstractConnection::callback(const char *const request)
 {
     if (this->hasSSL) {
-        return this->http->getHTTPS(this->host_, this->port_, this->fingerprint_, request);
+        return this->http->get(this->host_, this->port_, request, this->fingerprint_);
     } else {
         return this->http->get(this->host_, this->port_, request);
     };
 }
 
-/**************************************************************************************************/
-
+/***/
 
 std::string Ark::Utilities::Network::AbstractConnection::send(
         const char* const endpoint,
         const char *const bodyParameters
 ) {
     if (this->hasSSL) {
-        return this->http->postHTTPS(this->host_, this->port_, endpoint, this->fingerprint_, bodyParameters);
-
+        return this->http->post(this->host_, this->port_, endpoint, bodyParameters, this->fingerprint_);
     } else {
         return this->http->post(this->host_, this->port_, endpoint, bodyParameters);
     };
 }
-
-/**************************************************************************************************/
