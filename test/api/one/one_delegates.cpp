@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_ONE_API
 
@@ -16,13 +16,15 @@ TEST(api, test_one_delegates_fee)
     Ark::Client arkClient(DEVNET);
 
     const auto delegateFeeResponse = arkClient.delegateFee();
-    auto parser = Ark::Test::Utils::makeJSONString(delegateFeeResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(delegateFeeResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegateFeeResponse);
 
-    const auto delegateFee = parser->valueFor("fee");
-    ASSERT_STREQ("2500000000", delegateFee.c_str()); // actual value 2500000000 (int).
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+    const auto delegateFee = root["fee"].as<unsigned long long>();
+    ASSERT_STREQ("2500000000", toString(delegateFee).c_str());
 }
 
 TEST(api, test_one_delegates_forged_by_account)
@@ -30,21 +32,21 @@ TEST(api, test_one_delegates_forged_by_account)
     Ark::Client arkClient(DEVNET);
 
     const auto forgedByAccountResponse = arkClient.delegateForgedByAccount(darkPubkey);
-    auto parser = Ark::Test::Utils::makeJSONString(forgedByAccountResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(forgedByAccountResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(forgedByAccountResponse);
 
-    const auto fees = parser->valueFor("fees");
-    ASSERT_STRNE("", fees.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto rewards = parser->valueFor("rewards");
-    ASSERT_STRNE("0", rewards.c_str());
-    ASSERT_STRNE("", rewards.c_str());
+    const auto fees = root["fees"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(fees).c_str());
 
-    const auto forged = parser->valueFor("forged");
-    ASSERT_STRNE("0", forged.c_str());
-    ASSERT_STRNE("", forged.c_str());
+    const auto rewards = root["rewards"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(rewards).c_str());
+
+    const auto forged = root["forged"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(forged).c_str());
 }
 
 TEST(api, test_one_delegates_next_forgers)
@@ -52,23 +54,24 @@ TEST(api, test_one_delegates_next_forgers)
     Ark::Client arkClient(DEVNET);
 
     const auto nextForgersResponse = arkClient.delegateNextForgers();
-    auto parser = Ark::Test::Utils::makeJSONString(nextForgersResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(nextForgersResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(nextForgersResponse);
 
-    const auto currentBlock = parser->valueFor("currentBlock");
-    ASSERT_STRNE("0", currentBlock.c_str());
-    ASSERT_STRNE("", currentBlock.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto currentSlot = parser->valueFor("currentSlot");
-    ASSERT_STRNE("0", currentSlot.c_str());
-    ASSERT_STRNE("", currentSlot.c_str());
+    int currentBlock = root["currentBlock"];
+    ASSERT_NE(0, currentBlock);
 
+    int currentSlot = root["currentSlot"];
+    ASSERT_NE(0, currentSlot);
+
+    JsonArray& delegates = root["delegates"];
     for (int i = 0; i < 10; ++i)
     {
-        const auto delegateKey = parser->subvalueFor("delegates", i);
-        ASSERT_STRNE("", delegateKey.c_str());
+        const char* delegateKey = delegates[i];
+        ASSERT_STRNE("", delegateKey);
     };
 }
 
@@ -77,40 +80,38 @@ TEST(api, test_one_delegates_delegate_by_public_key)
     Ark::Client arkClient(DEVNET);
 
     auto delegateResponse = arkClient.delegate(darkPubkey);
-    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
-    const auto username = parser->valueIn("delegate", "username");
-    ASSERT_STREQ("sleepdeficit", username.c_str());
+    DynamicJsonBuffer jsonBuffer(delegateResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegateResponse);
 
-    const auto address = parser->valueIn("delegate", "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
+    JsonObject& delegate = root["delegate"];
 
-    const auto publicKey = parser->valueIn("delegate", "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    const char* username = delegate["username"];
+    ASSERT_STREQ("sleepdeficit", username);
 
-    const auto vote = parser->valueIn("delegate", "vote");
-    ASSERT_STRNE("0", vote.c_str());
-    ASSERT_STRNE("", vote.c_str());
+    const char* address = delegate["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address);
 
-    const auto producedblocks = parser->valueIn("delegate", "producedblocks");
-    ASSERT_STRNE("0", producedblocks.c_str());
-    ASSERT_STRNE("", producedblocks.c_str());
+    const char* publicKey = delegate["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
 
-    const auto missedblocks = parser->valueIn("delegate", "missedblocks");
-    ASSERT_STRNE("0", missedblocks.c_str());
-    ASSERT_STRNE("", missedblocks.c_str());
+    const auto vote = delegate["vote"].as<unsigned long>();
+    ASSERT_STRNE("", toString(vote).c_str());
 
-    const auto rate = parser->valueIn("delegate", "rate");
-    ASSERT_STRNE("0", rate.c_str());
-    ASSERT_STRNE("", rate.c_str());
+    int producedblocks = delegate["producedblocks"];
+    ASSERT_NE(0, producedblocks);
 
-    const auto approval = parser->valueIn("delegate", "approval");
-    ASSERT_STRNE("0.0", approval.c_str());
-    ASSERT_STRNE("", approval.c_str());
+    int missedblocks = delegate["missedblocks"];
+    ASSERT_NE(0, missedblocks);
 
-    const auto productivity = parser->valueIn("delegate", "productivity");
-    ASSERT_STRNE("0.0", productivity.c_str());
-    ASSERT_STRNE("", productivity.c_str());
+    int rate = delegate["rate"];
+    ASSERT_NE(0, rate);
+
+    double approval = delegate["approval"];
+    ASSERT_NE(0.00, approval);
+
+    double productivity = delegate["productivity"];
+    ASSERT_NE(0.00, productivity);
 }
 
 TEST(api, test_one_delegates_delegate_by_username)
@@ -118,40 +119,38 @@ TEST(api, test_one_delegates_delegate_by_username)
     Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
-    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
-    const auto username = parser->valueIn("delegate", "username");
-    ASSERT_STREQ("sleepdeficit", username.c_str());
+    DynamicJsonBuffer jsonBuffer(delegateResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegateResponse);
 
-    const auto address = parser->valueIn("delegate", "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
+    JsonObject& delegate = root["delegate"];
 
-    const auto publicKey = parser->valueIn("delegate", "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    const char* username = delegate["username"];
+    ASSERT_STREQ("sleepdeficit", username);
 
-    const auto vote = parser->valueIn("delegate", "vote");
-    ASSERT_STRNE("0", vote.c_str());
-    ASSERT_STRNE("", vote.c_str());
+    const char* address = delegate["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address);
 
-    const auto producedblocks = parser->valueIn("delegate", "producedblocks");
-    ASSERT_STRNE("0", producedblocks.c_str());
-    ASSERT_STRNE("", producedblocks.c_str());
+    const char* publicKey = delegate["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
 
-    const auto missedblocks = parser->valueIn("delegate", "missedblocks");
-    ASSERT_STRNE("0", missedblocks.c_str());
-    ASSERT_STRNE("", missedblocks.c_str());
+    const auto vote = delegate["vote"];
+    ASSERT_NE(0, vote);
 
-    const auto rate = parser->valueIn("delegate", "rate");
-    ASSERT_STRNE("0", rate.c_str());
-    ASSERT_STRNE("", rate.c_str());
+    int producedblocks = delegate["producedblocks"];
+    ASSERT_NE(0, producedblocks);
 
-    const auto approval = parser->valueIn("delegate", "approval");
-    ASSERT_STRNE("0.0", approval.c_str());
-    ASSERT_STRNE("", approval.c_str());
+    int missedblocks = delegate["missedblocks"];
+    ASSERT_NE(0, missedblocks);
 
-    const auto productivity = parser->valueIn("delegate", "productivity");
-    ASSERT_STRNE("0.0", productivity.c_str());
-    ASSERT_STRNE("", productivity.c_str());
+    int rate = delegate["rate"];
+    ASSERT_NE(0, rate);
+
+    double approval = delegate["approval"];
+    ASSERT_NE(0.00, approval);
+
+    double productivity = delegate["productivity"];
+    ASSERT_NE(0.00, productivity);
 }
 
 TEST(api, test_one_delegates_delegates)
@@ -159,45 +158,44 @@ TEST(api, test_one_delegates_delegates)
     Ark::Client arkClient(DEVNET);
 
     const auto delegatesResponse = arkClient.delegates();
-    auto parser = Ark::Test::Utils::makeJSONString(delegatesResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(delegatesResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegatesResponse);
 
-    for (int i = 0; i < 20; i++) // Full-list too large for MCU; limit to top 20 delegates.
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+
+    JsonArray& delegates = root["delegates"];
+
+    for (int i = 0; i < 20; i++) 
     {
-        const auto username = parser->subarrayValueIn("delegates", i, "username");
-        ASSERT_STRNE("", username.c_str());
+        const char* username = delegates[i]["username"];
+        ASSERT_STRNE("", username);
 
-        const auto address = parser->subarrayValueIn("delegates", i, "address");
-        ASSERT_STRNE("", address.c_str());
+        const char* address = delegates[i]["address"];
+        ASSERT_STRNE("", address);
 
-        const auto publicKey = parser->subarrayValueIn("delegates", i, "publicKey");
-        ASSERT_STRNE("", publicKey.c_str());
+        const char* publicKey = delegates[i]["publicKey"];
+        ASSERT_STRNE("", publicKey);
 
-        const auto vote = parser->subarrayValueIn("delegates", i, "vote");
-        ASSERT_STRNE("0", vote.c_str());
-        ASSERT_STRNE("", vote.c_str());
+        const auto vote = delegates[i]["vote"].as<unsigned long>();
+        ASSERT_STRNE("0", toString(vote).c_str());
 
-        const auto producedblocks = parser->subarrayValueIn("delegates", i, "producedblocks");
-        ASSERT_STRNE("0", producedblocks.c_str());
-        ASSERT_STRNE("", producedblocks.c_str());
+        int producedblocks = delegates[i]["producedblocks"];
+        ASSERT_NE(0, producedblocks);
 
-        const auto missedblocks = parser->subarrayValueIn("delegates", i, "missedblocks");
-        // ASSERT_STRNE("0", missedblocks.c_str());
-        ASSERT_STRNE("", missedblocks.c_str());
+        int missedblocks = delegates[i]["missedblocks"];
+        ASSERT_NE(0, missedblocks);
 
-        const auto rate = parser->subarrayValueIn("delegates", i, "rate");
-        ASSERT_STRNE("0", rate.c_str());
-        ASSERT_STRNE("", rate.c_str());
+        int rate = delegates[i]["rate"];
+        ASSERT_NE(0, rate);
 
-        const auto approval = parser->subarrayValueIn("delegates", i, "approval");
-        ASSERT_STRNE("0.0", approval.c_str());
-        ASSERT_STRNE("", approval.c_str());
+        double approval = delegates[i]["approval"];
+        ASSERT_NE(0.00, approval);
 
-        const auto productivity = parser->subarrayValueIn("delegates", i, "productivity");
-        ASSERT_STRNE("0.0", productivity.c_str());
-        ASSERT_STRNE("", productivity.c_str());
+        double productivity = delegates[i]["productivity"];
+        ASSERT_NE(0.00, productivity);
     }
 }
 
@@ -206,36 +204,39 @@ TEST(api, test_one_delegates_voters)
     Ark::Client arkClient(DEVNET);
 
     const auto votersResponse = arkClient.delegateVoters(darkPubkey);
-    auto parser = Ark::Test::Utils::makeJSONString(votersResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(votersResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(votersResponse);
 
-    // const auto username0 = parser->subarrayValueIn("accounts", 0, "username");
-    // ASSERT_STREQ("io.pi.relay.ds3", username0.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto address0 = parser->subarrayValueIn("accounts", 0, "address");
-    ASSERT_STREQ("DS3jiY1uPToqfGKmmfsdFnBhMmsrQY47gd", address0.c_str());
 
-    const auto publicKey0 = parser->subarrayValueIn("accounts", 0, "publicKey");
-    ASSERT_STREQ("03c57e437203403c5438bdb93f34d46a708a5d23a63fa9fe44c5fed1fa458d0717", publicKey0.c_str());
+    JsonObject& accountsZero = root["accounts"][0];
 
-    const auto balance0 = parser->subarrayValueIn("accounts", 0, "balance");
-    ASSERT_STREQ("0", balance0.c_str());
-    ASSERT_STRNE("", balance0.c_str());
+    const char* address0 = accountsZero["address"];
+    ASSERT_STREQ("DS3jiY1uPToqfGKmmfsdFnBhMmsrQY47gd", address0);
 
-    const auto username1 = parser->subarrayValueIn("accounts", 1, "username");
-    ASSERT_STREQ("sleepdeficit", username1.c_str());
+    const char* publicKey0 = accountsZero["publicKey"];
+    ASSERT_STREQ("03c57e437203403c5438bdb93f34d46a708a5d23a63fa9fe44c5fed1fa458d0717", publicKey0);
 
-    const auto address1 = parser->subarrayValueIn("accounts", 1, "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address1.c_str());
+    const auto balance0 = accountsZero["balance"].as<unsigned long>();
+    ASSERT_STREQ("0", toString(balance0).c_str());
 
-    const auto publicKey1 = parser->subarrayValueIn("accounts", 1, "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey1.c_str());
 
-    const auto balance1 = parser->subarrayValueIn("accounts", 1, "balance");
-    ASSERT_STREQ("0", balance0.c_str());
-    ASSERT_STRNE("", balance0.c_str());
+    JsonObject& accountsOne = root["accounts"][1];
+
+    const char* username1 = accountsOne["username"];
+    ASSERT_STREQ("sleepdeficit", username1);
+
+    const char* address1 = accountsOne["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address1);
+
+    const char* publicKey1 = accountsOne["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey1);
+
+    const auto balance1 = accountsOne["balance"].as<unsigned long>();
+    ASSERT_EQ(0, balance1);
 }
 
 TEST(api, test_one_delegates_search)
@@ -243,40 +244,38 @@ TEST(api, test_one_delegates_search)
     Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.delegate("sleepdeficit");
-    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
-    const auto username = parser->valueIn("delegate", "username");
-    ASSERT_STREQ("sleepdeficit", username.c_str());
+    DynamicJsonBuffer jsonBuffer(delegateResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegateResponse);
 
-    const auto address = parser->valueIn("delegate", "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
+    JsonObject& delegate = root["delegate"];
 
-    const auto publicKey = parser->valueIn("delegate", "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    const char* username = delegate["username"];
+    ASSERT_STREQ("sleepdeficit", username);
 
-    const auto vote = parser->valueIn("delegate", "vote");
-    ASSERT_STRNE("0", vote.c_str());
-    ASSERT_STRNE("", vote.c_str());
+    const char* address = delegate["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address);
 
-    const auto producedblocks = parser->valueIn("delegate", "producedblocks");
-    ASSERT_STRNE("0", producedblocks.c_str());
-    ASSERT_STRNE("", producedblocks.c_str());
+    const char* publicKey = delegate["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
 
-    const auto missedblocks = parser->valueIn("delegate", "missedblocks");
-    ASSERT_STRNE("0", missedblocks.c_str());
-    ASSERT_STRNE("", missedblocks.c_str());
+    const auto vote = delegate["vote"].as<unsigned long>();
+    ASSERT_NE(0, vote);
 
-    const auto rate = parser->valueIn("delegate", "rate");
-    ASSERT_STRNE("0", rate.c_str());
-    ASSERT_STRNE("", rate.c_str());
+    int producedblocks = delegate["producedblocks"];
+    ASSERT_NE(0, producedblocks);
 
-    const auto approval = parser->valueIn("delegate", "approval");
-    ASSERT_STRNE("0.0", approval.c_str());
-    ASSERT_STRNE("", approval.c_str());
+    int missedblocks = delegate["missedblocks"];
+    ASSERT_NE(0, missedblocks);
 
-    const auto productivity = parser->valueIn("delegate", "productivity");
-    ASSERT_STRNE("0.0", productivity.c_str());
-    ASSERT_STRNE("", productivity.c_str());
+    int rate = delegate["rate"];
+    ASSERT_NE(0, rate);
+
+    double  approval = delegate["approval"];
+    ASSERT_NE(0.00, approval);
+
+    double productivity = delegate["productivity"];
+    ASSERT_NE(0.00, productivity);
 }
 
 TEST(api, test_one_delegates_count)
@@ -284,14 +283,15 @@ TEST(api, test_one_delegates_count)
     Ark::Client arkClient(DEVNET);
 
     const auto delegatesCountResponse = arkClient.delegatesCount();
-    auto parser = Ark::Test::Utils::makeJSONString(delegatesCountResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(delegatesCountResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegatesCountResponse);
 
-    const auto count = parser->valueFor("count");
-    ASSERT_STRNE("0", count.c_str());
-    ASSERT_STRNE("", count.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+    int count = root["count"];
+    ASSERT_NE(0, count);
 }
 
 #endif

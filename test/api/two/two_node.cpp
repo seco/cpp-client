@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_TWO_API
 
@@ -11,89 +11,89 @@
  * Expected Response:
     {
     "data": {
-        "nethash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
-        "token": "DARK",
-        "symbol": "D\u0466",
-        "explorer": "https:\/\/dexplorer.ark.io",
-        "version": 30,
+        "nethash": "string",
+        "token": "string",
+        "symbol": "string",
+        "explorer": "string",
+        "version": int,
         "ports": {
-            "@arkecosystem\/core-p2p": "4002",
-            "@arkecosystem\/core-api": "4003"
+            "@arkecosystem\/core-p2p": "int",
+            "@arkecosystem\/core-api": "int"
         },
         "constants": {
-            "height": 10800,
-            "reward": 200000000,
-            "activeDelegates": 51,
+            "height": unsigned long,
+            "reward": unsigned long,
+            "activeDelegates": int,
             "blocktime": 8,
             "block": {
-                "version": 0,
-                "maxTransactions": 50,
-                "maxPayload": 2097152
+                "version": int,
+                "maxTransactions": int,
+                "maxPayload": int
             },
-            "epoch": "2017-03-21T13:00:00.000Z",
+            "epoch": "string",
             "fees": {
-                "dynamic": false,
-                "transfer": 10000000,
-                "secondSignature": 500000000,
-                "delegateRegistration": 2500000000,
-                "vote": 100000000,
-                "multiSignature": 500000000,
-                "ipfs": 0,
-                "timelockTransfer": 0,
-                "multiPayment": 0,
-                "delegateResignation": 0
+                "dynamic": bool,
+                "transfer": unsigned long long,
+                "secondSignature": unsigned long long,
+                "delegateRegistration": unsigned long long,
+                "vote": unsigned long long,
+                "multiSignature": unsigned long long,
+                "ipfs": int,
+                "timelockTransfer": int,
+                "multiPayment": int,
+                "delegateResignation": int
             },
             "dynamicOffsets": {
-                "transfer": 100,
-                "secondSignature": 250,
-                "delegateRegistration": 500,
-                "vote": 100,
-                "multiSignature": 500,
-                "ipfs": 250,
-                "timelockTransfer": 500,
-                "multiPayment": 500,
-                "delegateResignation": 500
+                "transfer": int,
+                "secondSignature": int,
+                "delegateRegistration": int,
+                "vote": int,
+                "multiSignature": int,
+                "ipfs": int,
+                "timelockTransfer": int,
+                "multiPayment": int,
+                "delegateResignation": int
             }
         },
         "feeStatistics": [
         {
             "type": 0,
             "fees": {
-                "minFee": 10000,
-                "maxFee": 10000000,
-                "avgFee": 9682191
+                "minFee": unsigned long,
+                "maxFee": unsigned long,
+                "avgFee": unsigned long
             }
         },
         {
             "type": 3,
             "fees": {
-                "minFee": 100000000,
-                "maxFee": 100000000,
-                "avgFee": 100000000
+                "minFee": unsigned long,
+                "maxFee": unsigned long,
+                "avgFee": unsigned long
             }
         },
         {
             "type": 1,
             "fees": {
-                "minFee": 500000000,
-                "maxFee": 500000000,
-                "avgFee": 500000000
+                "minFee": unsigned long,
+                "maxFee": unsigned long,
+                "avgFee": unsigned long
             }
         },
         {
             "type": 2,
             "fees": {
-                "minFee": 2500000000,
-                "maxFee": 2500000000,
-                "avgFee": 2500000000
+                "minFee": unsigned long,
+                "maxFee": unsigned long,
+                "avgFee": unsigned long
             }
         },
         {
             "type": 4,
             "fees": {
-                "minFee": 1500000000,
-                "maxFee": 1500000000,
-                "avgFee": 1500000000
+                "minFee": unsigned long,
+                "maxFee": unsigned long,
+                "avgFee": unsigned long
             }
         }
         ]
@@ -105,28 +105,35 @@ TEST(api, test_two_node_configuration)
     Ark::Client arkClient(DEVNET);
 
     const auto nodeConfiguration = arkClient.nodeConfiguration();
-    auto parser = Ark::Test::Utils::makeJSONString(nodeConfiguration);
 
-    const auto nethash = parser->valueIn("data", "nethash");
-    ASSERT_STREQ("2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867", nethash.c_str());
+    DynamicJsonBuffer jsonBuffer(nodeConfiguration.size());
+    JsonObject& root = jsonBuffer.parseObject(nodeConfiguration);
 
-    const auto token = parser->valueIn("data", "token");
-    ASSERT_STREQ("DARK", token.c_str());
+    JsonObject& data = root["data"];
 
-    const auto symbol = parser->valueIn("data", "symbol");
-    ASSERT_STREQ("D\xD1\xA6", symbol.c_str());
+    const char* nethash = data["nethash"];
+    ASSERT_STREQ("2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867", nethash);
 
-    const auto explorer = parser->valueIn("data", "explorer");
-    ASSERT_STREQ("https://dexplorer.ark.io", explorer.c_str());
+    const char* token = data["token"];
+    ASSERT_STREQ("DARK", token);
 
-    const auto version = parser->valueIn("data", "version");
-    ASSERT_STREQ("30", version.c_str());
+    const char* symbol = data["symbol"];
+    ASSERT_STREQ("D\xD1\xA6", symbol);
 
-    const auto core_p2p = parser->subvalueNestedIn("data", "ports", "@arkecosystem/core-p2p");
-    ASSERT_STREQ("4002", core_p2p.c_str());
+    const char* explorer = data["explorer"];
+    ASSERT_STREQ("https://dexplorer.ark.io", explorer);
 
-    const auto core_api = parser->subvalueNestedIn("data", "ports", "@arkecosystem/core-api");
-    ASSERT_STREQ("4003", core_api.c_str());
+    int version = data["version"];
+    ASSERT_EQ(30, version);
+
+
+    JsonObject& ports = data["ports"];
+
+    int core_p2p = ports["@arkecosystem/core-p2p"];
+    ASSERT_EQ(4002, core_p2p);
+
+    int core_api = ports["@arkecosystem/core-api"];
+    ASSERT_EQ(4003, core_api);
 }
 
 /* test_two_node_status
@@ -134,9 +141,9 @@ TEST(api, test_two_node_configuration)
  * Expected Response:
     {
         "data": {
-            "synced": true,
-            "now": 174889,
-            "blocksCount": -6299
+            "synced": bool,
+            "now": int,
+            "blocksCount": int
         }
     }
  */
@@ -145,18 +152,20 @@ TEST(api, test_two_node_status)
     Ark::Client arkClient(DEVNET);
 
     const auto nodeStatus = arkClient.nodeStatus();
-    auto parser = Ark::Test::Utils::makeJSONString(nodeStatus);
 
-    const auto synced = parser->valueIn("data", "synced");
-    ASSERT_STREQ("true", synced.c_str());
+    DynamicJsonBuffer jsonBuffer(nodeStatus.size());
+    JsonObject& root = jsonBuffer.parseObject(nodeStatus);
 
-    const auto now = parser->valueIn("data", "now");
-    ASSERT_STRNE("0", now.c_str());
-    ASSERT_STRNE("", now.c_str());
+    JsonObject& data = root["data"];
 
-    const auto blocksCount = parser->valueIn("data", "blocksCount");
-    ASSERT_STRNE("0", blocksCount.c_str());
-    ASSERT_STRNE("", blocksCount.c_str());
+    bool synced = data["synced"];
+    ASSERT_EQ(1, synced);
+
+    int now = data["now"];
+    ASSERT_NE(0, now);
+
+    int blocksCount = data["blocksCount"];
+    ASSERT_NE(0, blocksCount);
 }
 
 /* test_two_node_status
@@ -164,10 +173,10 @@ TEST(api, test_two_node_status)
  * Expected Response:
     {
     "data": {
-        "syncing": false,
-        "blocks": -5199,
-        "height": 6916,
-        "id": "13992612323153287486"
+        "syncing": bool,
+        "blocks": int,
+        "height": unsigned long,
+        "id": "string"
     }
     }
  */
@@ -176,21 +185,23 @@ TEST(api, test_two_node_syncing)
     Ark::Client arkClient(DEVNET);
 
     const auto nodeSycing = arkClient.nodeSycing();
-    auto parser = Ark::Test::Utils::makeJSONString(nodeSycing);
 
-    const auto syncing = parser->valueIn("data", "syncing");
-    ASSERT_STREQ("false", syncing.c_str());
+    DynamicJsonBuffer jsonBuffer(nodeSycing.size());
+    JsonObject& root = jsonBuffer.parseObject(nodeSycing);
 
-    const auto blocks = parser->valueIn("data", "blocks");
-    ASSERT_STRNE("0", blocks.c_str());
-    ASSERT_STRNE("", blocks.c_str());
+    JsonObject& data = root["data"];
 
-    const auto height = parser->valueIn("data", "height");
-    ASSERT_STRNE("0", height.c_str());
-    ASSERT_STRNE("", height.c_str());
+    bool syncing = data["syncing"];
+    ASSERT_EQ(0, syncing);
 
-    const auto id = parser->valueIn("data", "id");
-    ASSERT_STRNE("", id.c_str());
+    int blocks = data["blocks"];
+    ASSERT_NE(0, blocks);
+
+    const auto height = data["height"].as<unsigned long>();
+    ASSERT_STRNE("0", toString(height).c_str());
+
+    const char* id = data["id"];
+    ASSERT_STRNE("", id);
 }
 
 #endif

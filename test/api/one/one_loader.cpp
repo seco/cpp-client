@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_ONE_API
 
@@ -11,26 +11,31 @@ TEST(api, test_one_loader_autoconfigure)
     Ark::Client arkClient(DEVNET);
 
     const auto autoconfigureResponse = arkClient.loaderAutoconfigure();
-    auto parser = Ark::Test::Utils::makeJSONString(autoconfigureResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(autoconfigureResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(autoconfigureResponse);
 
-    const auto nethash = parser->valueIn("network", "nethash");
-    // ASSERT_STREQ("578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23", nethash.c_str()); // v1 devnet nethash
-    ASSERT_STREQ("2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867", nethash.c_str()); // v2 devnet nethash
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto token = parser->valueIn("network", "token");
-    ASSERT_STREQ("DArk", token.c_str());
 
-    const auto symbol = parser->valueIn("network", "symbol");
-    ASSERT_STREQ(u8"DѦ", symbol.c_str());
+    JsonObject& network = root["network"];
 
-    const auto explorer = parser->valueIn("network", "explorer");
-    ASSERT_STREQ("http://dexplorer.ark.io", explorer.c_str());
+    const char* nethash = network["nethash"];
+    // ASSERT_STREQ("578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23", nethash); // v1 devnet nethash
+    ASSERT_STREQ("2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867", nethash); // v2 devnet nethash
 
-    const auto version = parser->valueIn("network", "version");
-    ASSERT_STREQ("30", version.c_str()); // actual value 30 (int).
+    const char* token = network["token"];
+    ASSERT_STREQ("DArk", token);
+
+    const char* symbol = network["symbol"];
+    ASSERT_STREQ(u8"DѦ", symbol);
+
+    const char* explorer = network["explorer"];
+    ASSERT_STREQ("http://dexplorer.ark.io", explorer);
+
+    int version = network["version"];
+    ASSERT_EQ(30, version);
 }
 
 TEST(api, test_one_loader_status)
@@ -38,46 +43,46 @@ TEST(api, test_one_loader_status)
     Ark::Client arkClient(DEVNET);
     
     const auto statusResponse = arkClient.loaderStatus();
-    auto parser = Ark::Test::Utils::makeJSONString(statusResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(statusResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(statusResponse);
 
-    const auto loaded = parser->valueFor("loaded");
-    ASSERT_STREQ("true", loaded.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto now = parser->valueFor("now"); // actual value 2338842 (int)
-    ASSERT_STRNE("0", now.c_str());
-    ASSERT_STRNE("", now.c_str());
+    bool loaded = root["loaded"];
+    ASSERT_TRUE(loaded);
+
+    int now = root["now"];
+    ASSERT_NE(0, now);
     
-    const auto blocksCount = parser->valueFor("blocksCount"); // actual value 0 (int)
-    ASSERT_STREQ("0", blocksCount.c_str());
-    ASSERT_STRNE("", blocksCount.c_str());
+    int blocksCount = root["blocksCount"];
+    ASSERT_EQ(0, blocksCount);
 }
 
 TEST(api, test_one_loader_sync)
 {
     Ark::Client arkClient(DEVNET);
-    
+
     const auto syncResponse = arkClient.loaderSync();
-    auto parser = Ark::Test::Utils::makeJSONString(syncResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(syncResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(syncResponse);
 
-    const auto syncing = parser->valueFor("syncing");
-    ASSERT_STREQ("false", syncing.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto blocks = parser->valueFor("blocks");
-    ASSERT_STRNE("", blocks.c_str());
+    bool syncing = root["syncing"];
+    ASSERT_FALSE(syncing);
 
-    const auto height = parser->valueFor("height");
-    ASSERT_STRNE("0", height.c_str());
-    ASSERT_STRNE("", height.c_str());
+    int blocks = root["blocks"];
+    ASSERT_STRNE("", toString(blocks).c_str());
 
-    const auto id = parser->valueFor("id");
-    ASSERT_STRNE("0", id.c_str());
-    ASSERT_STRNE("", id.c_str());
+    int height = root["height"];
+    ASSERT_NE(0, height);
+
+    const char* id = root["id"];
+    ASSERT_STRNE("", id);
 }
 
 #endif

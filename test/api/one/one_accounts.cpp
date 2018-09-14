@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_ONE_API
 
@@ -16,31 +16,35 @@ TEST(api, test_one_accounts_account)
     Ark::Client arkClient(DEVNET);
 
     const auto accountResponse = arkClient.account(darkAddress);
-    auto parser = Ark::Test::Utils::makeJSONString(accountResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(accountResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(accountResponse);
 
-    const auto address = parser->valueIn("account", "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+    JsonObject& account = root["account"];
+
+    const char* address = account["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address);
     
-    const auto unconfirmedBalance = parser->valueIn("account", "unconfirmedBalance");
-    ASSERT_STRNE("", unconfirmedBalance.c_str());
+    const auto unconfirmedBalance = account["unconfirmedBalance"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(unconfirmedBalance).c_str());
 
-    const auto balance = parser->valueIn("account", "balance");
-    ASSERT_STRNE("", balance.c_str());
+    const auto balance = account["balance"].as<unsigned long long>();
+    ASSERT_NE("", toString(balance).c_str());
 
-    const auto publicKey = parser->valueIn("account", "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    const char* publicKey = account["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
     
-    const auto unconfirmedSignature = parser->valueIn("account", "unconfirmedSignature");
-    ASSERT_STREQ("1", unconfirmedSignature.c_str()); // actual value is 1 (int).
+    int unconfirmedSignature = account["unconfirmedSignature"];
+    ASSERT_EQ(1, unconfirmedSignature);
 
-    const auto secondSignature = parser->valueIn("account", "secondSignature");
-    ASSERT_STREQ("1", secondSignature.c_str()); // actual value is 1 (int).
+    int secondSignature = account["secondSignature"];
+    ASSERT_EQ(1, secondSignature); 
 
-    const auto secondPublicKey = parser->valueIn("account", "secondPublicKey");
-    ASSERT_STREQ("03ad2a481719c80571061f0c941d57e91c928700d8dd132726edfc0bf9c4cb2869", secondPublicKey.c_str());
+    const char* secondPublicKey = account["secondPublicKey"];
+    ASSERT_STREQ("03ad2a481719c80571061f0c941d57e91c928700d8dd132726edfc0bf9c4cb2869", secondPublicKey);
 }
 
 TEST(api, test_one_accounts_balance)
@@ -48,17 +52,18 @@ TEST(api, test_one_accounts_balance)
     Ark::Client arkClient(DEVNET);
 
     const auto accountBalanceResponse = arkClient.accountBalance(darkAddress);
-    auto parser = Ark::Test::Utils::makeJSONString(accountBalanceResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(accountBalanceResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(accountBalanceResponse);
 
-    const auto balance = parser->valueFor("balance");
-    ASSERT_STRNE("", balance.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto unconfirmedBalance = parser->valueFor("unconfirmedBalance");
-    ASSERT_STRNE("0", unconfirmedBalance.c_str());
-    ASSERT_STRNE("", unconfirmedBalance.c_str());
+    const auto balance = root["balance"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(balance).c_str());
+
+    const auto unconfirmedBalance = root["unconfirmedBalance"].as<unsigned long long>();
+    ASSERT_STRNE("", toString(unconfirmedBalance).c_str());
 }
 
 TEST(api, test_one_accounts_delegates)
@@ -66,39 +71,38 @@ TEST(api, test_one_accounts_delegates)
     Ark::Client arkClient(DEVNET);
 
     const auto delegateResponse = arkClient.accountDelegates(darkAddress);
-    auto parser = Ark::Test::Utils::makeJSONString(delegateResponse);
 
-    const auto username = parser->subarrayValueIn("delegates", 0, "username");
-    ASSERT_STREQ("sleepdeficit", username.c_str());
+    DynamicJsonBuffer jsonBuffer(delegateResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegateResponse);
+
+    JsonObject& delegatesZero = root["delegates"][0];
+
+    const char* username = delegatesZero["username"];
+    ASSERT_EQ("sleepdeficit", username);
     
-    const auto address = parser->subarrayValueIn("delegates", 0, "address");
-    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address.c_str());
+    const char* address = delegatesZero["address"];
+    ASSERT_STREQ("DHQ4Fjsyiop3qBR4otAjAu6cBHkgRELqGA", address);
     
-    const auto publicKey = parser->subarrayValueIn("delegates", 0, "publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    const char* publicKey = delegatesZero["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
 
-    const auto vote = parser->subarrayValueIn("delegates", 0, "vote");
-    ASSERT_STRNE("", vote.c_str());
+    const auto vote = delegatesZero["vote"].as<unsigned long long>();
+    ASSERT_STRNE("0", toString(vote).c_str());
 
-    const auto producedblocks = parser->subarrayValueIn("delegates", 0, "producedblocks");
-    ASSERT_STRNE("0", producedblocks.c_str());
-    ASSERT_STRNE("", producedblocks.c_str());
+    int producedblocks = delegatesZero["producedblocks"];
+    ASSERT_NE(0, producedblocks);
 
-    const auto missedblocks = parser->subarrayValueIn("delegates", 0, "missedblocks");
-    ASSERT_STRNE("0", missedblocks.c_str());
-    ASSERT_STRNE("", missedblocks.c_str());
+    int missedblocks = delegatesZero["missedblocks"];
+    ASSERT_NE(0, missedblocks);
 
-    const auto rate = parser->subarrayValueIn("delegates", 0, "rate");
-    ASSERT_STRNE("0", rate.c_str());
-    ASSERT_STRNE("", rate.c_str());
+    int rate = delegatesZero["rate"];
+    ASSERT_NE(0, rate);
 
-    const auto approval = parser->subarrayValueIn("delegates", 0, "approval");
-    ASSERT_STRNE("0.0", approval.c_str());
-    ASSERT_STRNE("", approval.c_str());
+    double approval = delegatesZero["approval"];
+    ASSERT_NE(0.00, approval);
 
-    const auto productivity = parser->subarrayValueIn("delegates", 0, "productivity");
-    ASSERT_STRNE("0.0", productivity.c_str());
-    ASSERT_STRNE("", productivity.c_str());
+    double productivity = delegatesZero["productivity"];
+    ASSERT_NE(0.00, productivity);
 }
 
 TEST(api, test_one_accounts_delegates_fee)
@@ -106,13 +110,15 @@ TEST(api, test_one_accounts_delegates_fee)
     Ark::Client arkClient(DEVNET);
 
     const auto delegatesFeeResponse = arkClient.accountDelegatesFee(darkAddress);
-    auto parser = Ark::Test::Utils::makeJSONString(delegatesFeeResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(delegatesFeeResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(delegatesFeeResponse);
 
-    const auto delegatesFee = parser->valueFor("fee");
-    ASSERT_STREQ("2500000000", delegatesFee.c_str()); // actual value is 2500000000 (int).
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+    const auto delegatesFee = root["fee"].as<unsigned long long>();
+    ASSERT_EQ("2500000000", toString(delegatesFee));
 }
 
 TEST(api, test_one_accounts_public_key)
@@ -120,10 +126,12 @@ TEST(api, test_one_accounts_public_key)
     Ark::Client arkClient(DEVNET);
 
     const auto pubkeyResponse = arkClient.accountPublickey(darkAddress);
-    auto parser = Ark::Test::Utils::makeJSONString(pubkeyResponse);
 
-    const auto publicKey = parser->valueFor("publicKey");
-    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey.c_str());
+    DynamicJsonBuffer jsonBuffer(pubkeyResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(pubkeyResponse);
+
+    const char* publicKey = root["publicKey"];
+    ASSERT_STREQ("0275776018638e5c40f1b922901e96cac2caa734585ef302b4a2801ee9a338a456", publicKey);
 }
 
 #endif

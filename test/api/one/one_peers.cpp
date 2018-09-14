@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_ONE_API
 
@@ -11,38 +11,41 @@ TEST(api, test_one_peers_peer)
     Ark::Client arkClient(DEVNET);
 
     const auto peerResponse = arkClient.peer("167.114.29.54", 4002);
-    auto parser = Ark::Test::Utils::makeJSONString(peerResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(peerResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(peerResponse);
 
-    const auto ip = parser->valueIn("peer", "ip");
-    ASSERT_STREQ("167.114.29.54", ip.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto peer = parser->valueIn("peer", "port");
-    ASSERT_STREQ("4002", peer.c_str()); // actual value 4002 (int).
 
-    const auto version = parser->valueIn("peer", "version");
-    // ASSERT_STREQ("1.1.1", version.c_str());
-    ASSERT_STREQ("2.0.0", version.c_str());
+    JsonObject& peer = root["peer"];
 
-    const auto errors = parser->valueIn("peer", "errors");
-    ASSERT_STREQ("0", errors.c_str()); // actual value 0 (int).
-    ASSERT_STRNE("", errors.c_str());
+    const char* ip = peer["ip"];
+    ASSERT_STREQ("167.114.29.54", ip);
 
-    const auto os = parser->valueIn("peer", "os");
-    ASSERT_STREQ("linux4.4.0-79-generic", os.c_str());
+    int port = peer["port"];
+    ASSERT_EQ(4002, port);
 
-    const auto height = parser->valueIn("peer", "height");
-    ASSERT_STRNE("0", height.c_str());
-    ASSERT_STRNE("", height.c_str());
+    const char* version = peer["version"];
+    ASSERT_STRNE("", version);
+    // ASSERT_STREQ("1.1.1", version);
+    // ASSERT_STREQ("2.0.0", version);
 
-    const auto status = parser->valueIn("peer", "status");
-    ASSERT_STREQ("OK", status.c_str());
+    int errors = peer["errors"];
+    ASSERT_EQ(0, errors);
 
-    const auto delay = parser->valueIn("peer", "delay");
-    ASSERT_STRNE("0", delay.c_str()); // actual value is (int).
-    ASSERT_STRNE("", delay.c_str());
+    const char* os = peer["os"];
+    ASSERT_STREQ("linux4.4.0-79-generic", os);
+
+    int height = peer["height"];
+    ASSERT_TRUE(height >= 0);
+
+    const char* status = peer["status"];
+    ASSERT_STREQ("OK", status);
+
+    int delay = peer["delay"];
+    ASSERT_NE(0, delay);
 }
 
 TEST(api, test_one_peers_peers)
@@ -50,39 +53,41 @@ TEST(api, test_one_peers_peers)
     Ark::Client arkClient(DEVNET);
 
     const auto peersResponse = arkClient.peers();
-    auto parser = Ark::Test::Utils::makeJSONString(peersResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(peersResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(peersResponse);
+
+    bool success = root["success"];
+    ASSERT_TRUE(success);
+
+
+    JsonArray& peers = root["peers"];
 
     for (int i = 0; i < 20; i++)
     {
-        const auto ip = parser->subarrayValueIn("peers", i, "ip");
-        ASSERT_STRNE("", ip.c_str());
+        const char* ip = peers[i]["ip"];
+        ASSERT_STRNE("", ip);
 
-        const auto port = parser->subarrayValueIn("peers", i, "port");
-        ASSERT_STREQ("4002", port.c_str()); // actual value 4002 (int).
+        int port = peers[i]["port"];
+        ASSERT_EQ(4002, port);
 
-        const auto version = parser->subarrayValueIn("peers", i, "version");
-        ASSERT_STRNE("", version.c_str());
+        int version = peers[i]["version"];
+        ASSERT_STRNE("", toString(version).c_str());
 
-        const auto errors = parser->subarrayValueIn("peers", i, "errors");
-        // ASSERT_STREQ("0", errors.c_str()); // actual value 0 (int). (1-peer: error `12`).
-        ASSERT_STRNE("", errors.c_str());
+        int errors = peers[i]["errors"];
+        ASSERT_STRNE("", toString(errors).c_str());
 
-        const auto os = parser->subarrayValueIn("peers", i, "os");
-        ASSERT_STRNE("", os.c_str());
+        const char* os = peers[i]["os"];
+        ASSERT_STRNE("", os);
 
-        const auto height = parser->subarrayValueIn("peers", i, "height");
-        ASSERT_STRNE("0", os.c_str()); // actual value is (int).
-        ASSERT_STRNE("", os.c_str());
+        int height = peers[i]["height"];
+        ASSERT_TRUE(height > 0);
 
-        const auto status = parser->subarrayValueIn("peers", i, "status");
-        ASSERT_STREQ("OK", status.c_str());
+        const char* status = peers[i]["status"];
+        ASSERT_STREQ("OK", status);
 
-        const auto delay = parser->subarrayValueIn("peers", i, "delay");
-        ASSERT_STRNE("0", delay.c_str()); // actual value is (int).
-        ASSERT_STRNE("", delay.c_str());
+        int delay = peers[i]["delay"];
+        ASSERT_TRUE(delay >= 0);
     };
 }
 
@@ -91,17 +96,20 @@ TEST(api, test_one_peers_version)
     Ark::Client arkClient(DEVNET);
 
     const auto versionResponse = arkClient.peerVersion();
-    auto parser = Ark::Test::Utils::makeJSONString(versionResponse);
 
-    const auto success = parser->valueFor("success");
-    ASSERT_STREQ("true", success.c_str());
+    DynamicJsonBuffer jsonBuffer(versionResponse.size());
+    JsonObject& root = jsonBuffer.parseObject(versionResponse);
 
-    const auto version = parser->valueFor("version");
-    // ASSERT_STREQ("1.3.0", version.c_str());
-    ASSERT_STREQ("2.0.0", version.c_str());
+    bool success = root["success"];
+    ASSERT_TRUE(success);
 
-    const auto build = parser->valueFor("build");
-    ASSERT_STREQ("", build.c_str());
+    const char* version = root["version"];
+    ASSERT_STRNE("", version);
+    // ASSERT_STREQ("1.3.0", version);
+    // ASSERT_STREQ("2.0.0", version);
+
+    const char* build = root["build"];
+    ASSERT_STRNE("", build);
 }
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "arkClient.h"
-#include "utils/json/json.h"
+#include "utils/json.h"
 
 #ifdef HAS_TWO_API
 
@@ -11,12 +11,12 @@
  * Expected Response:
     {
     "data": {
-        "ip": "167.114.29.55",
-        "port": 4002,
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 190
+        "ip": "string",
+        "port": int,
+        "version": "string",
+        "status": "string",
+        "os": "string",
+        "latency": int
     }
     }
  */
@@ -25,26 +25,29 @@ TEST(api, test_two_peer)
     Ark::Client arkClient(DEVNET);
 
     const auto peer = arkClient.peer("167.114.29.55");
-    auto parser = Ark::Test::Utils::makeJSONString(peer);
 
-    const auto ip = parser->valueIn("data", "ip");
-    ASSERT_STREQ("167.114.29.55", ip.c_str());
+    DynamicJsonBuffer jsonBuffer(peer.size());
+    JsonObject& root = jsonBuffer.parseObject(peer);
 
-    const auto port = parser->valueIn("data", "port");
-    ASSERT_STREQ("4002", port.c_str());
+    JsonObject& data = root["data"];
 
-    const auto version = parser->valueIn("data", "version");
-    ASSERT_STREQ("2.0.0", version.c_str());
+    const char* ip = data["ip"];
+    ASSERT_STREQ("167.114.29.55", ip);
 
-    const auto status = parser->valueIn("data", "status");
-    ASSERT_STREQ("OK", status.c_str());
+    int port = data["port"];
+    ASSERT_EQ(4002, port);
 
-    const auto os = parser->valueIn("data", "os");
-    ASSERT_STREQ("linux", os.c_str());
+    const char* version = data["version"];
+    ASSERT_STREQ("2.0.0", version);
 
-    const auto latency = parser->valueIn("data", "latency");
-    ASSERT_STRNE("0", latency.c_str());
-    ASSERT_STRNE("", latency.c_str());
+    const char* status = data["status"];
+    ASSERT_STREQ("OK", status);
+
+    const char* os = data["os"];
+    ASSERT_STREQ("linux", os);
+
+    int latency = data["latency"];
+    ASSERT_STRNE("", toString(latency).c_str());
 }
 
 /* test_two_peers_peers
@@ -52,55 +55,23 @@ TEST(api, test_two_peer)
  * Expected Response:
     {
     "meta": {
-        "count": 5,
-        "pageCount": 1,
-        "totalCount": 5,
-        "next": null,
-        "previous": null,
-        "self": "\/api\/v2\/peers?limit=5&page=1",
-        "first": "\/api\/v2\/peers?limit=5&page=1",
-        "last": "\/api\/v2\/peers?limit=5&page=1"
+        "count": int,
+        "pageCount": int,
+        "totalCount": int,
+        "next": "string",
+        "previous": "string",
+        "self": "/api/v2/peers?limit=5&page=1",
+        "first": "/api/v2/peers?limit=5&page=1",
+        "last": "/api/v2/peers?limit=5&page=1"
     },
     "data": [
         {
-        "ip": "37.59.70.165",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 35
-        },
-        {
-        "ip": "145.239.75.25",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 36
-        },
-        {
-        "ip": "104.238.173.32",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
-        },
-        {
-        "ip": "45.77.90.28",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
-        },
-        {
-        "ip": "209.250.228.98",
-        "port": "4002",
-        "version": "2.0.0",
-        "status": "OK",
-        "os": "linux",
-        "latency": 43
+        "ip": "string",
+        "port": "string",
+        "version": "string",
+        "status": "string",
+        "os": "string",
+        "latency": int
         }
     ]
     }
@@ -110,39 +81,38 @@ TEST(api, test_two_peers)
     Ark::Client arkClient(DEVNET);
 
     const auto peers = arkClient.peers(5, 1);
-    auto parser = Ark::Test::Utils::makeJSONString(peers);
 
-    const auto count = parser->valueIn("meta", "count");
-    ASSERT_STREQ("5", count.c_str());
+    DynamicJsonBuffer jsonBuffer(peers.size());
+    JsonObject& root = jsonBuffer.parseObject(peers);
 
-    const auto pageCount = parser->valueIn("meta", "pageCount");
-    ASSERT_STREQ("1", pageCount.c_str());
+    JsonObject& meta = root["meta"];
 
-    const auto totalCount = parser->valueIn("meta", "totalCount");
-    ASSERT_STREQ("5", totalCount.c_str());
+    int count = meta["count"];
+    ASSERT_NE(0, count);
 
-    for (int i = 0; i < 5; i++)
-    {
-        const auto ip = parser->subarrayValueIn("data", i, "ip");
-        ASSERT_STRNE("", ip.c_str());
+    int pageCount = meta["pageCount"];
+    ASSERT_NE(0, pageCount);
 
-        const auto port = parser->subarrayValueIn("data", i, "port");
-        ASSERT_STREQ("4002", port.c_str());
+    int totalCount = meta["totalCount"];
+    ASSERT_NE(0, totalCount);
 
-        const auto version = parser->subarrayValueIn("data", i, "version");
-        ASSERT_STREQ("2.0.0", version.c_str());
 
-        const auto status = parser->subarrayValueIn("data", i, "status");
-        // ASSERT_STREQ("OK", status.c_str());
-        // ASSERT_STREQ("ECONNABORTED", status.c_str());
+    JsonObject& dataZero = root["data"][0];
 
-        const auto os = parser->subarrayValueIn("data", 0, "os");
-        ASSERT_STRNE("", os.c_str());
+    const char* ip = dataZero["ip"];
+    ASSERT_STRNE("", ip);
 
-        const auto latency = parser->subarrayValueIn("data", 0, "latency");
-        ASSERT_STRNE("0", latency.c_str());
-        ASSERT_STRNE("", latency.c_str());
-    };
+    int port = dataZero["port"];
+    ASSERT_EQ(4002, port);
+
+    const char* version = dataZero["version"];
+    ASSERT_STREQ("2.0.0", version);
+
+    const char* os = dataZero["os"];
+    ASSERT_STRNE("", os);
+
+    int latency = dataZero["latency"];
+    ASSERT_STRNE("", toString(latency).c_str());
 }
 
 #endif
